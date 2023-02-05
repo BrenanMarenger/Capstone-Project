@@ -78,12 +78,19 @@ export default {
     Favorite
   },
   async mounted(){
-    //this.videos = await videoService.getAllVideos() // .then
+    // fetch(videoService.getAllVideos())
+    // .then(videoData => { videoData.data })
+    // .then(this.getCategories())
+    // .then(this.getYears())
+
+    var videoData = await videoService.getAllVideos()    
+    this.videos = videoData.data
     this.getYears();
     this.getCategories()
+    
   },
   async created() {
-    this.videos = videosJson.videos;
+    //this.videos = videosJson.videos;
     
   },
   methods: {

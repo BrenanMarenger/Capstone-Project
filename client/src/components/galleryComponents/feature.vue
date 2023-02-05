@@ -52,6 +52,7 @@ export default {
     async mounted(){
     //this.videos = videosJson.videos
     this.feature = this.videos[Math.floor(Math.random() * this.videos.length)];
+    console.log(this.feature.Title)
     // fetch(this.feature.Subtitles, { mode: 'no-cors'})
     // .then(res => res.text())
     // .then(result => {
