@@ -4,7 +4,7 @@
     <Navbar  @recieveSearch="applySearch($event)" @toggleYearFilter="toggleYearFilter($event)" :yearList="years" :categoryList="categories"/>
 
     <!--FEATURE-->
-    <Feature :videos="videos" :modalActive="modalActive" v-show="!search && filteredYears.length ==0" />
+    <Feature v-if="videos.length > 1" :videos="videos" :modalActive="modalActive" v-show="!search && filteredYears.length ==0" />
 
     <!--MODAL-->
     <Modal v-if="modalActive" :videos="videos" :modal="modal" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorite="toggleFavorites($event)"/>
@@ -20,11 +20,11 @@
     <!--ALL-->
     <h2> All {{search}} Videos </h2>
     <div class="all-videos-container">
-      <div class="" v-for="video in videos" :key="video.Path">
+      <div class="" v-for="video in videos" :key="video.id">
         <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function-->
           <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
             <h3> {{video.Title}} </h3>
-            <router-link :to="{name: 'display', params: {video: video}}" tag="button">
+            <router-link :to="{name: 'display', params: {id: video.id}}" tag="button">
              Play
             </router-link>
             <button @click="toggleModal(video)">
@@ -82,16 +82,12 @@ export default {
     // .then(videoData => { videoData.data })
     // .then(this.getCategories())
     // .then(this.getYears())
-
+  },
+  async created() {
     var videoData = await videoService.getAllVideos()    
     this.videos = videoData.data
     this.getYears();
     this.getCategories()
-    
-  },
-  async created() {
-    //this.videos = videosJson.videos;
-    
   },
   methods: {
     applySearch(updateSearch){
@@ -136,10 +132,8 @@ export default {
             this.modal.Categories = video.Categories
             if(this.modalActive == true){
               this.modalActive = false;
-              //play the feature
             } else {
               this.modalActive = true;
-              //pasuse the feate
             }
     },
 

@@ -44,22 +44,14 @@ export default {
     props: ['videos', 'modalActive'],
     data(){
         return {
-            
             feature: '',
-
         }
     },
     async mounted(){
-    //this.videos = videosJson.videos
-    this.feature = this.videos[Math.floor(Math.random() * this.videos.length)];
-    console.log(this.feature.Title)
-    // fetch(this.feature.Subtitles, { mode: 'no-cors'})
-    // .then(res => res.text())
-    // .then(result => {
-    //     var blob = new Blob([result], {type: "text/vtt"})
-    //     console.log(blob)
-    // })
-    
+  },
+  async created(){
+    this.feature = await this.videos[Math.floor(Math.random() * this.videos.length)];
+
   },
   methods: {
     toggleSound(){
