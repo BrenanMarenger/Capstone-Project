@@ -86,8 +86,11 @@ export default {
     }
   },
   watch: {
-    modalActive(){
-        this.togglePlay()
+    modalActive(){ //Bug where feature plays if paused before modal was opened
+        if(this.modalActive){
+            this.togglePlay()
+        }
+        
     }
   }
 }

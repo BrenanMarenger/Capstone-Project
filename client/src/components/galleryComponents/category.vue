@@ -2,8 +2,8 @@
     <div> 
         <h1> {{ currentCategory }}</h1>
         <div class="category-container"> 
-            <div v-for="video in videos" :key="video.Path">
-                <div v-if="video.Categories.includes(currentCategory)">
+            <div v-for="video in catVideos" :key="video.Path">
+                
                     <h3>{{ video.Title }}</h3>
                     <router-link :to="{name: 'display', params: {video: video}}" tag="button">
                         Play
@@ -13,7 +13,7 @@
                     </button>
                     <button @click="sendToggleFavorite(video)">⭐</button>
                     <img :src="video.Thumbnail"/>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -25,9 +25,23 @@ export default {
     props: ['currentCategory','videos'],
     data(){
         return {
+            catVideos: []
         }
     },
     mounted(){
+        for(let vid of this.videos){
+            if(vid.Categories.includes(this.currentCategory)){
+                this.catVideos.push(vid)
+            }
+        }
+
+        //SHUFFLE ITEMS
+        for(let i = this.catVideos.length - 1;i > 0; i--){
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = this.catVideos[i]
+            this.catVideos[i] = this.catVideos[j];
+            this.catVideos[j] = temp;
+        }
   },
   methods: {
     sendToggleFavorite(video){

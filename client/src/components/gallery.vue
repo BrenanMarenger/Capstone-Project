@@ -4,18 +4,18 @@
     <Navbar  @recieveSearch="applySearch($event)" @toggleYearFilter="toggleYearFilter($event)" :yearList="years" :categoryList="categories"/>
 
     <!--FEATURE-->
-    <Feature v-if="videos.length > 1" :videos="videos" :modalActive="modalActive" v-show="!search && filteredYears.length ==0" />
+    <Feature v-if="videos.length > 1" :videos="videos" :modalActive="modalActive" v-show="hideItems" />
 
     <!--MODAL-->
     <Modal v-if="modalActive" :videos="videos" :modal="modal" @receiveModal="updateModal($event)" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorite="toggleFavorites($event)"/>
 
     <!--CATEGORIES-->
     <div v-for="category in categories" :key="category" > 
-      <Category v-show="!search && filteredYears.length ==0" :videos="videos" :currentCategory="category" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/> <!--<button @click="toggleFavorites(video)">⭐</button>-->
+      <Category v-show="hideItems" :videos="videos" :currentCategory="category" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/> <!--<button @click="toggleFavorites(video)">⭐</button>-->
     </div>
 
     <!--FAVORITES-->
-    <Favorite v-show="!search && filteredYears.length ==0" @recieveToggleFavorites="toggleFavorites($event)" :favoriteList="favoriteList" />
+    <Favorite v-show="hideItems" @recieveToggleFavorites="toggleFavorites($event)" :favoriteList="favoriteList" />
 
     <!--ALL-->
     <h2> All {{search}} Videos </h2>
@@ -81,10 +81,6 @@ export default {
     Favorite
   },
   async mounted(){
-    // fetch(videoService.getAllVideos())
-    // .then(videoData => { videoData.data })
-    // .then(this.getCategories())
-    // .then(this.getYears())
   },
   async created() {
     this.videos = (await videoService.getAllVideos()).data   
@@ -178,7 +174,9 @@ export default {
       return this.videos.filter(video =>
                 video.Title.toLowerCase().includes(this.search.toLowerCase()))
     },
-    
+    hideItems(){
+      return (!this.search && this.filteredYears.length ==0)
+    }
   }, 
 }
 
