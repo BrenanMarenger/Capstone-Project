@@ -68,7 +68,7 @@ video{
 }
 
 img {
-    width: 200px;
+    width: 100px;
     
 }
 .modal-container {

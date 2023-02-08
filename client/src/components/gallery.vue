@@ -128,10 +128,7 @@ export default {
     },
 
     toggleModal(video) {
-            this.modal.Title = video.Title;
-            this.modal.Description = video.Description
-            this.modal.Path = video.Path
-            this.modal.Categories = video.Categories
+            this.modal = video;
             if(this.modalActive == true){
               this.modalActive = false;
             } else {
@@ -140,10 +137,7 @@ export default {
     },
 
     updateModal(video){
-      this.modal.Title = video.Title;
-      this.modal.Description = video.Description
-      this.modal.Path = video.Path
-      this.modal.Categories = video.Categories
+      this.modal = video
     },
 
     toggleYearFilter(year){
