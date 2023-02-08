@@ -31,9 +31,8 @@ export default new Router({
       component: gallery
     },
     {
-      path: '/display', //TODO: :videoId
+      path: '/display/:videoId',
       name: 'display',
-      props: true,
       component: display
     },
   ]
