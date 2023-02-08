@@ -23,15 +23,18 @@
       <div class="" v-for="video in videos" :key="video.id">
         <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function-->
           <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
+
             <h3> {{video.Title}} </h3>
-            <router-link :to="{name: 'display', params: {id: video.id}}" tag="button">
-             Play
+            <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+             Play {{ video.id }}
             </router-link>
+            
             <button @click="toggleModal(video)">
               More Info
             </button>
             <button @click="toggleFavorites(video)">⭐</button>
             <img class="all-videos-video" :src="video.Thumbnail" />
+
           </div>
         </div>
       </div>
@@ -84,8 +87,7 @@ export default {
     // .then(this.getYears())
   },
   async created() {
-    var videoData = await videoService.getAllVideos()    
-    this.videos = videoData.data
+    this.videos = (await videoService.getAllVideos()).data   
     this.getYears();
     this.getCategories()
   },
@@ -144,6 +146,22 @@ export default {
       } else {
         this.filteredYears.push(year)
       }
+    },
+    goTo(route){
+      this.$route.push(route)
+    }
+  },
+  watch: {
+    search(){
+      if(this.search == ''){
+        this.$router.replace({name: "gallery"})
+      } else {
+        this.$router.replace({query: {search: this.search.toLowerCase()}})
+      }
+    },
+    
+    filteredYears(){
+      this.$router.replace({query: {filter: this.filteredYears}})
     }
   },
   computed: {
