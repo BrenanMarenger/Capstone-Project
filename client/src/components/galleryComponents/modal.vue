@@ -1,7 +1,7 @@
 <template>
     <div class="modal-container">
         <div class="modal"> 
-            <router-link :to="{name: 'display', params: {video: modal}}" tag="button">
+            <router-link :to="{name: 'display', params: {videoId: modal.id}}" tag="button">
                 Play
             </router-link>
             <button @click="sendToggleModal(modal)">

@@ -26,7 +26,7 @@
 
             <h3> {{video.Title}} </h3>
             <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
-             Play {{ video.id }}
+             Play
             </router-link>
             
             <button @click="toggleModal(video)">

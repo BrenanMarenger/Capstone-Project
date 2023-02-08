@@ -6,13 +6,13 @@ module.exports = (app) => {
     app.post('/register',
         AuthenticationControllerPolicy.register, //middleware -> checks if valid email before sending it to the following function
         AuthenticationController.register)
-
     app.post('/login',
         AuthenticationController.login)
 
     app.get('/videos',
         videoController.getAllVideos)
-
+    app.get('/videos/:videoId',
+        videoController.show)
     app.post('/videos',
         videoController.post)
 }

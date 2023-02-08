@@ -20,8 +20,8 @@
                 <button @click="togglePlay" class="pause">⏸️ Pause</button>
             </div>
             <div class="watch-now"> 
-                <router-link :to="{name: 'display', params: {video: feature}}" tag="button">
-                    Watch Now
+                <router-link :to="{name: 'display', params: {videoId: feature.id}}" tag="button">
+                Watch Now
                 </router-link>
             </div>
             <div class="mute-unmute"> 

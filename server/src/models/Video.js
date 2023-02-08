@@ -9,5 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         Year: DataTypes.INTEGER
     })
 
+    Video.associate = function (models) {
+    }
+
     return Video
 }

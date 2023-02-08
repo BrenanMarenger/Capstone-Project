@@ -5,8 +5,8 @@
             <div v-for="video in catVideos" :key="video.Path">
                 
                     <h3>{{ video.Title }}</h3>
-                    <router-link :to="{name: 'display', params: {video: video}}" tag="button">
-                        Play
+                    <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                     Play
                     </router-link>
                     <button @click="sendToggleModal(video)">
                         More Info

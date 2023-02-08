@@ -1,11 +1,5 @@
 <template>
     <div> 
-        <!--
-        <router-link :to="gallery" tag="button">
-            Go Back 
-        </router-link>
-        -->
-        {{ $route.params.video.Title }}
         <div class="video-container"> 
             <div class="video-controls-container">
                 <div class="timeline-container"> 
@@ -31,7 +25,7 @@
                     </button>
                 </div>
             </div>
-            <video v-if="video" :src="video.Path" autoplay>
+            <video v-if="displayVideo" :src="displayVideo.Path" autoplay>
                 <track
                 label="English"
                 kind="subtitles"
@@ -48,15 +42,21 @@
 </template>
 
 <script>
+import videoService from '../services/VideoService'
 export default {
-    name: 'Display',
-    props: ['video'],
+    name: 'display',
     data(){
         return {
-            captions: ''
+            captions: '',
+            displayVideo: null
         }
     },
-    mounted() {
+    async mounted() {
+        const videoId = this.$route.params.videoId
+        this.displayVideo = (await videoService.show(videoId)).data
+        console.log(this.displayVideo)
+
+        //CAPTIONS
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange=function() {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200) //
@@ -66,22 +66,10 @@ export default {
                     document.querySelector('track').src = this.captions
                 }
         }
-        xmlhttp.open("GET", this.video.Subtitles, true)
+        xmlhttp.open("GET", this.displayVideo.Subtitles, true)
         xmlhttp.send();
-        
-        
-        fetch(this.video.Subtitles)
-        .then( res => res.text())
-        .then( result => {
-            // var blob = new Blob([result], {
-            //     type: "text,vtt"
-            // })
-            // const url = window.URL.createObjectURL(blob)
-            //console.log(result)
-        })
-        .catch(error => console.log('error', error));
-        
-        
+    },
+    computed: {
     }
 }
 

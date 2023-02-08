@@ -9,9 +9,9 @@
                 </div>
                 <h3>{{ video.Title }}</h3>
                 <div class="favorite-play-btn"> 
-                    <router-link :to="{name: 'display', params: {video: video}}" tag="button">
-                        Play
-                    </router-link>
+                  <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                  Play
+                  </router-link>
                 </div>
                 <div class="favorite-moreinfo-btn"> 
                     <button>More Info</button>
