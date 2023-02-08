@@ -31,7 +31,7 @@
                         </ul>
                     </li>
         -->
-        
+        <button>Reset Filters</button>
         <button>Tree</button>
         <button v-if="$store.state.isLoggedIn" @click="logout">Sign out</button>
     </div> 

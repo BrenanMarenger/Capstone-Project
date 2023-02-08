@@ -7,7 +7,7 @@
     <Feature v-if="videos.length > 1" :videos="videos" :modalActive="modalActive" v-show="!search && filteredYears.length ==0" />
 
     <!--MODAL-->
-    <Modal v-if="modalActive" :videos="videos" :modal="modal" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorite="toggleFavorites($event)"/>
+    <Modal v-if="modalActive" :videos="videos" :modal="modal" @receiveModal="updateModal($event)" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorite="toggleFavorites($event)"/>
 
     <!--CATEGORIES-->
     <div v-for="category in categories" :key="category" > 
@@ -139,6 +139,13 @@ export default {
             }
     },
 
+    updateModal(video){
+      this.modal.Title = video.Title;
+      this.modal.Description = video.Description
+      this.modal.Path = video.Path
+      this.modal.Categories = video.Categories
+    },
+
     toggleYearFilter(year){
       let index = this.filteredYears.indexOf(year)
       if(index != -1){
@@ -160,6 +167,14 @@ export default {
       }
     },
     
+    modalActive(){
+      if(this.modalActive){
+        this.$router.replace({query: {video: this.modal.Title.toLowerCase()}})
+      } else {
+        this.$router.replace({name: "gallery"})
+      }
+    },
+
     filteredYears(){
       this.$router.replace({query: {filter: this.filteredYears}})
     }

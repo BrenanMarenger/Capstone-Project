@@ -14,7 +14,7 @@
             <div class="related-container"> 
                 <h4>Watch more like this: </h4>
                 <div class="related-videos" v-for="rVideo in relatedVideos" :key="rVideo.Path"> 
-                    <img v-if="rVideo.Path != modal.Path " :src="rVideo.Thumbnail"/>
+                    <img @click="updateModal(rVideo)" v-if="rVideo.Path != modal.Path " :src="rVideo.Thumbnail"/>
                 </div>
             </div>
             
@@ -40,6 +40,9 @@ export default {
         },
         sendToggleFavorites(video){
             this.$emit('recieveToggleFavorite', video)
+        },
+        updateModal(video){
+            this.$emit('receiveModal', video)
         }
     },
     mounted() {
@@ -65,7 +68,7 @@ video{
 }
 
 img {
-    width: 100px;
+    width: 200px;
     
 }
 .modal-container {
@@ -73,7 +76,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
