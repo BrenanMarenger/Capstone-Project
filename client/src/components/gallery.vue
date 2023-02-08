@@ -112,6 +112,13 @@ export default {
           }
         }
       }
+      //Shuffle
+      for(let i = this.categories.length - 1;i > 0; i--){
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = this.categories[i]
+            this.categories[i] = this.categories[j];
+            this.categories[j] = temp;
+        }
     },
 
     toggleFavorites(video){
