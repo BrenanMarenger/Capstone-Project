@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     toggleSound(){
-        const muteUnmuteBtn = document.querySelector("mute-unmute")
+        //const muteUnmuteBtn = document.querySelector("mute-unmute")
         const video = document.querySelector("video")
         const featureContainer = document.querySelector(".feature-container")
 
@@ -71,7 +71,7 @@ export default {
         }   
     },
     togglePlay(){
-        const playPauseBtn = document.querySelector(".play-pause")
+        //const playPauseBtn = document.querySelector(".play-pause")
         const video = document.querySelector("video")
         const featureContainer = document.querySelector(".feature-container")
         if(video.paused){
@@ -87,10 +87,13 @@ export default {
   },
   watch: {
     modalActive(){ //Bug where feature plays if paused before modal was opened
-        if(this.modalActive){
-            this.togglePlay()
-        }
-        
+        const video = document.querySelector("video")
+        const featureContainer = document.querySelector(".feature-container")
+        if(this.modalActive && !video.paused){
+            video.pause()
+            featureContainer.classList.remove("playing")
+            featureContainer.classList.add("paused")
+        } 
     }
   }
 }
