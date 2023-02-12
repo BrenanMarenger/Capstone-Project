@@ -1,10 +1,7 @@
 <template>
     <div > 
-        <div class="video-container" data-volume-level="high"> 
+        <div class="video-container"> 
             <div class="video-controls-container" >
-                <div class="timeline-container"> 
-                
-                </div>
                 <div class="title">
 
                 </div>
@@ -19,17 +16,26 @@
                     </button>
                     <div class="volume-container">
                         <button class="volume-btn">
-                        <svg @click="toggleMute" class="volume-high-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
-                        </svg>
-                        <svg @click="toggleMute" class="volume-low-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
-                        </svg>
-                        <svg @click="toggleMute" class="volume-muted-icon" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
-                        </svg>
-                        <input type="range" @drag="changeVolume($event)" class="volume-slider" min="0" max="1" step="any" value=".5">
-                    </button>
+                            <svg @click="toggleMute" v-if="volumeLevel > 0.5" class="volume-high-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                            </svg>
+                            <svg @click="toggleMute" v-if="volumeLevel > 0 && volumeLevel < .5" class="volume-low-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
+                            </svg>
+                            <svg @click="toggleMute" v-if="volumeLevel == 0" class="volume-muted-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
+                            </svg>
+                            <input type="range" @change="changeVolume($event)" class="volume-slider" min="0" max="1" step="any" :value="volumeLevel"> 
+                        </button>
+                    </div>
+                    <div class="video-duration">
+                        <div class="current-time">
+                            0.00
+                        </div>
+                        <div class="total-time">
+                            /
+                            10:21
+                        </div>
                     </div>
                     <button class="rewind">
 
@@ -71,6 +77,7 @@ export default {
         return {
             captions: '',
             displayVideo: null,
+            volumeLevel: .25
             
         }
     },
@@ -106,6 +113,9 @@ export default {
                 case "f":
                     this.toggleFullScreen()
                     break
+                case "m":
+                    this.toggleMute
+                    break
             }
         })
         
@@ -140,46 +150,17 @@ export default {
             const video = document.querySelector("video")
 
             video.muted = !video.muted
-            
-            // if(video.muted || video.volume === 0){
-            //     volumeSlider.value = 0
-            // }
-            // videoContainer.dataset.volumeLevel = "muted" //might need tweak
         },
         changeVolume(event){
-            const volumeSlider = document.querySelector(".volume-slider")
             const video = document.querySelector("video")
 
-            video.volume = event.target.value
-            video.muted = event.target.value === 0 //might need to tweak this
-            
-
-            // video.addEventListener("volumechange", () => {
-            // volumeSlider.value = video.volume
-            // let volumeLevel
-            // if(video.muted || video.volume === 0){
-            //     volumeSlider.value = 0
-            //     volumeLevel = "muted"
-            // } else if(video.volume >= .5){
-            //     volumeLevel = "high"
-            // } else {
-            //     volumeLevel = "low"
-            // }
-            // videoContainer.dataset.volumeLevel = volumeLevel
-            //})
+            this.volumeLevel = event.target.value
+            video.volume = this.volumeLevel
         }
     },
     computed: {
     }
 }
-
-//add this to computed?
-const volumeSlider = document.querySelector(".volume-slider")
-const video = document.querySelector("video")
-const videoContainer = document.querySelector(".video-container")
-
-
-
 </script>
 
 <style scoped>
@@ -187,6 +168,12 @@ video{
      
 }
 
+svg{
+    transition: all .3s ease-in-out;
+}
+svg:hover{
+    scale: 1.05;
+}
 .video-container{
     position: relative;
     min-width: 90%; 
@@ -270,15 +257,15 @@ video{
 .volume-high-icon, .volume-low-icon, .volume-muted-icon{
     display: none;
 }
-.video-container[data-volume-level="high"] .volume-high-icon{
+.volume-high-icon{
     display: block;
 }
 
-.video-container[data-volume-level="low"] .volume-low-icon{
+.volume-low-icon{
     display: block;
 }
 
-.video-container[data-volume-level="muted"] .volume-muted-icon{
+.volume-muted-icon{
     display: block;
 }
 
