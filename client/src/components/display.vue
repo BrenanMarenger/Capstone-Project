@@ -16,25 +16,25 @@
                     </button>
                     <div class="volume-container">
                         <button class="volume-btn">
-                            <svg @click="toggleMute" v-if="volumeLevel > 0.5" class="volume-high-icon" viewBox="0 0 24 24">
+                            <svg @click="toggleMute" v-if="volumeLevel > 0.5 && isMuted == false" class="volume-high-icon" viewBox="0 0 24 24">
                                 <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
                             </svg>
-                            <svg @click="toggleMute" v-if="volumeLevel > 0 && volumeLevel < .5" class="volume-low-icon" viewBox="0 0 24 24">
+                            <svg @click="toggleMute" v-if="volumeLevel > 0 && volumeLevel < .5 && isMuted == false" class="volume-low-icon" viewBox="0 0 24 24">
                                 <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
                             </svg>
-                            <svg @click="toggleMute" v-if="volumeLevel == 0" class="volume-muted-icon" viewBox="0 0 24 24">
+                            <svg @click="toggleMute" v-if="volumeLevel == 0 || isMuted == true" class="volume-muted-icon" viewBox="0 0 24 24">
                                 <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
                             </svg>
                             <input type="range" @change="changeVolume($event)" class="volume-slider" min="0" max="1" step="any" :value="volumeLevel"> 
                         </button>
                     </div>
-                    <div class="video-duration">
+                    <div class="video-duration-container">
                         <div class="current-time">
-                            0.00
+                            {{ current }}
                         </div>
+                        /
                         <div class="total-time">
-                            /
-                            10:21
+                            {{ total }}
                         </div>
                     </div>
                     <button class="rewind">
@@ -77,7 +77,10 @@ export default {
         return {
             captions: '',
             displayVideo: null,
-            volumeLevel: .25
+            volumeLevel: .25,
+            current: 0,
+            total: 0,
+            isMuted: false
             
         }
     },
@@ -85,11 +88,12 @@ export default {
         //GET request for the video
         const videoId = this.$route.params.videoId
         this.displayVideo = (await videoService.show(videoId)).data
+        
 
-        //CAPTIONS
+        //Captions
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange=function() {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200) //
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) 
                 {
                     const blob = new Blob([this.responseText], { type: "text,vtt" });
                     this.captions = URL.createObjectURL(blob);
@@ -98,8 +102,15 @@ export default {
         }
         xmlhttp.open("GET", this.displayVideo.Subtitles, true)
         xmlhttp.send();
+
+        //Getting video duration
+        setInterval(this.getCurrent, 500)
+        //this.getTotalTime()
+
+        
     },
     created() {
+        
         //Key Binds
         window.addEventListener('keydown', (event) => {
             
@@ -145,22 +156,58 @@ export default {
         },
 
         toggleMute(){
-            const muteBtn = document.querySelector(".mute-btn")
-            const volumeSlider = document.querySelector(".volume-slider")
             const video = document.querySelector("video")
 
             video.muted = !video.muted
+            if(video.muted){
+                this.isMuted = true
+            } else {
+                this.isMuted = false
+            }
         },
+
         changeVolume(event){
             const video = document.querySelector("video")
 
             this.volumeLevel = event.target.value
             video.volume = this.volumeLevel
-        }
+        },
+
+        formatTime(time){
+            var sec = Math.floor(time % 60).toString()
+            var min = Math.floor(time / 60) % 60
+            var hr = Math.floor(time / 3600)
+            if(sec < 10){
+                 sec = "0" + sec
+            }
+            if(min < 10 && hr > 0){
+                 min = "0" + min
+            }
+            if(hr == 0){
+            return `${min}:${sec}`
+            } else {
+                return `${hr}:${min}:${sec}`
+            }
+        },
+        
+        getCurrent(){
+        const video = document.querySelector("video")
+        this.total = this.formatTime(video.duration)
+        this.current = this.formatTime(video.currentTime)
+        },
+        // getTotalTime(){
+        // const video = document.querySelector("video")
+        // this.total = this.formatTime(video.duration)
+        // console.log("total: " + this.total)
+        // }
     },
     computed: {
+    },
+    watch: { 
     }
 }
+
+
 </script>
 
 <style scoped>
@@ -286,6 +333,13 @@ svg:hover{
 .volume-container:hover .volume-slider, .volume-slider:focus-within{
     width: 100px;
     transform: scaleX(1)
+}
+
+.video-duration-container {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    flex-grow: 1;
 }
 
 
