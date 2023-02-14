@@ -1,9 +1,24 @@
 <template>
-    <div > 
-        <div class="video-container"> 
+    <div> 
+        <div class="video-container full-screen"> 
             <div class="video-controls-container" >
+                <!-- Navigation -->
+                <div class="nav"> 
+                    <router-link :to="{name: 'gallery'}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    </router-link>
+                    
+                </div>
                 <div class="title">
+                    {{displayVideo.Title}}
+                </div>
+                <!-- Timeline -->
+                <div class="timeline-container" @mousemove="updateTimeline" @mousedown="toggleScrubbing" @mouseup="toggleScrubbing">
+                    <div class="timeline" >
+                        <div class="timeline-btn">
 
+                        </div>
+                    </div>
                 </div>
                 <!-- PLAY/PAUSE -->
                 <div class="controls">
@@ -98,7 +113,8 @@ export default {
             current: 0,
             total: 0,
             isMuted: false,
-            speed: 1
+            speed: 1,
+            isScrubbing: false,
             
         }
     },
@@ -123,6 +139,9 @@ export default {
 
         //Getting video duration
         setInterval(this.getCurrent, 250)
+
+        //Updating timeline
+        //setInterval(this.updateTimeline, 100)
         
     },
     created() {
@@ -231,6 +250,10 @@ export default {
         
         getCurrent(){
         const video = document.querySelector("video")
+        const timelineContainer = document.querySelector(".timeline-container")
+        const percent = video.currentTime / video.duration
+        timelineContainer.style.setProperty("--progress", percent)
+        
         this.total = this.formatTime(video.duration)
         this.current = this.formatTime(video.currentTime)
         },
@@ -252,10 +275,45 @@ export default {
             const video = document.querySelector("video")
             this.speed = video.playbackRate + .25
             if(this.speed > 2){
-                this.speed = 1
+                this.speed = .25
             }
             video.playbackRate = this.speed
             
+        },
+        updateTimeline(e){
+            const timelineContainer = document.querySelector(".timeline-container")
+            const rec = timelineContainer.getBoundingClientRect()
+            const percent = Math.min(Math.max(0, e.x - rec.x), rec.width) / rec.width
+            timelineContainer.style.setProperty("--preview", percent)
+
+            if(this.isScrubbing) {
+                e.preventDefault()
+                timelineContainer.style.setProperty("--progress", percent)
+
+            }
+        },
+        toggleScrubbing(e){
+            const timelineContainer = document.querySelector(".timeline-container")
+            const videoContainer = document.querySelector(".video-container")
+            const rec = timelineContainer.getBoundingClientRect()
+            const video = document.querySelector("video")
+            const percent = Math.min(Math.max(0, e.x - rec.x), rec.width) / rec.width
+
+            this.isScrubbing = (e.buttons & 1) === 1
+            videoContainer.classList.toggle("scrubbing", this.isScrubbing)
+            let wasPaused
+            if(this.isScrubbing){
+                e.preventDefault()
+                wasPaused = video.paused
+                video.pause()
+            } else {
+                video.currentTime = percent * video.duration
+
+                if(!wasPaused){
+                    video.play()
+                }
+            }
+
         }
     },
     computed: {
@@ -271,12 +329,28 @@ export default {
 video{
      
 }
+.nav{
+    filter: drop-shadow(0px 1px 5px black);
+    position: absolute;
+    left: 0%;
+    z-index: 5;
+    bottom: 440px;
+}
 
 svg{
     transition: all .3s ease-in-out;
 }
 svg:hover{
     scale: 1.05;
+}
+
+.title{
+    position: absolute;
+    bottom: 440px;
+    right: 50%;
+    z-index: 5;
+    font-size: 30px;
+    filter: drop-shadow(0px 1px 3px black);
 }
 .video-container{
     position: relative;
@@ -291,7 +365,7 @@ svg:hover{
     content: "";
     position: absolute;
     bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, .65), transparent);
     width: 100%;
     aspect-ratio: 6 / 1;
     z-index: -1;
@@ -305,7 +379,7 @@ svg:hover{
     color: white;
     z-index: 5;
     opacity: 0;
-    transition: 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
 }
 
 .underline{
@@ -337,6 +411,7 @@ svg:hover{
     padding: 0;
     height: 30px;
     width: 30px;
+    font-size: 1.1rem;
     cursor: pointer;
     opacity: .85;
     transition: opacity 150ms ease-in-out;
@@ -391,8 +466,6 @@ svg:hover{
     transform-origin: left;
     transform: scaleX(0);
     transition: width 150ms ease-in-out;
-    transition: transform 150ms ease-in-out;
-
 }
 
 .volume-container:hover .volume-slider, .volume-slider:focus-within{
@@ -407,5 +480,63 @@ svg:hover{
     flex-grow: 1;
 }
 
+.timeline-container {
+    height: 7px;
+    margin-inline: .5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.video-container.scrubbing .timeline, .timeline-container:hover .timeline{
+    height: 100%
+}
+
+.timeline{
+    background-color: rgba(100, 100, 100, .5);
+    height: 3px;
+    width: 100%;
+    position: relative;
+}
+.timeline::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--preview) * 100%);
+    background-color: rgb(150, 150, 150);
+    display: none;
+}
+
+.timeline::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - var(--progress) * 100%);
+    background-color: rgb(22, 49, 145);
+}
+
+.timeline .timeline-btn{
+    --scale: 0;
+    position: absolute;
+    transform: translateX(-50%) scale(var(--scale));
+    height: 200%;
+    top: -50%;
+    left: calc(var(--progress) * 100%);
+    background-color: rgb(22, 49, 145);
+    border-radius: 50%;
+    transition: transform 150ms ease-in-out;
+    aspect-ratio: 1 / 1;
+}
+
+.video-container.scrubbing .timeline::before, .timeline-container:hover .timeline::before{
+    display: block;
+}
+
+.video-container.scrubbing .timeline, .timeline-container:hover .timeline-btn {
+    --scale: 1;
+}
 
 </style>
