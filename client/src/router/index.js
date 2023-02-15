@@ -35,6 +35,10 @@ export default new Router({
       name: 'display',
       component: display
     },
+    {
+      path: '*',
+      redirect: 'gallery' //use this if the user is not logged in?
+    }
   ]
 })
 

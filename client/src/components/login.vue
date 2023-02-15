@@ -34,6 +34,7 @@ export default {
                 })
                     this.$store.dispatch('setToken', response.data.token)
                     this.$store.dispatch('setUser', response.data.user)
+                    this.$router.push({name: 'gallery'})
 
                 } catch (err) {
                     this.err = err.response.data.error
