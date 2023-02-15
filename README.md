@@ -1,3 +1,3 @@
 # netflix-clone
 
-> A Vue.js project for my senior project replicating Netflix using VHS tapes
+> A Vue.js app for my senior project replicating Netflix using VHS tapes
