@@ -21,7 +21,7 @@
     <h2> All {{search}} Videos </h2>
     <div class="all-videos-container">
       <div class="" v-for="video in videos" :key="video.id">
-        <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function-->
+        <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function || video.Categories.toLowerCase().includes(search.toLowerCase()) || video.Year.includes(search)-->
           <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
 
             <h3> {{video.Title}} </h3>
@@ -45,7 +45,6 @@
 
 <script>
 import videoService from '@/services/VideoService'
-import videosJson from '../assets/video-config.json'
 import Feature from "./galleryComponents/feature.vue"
 import Category from "./galleryComponents/category.vue"
 import Navbar from "./galleryComponents/navbar.vue"
@@ -80,7 +79,13 @@ export default {
     Modal,
     Favorite
   },
-  async mounted(){
+  mounted(){
+    if(this.$route.query.search){
+      this.search = this.$route.query.search
+    }
+    //with filters as well?
+    
+    
   },
   async created() {
     this.videos = (await videoService.getAllVideos()).data   
@@ -160,10 +165,20 @@ export default {
       if(this.search == ''){
         this.$router.replace({name: "gallery"})
       } else {
-        this.$router.replace({query: {search: this.search.toLowerCase()}})
+        this.$router.replace({query: {search: this.search}})
       }
     },
-    
+    // '$route.query.filter': {
+    //   immediate: true,
+    //   handler (value) {
+    //     this.filteredYears = value //might have to add to the array
+    //   }
+    // },
+
+    filteredYears(){
+      this.$router.replace({query: {filter: this.filteredYears}})
+    },
+
     modalActive(){
       if(this.modalActive){
         this.$router.replace({query: {video: this.modal.Title.toLowerCase()}})
@@ -172,9 +187,7 @@ export default {
       }
     },
 
-    filteredYears(){
-      this.$router.replace({query: {filter: this.filteredYears}})
-    }
+    
   },
   computed: {
     searchVideos(){
