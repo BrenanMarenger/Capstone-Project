@@ -1,5 +1,7 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const videoController = require('./controllers/videoController')
+const FavoritesController = require('./controllers/FavoritesController')
+
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 
 module.exports = (app) => {
@@ -15,4 +17,11 @@ module.exports = (app) => {
         videoController.show)
     app.post('/videos',
         videoController.post)
+
+    app.get('/favorites',
+        FavoritesController.index)
+    app.post('/favorites',
+        FavoritesController.post)
+    app.delete('/favorites/:favoriteId',
+        FavoritesController.delete)
 }
