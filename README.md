@@ -1,3 +1,9 @@
-# netflix-clone
+# Netflix-Clone
 
 > A Vue.js app for my senior project replicating Netflix using VHS tapes
+
+#### Tech Stack
+* Vue
+* Express
+
+[Object Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ObjectMap.png)
