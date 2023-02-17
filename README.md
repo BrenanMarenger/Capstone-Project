@@ -6,4 +6,4 @@
 * Vue
 * Express
 
-[Object Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ObjectMap.png)
+![Object Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ObjectMap.png)
