@@ -9,7 +9,10 @@ export default {
     post(favorite) {
         return Api().post('favorites', favorite)
     },
-    delete(favoriteId) {
-        return Api().delete(`favorites/${favoriteId}`)
-    }
+    delete(params) {
+        console.log(params)
+        const favoriteId = params.VideoId
+        const userId = params.UserId
+        return Api().delete(`favorites/${favoriteId}/${userId}`)
+    },
 }

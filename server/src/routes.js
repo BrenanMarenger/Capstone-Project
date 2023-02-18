@@ -22,6 +22,6 @@ module.exports = (app) => {
         FavoritesController.index)
     app.post('/favorites',
         FavoritesController.post)
-    app.delete('/favorites/:favoriteId',
-        FavoritesController.delete)
+    app.delete('/favorites/:favoriteId/:userId',
+        FavoritesController.remove)
 }

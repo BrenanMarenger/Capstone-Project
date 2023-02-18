@@ -12,7 +12,7 @@ const videos = require('./video-config.json')
 const users = requre('./user-config.json')
 const favorites = requre('./favorites.json')
 
-sequelize.sync({ force: true }) //force: true
+sequelize.sync({ force: true })
     .then(async function () {
         await Promise.all(
             users.map(user => {
