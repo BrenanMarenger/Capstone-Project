@@ -7,19 +7,23 @@
                     <router-link :to="{name: 'gallery'}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
                     </router-link>
+                </div>
+                
+                <!-- TIME time = total - current-->
+                <div class="video-duration-container">
+                        <div class="remaining-time"> 
+                            {{ remainingTime }}
+                        </div>
+                    </div>
                     
-                </div>
-                <div class="title">
-                    {{displayVideo.Title}}
-                </div>
                 <!-- Timeline -->
-                <div class="timeline-container" @mousemove="updateTimeline" @mousedown="toggleScrubbing" @mouseup="toggleScrubbing">
+                <div class="timeline-container" @mousemove="updateTimeline" @click="toggleScrubbing" @mouseup="toggleScrubbing" >
                     <div class="timeline" >
                         <div class="timeline-btn">
-
                         </div>
                     </div>
                 </div>
+
                 <!-- PLAY/PAUSE -->
                 <div class="controls">
                     <button class="playpause-btn" >
@@ -29,6 +33,15 @@
                         <svg @click="togglePlay" class="pause-icon" viewBox="0 0 24 24" >
                             <path fill="currentColor" d="M14,19H18V5H14M6,19H10V5H6V19Z" />
                         </svg>
+                    </button>
+                     <!-- SKIP -->
+                     <button class="rewind">
+                        <svg @click="rewind" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M11.99,5V1l-5,5l5,5V7c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6h-2c0,4.42,3.58,8,8,8s8-3.58,8-8S16.41,5,11.99,5z"/><g>
+                            <path d="M10.89,16h-0.85v-3.26l-1.01,0.31v-0.69l1.77-0.63h0.09V16z"/><path d="M15.17,14.24c0,0.32-0.03,0.6-0.1,0.82s-0.17,0.42-0.29,0.57s-0.28,0.26-0.45,0.33s-0.37,0.1-0.59,0.1 s-0.41-0.03-0.59-0.1s-0.33-0.18-0.46-0.33s-0.23-0.34-0.3-0.57s-0.11-0.5-0.11-0.82V13.5c0-0.32,0.03-0.6,0.1-0.82 s0.17-0.42,0.29-0.57s0.28-0.26,0.45-0.33s0.37-0.1,0.59-0.1s0.41,0.03,0.59,0.1c0.18,0.07,0.33,0.18,0.46,0.33 s0.23,0.34,0.3,0.57s0.11,0.5,0.11,0.82V14.24z M14.32,13.38c0-0.19-0.01-0.35-0.04-0.48s-0.07-0.23-0.12-0.31 s-0.11-0.14-0.19-0.17s-0.16-0.05-0.25-0.05s-0.18,0.02-0.25,0.05s-0.14,0.09-0.19,0.17s-0.09,0.18-0.12,0.31 s-0.04,0.29-0.04,0.48v0.97c0,0.19,0.01,0.35,0.04,0.48s0.07,0.24,0.12,0.32s0.11,0.14,0.19,0.17s0.16,0.05,0.25,0.05 s0.18-0.02,0.25-0.05s0.14-0.09,0.19-0.17s0.09-0.19,0.11-0.32s0.04-0.29,0.04-0.48V13.38z"/></g></g></g></svg>
+                    </button>
+                    <button class="fast-forward">
+                        <svg @click="forward" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><g><rect fill="none" height="24" width="24"/></g><g><g>
+                            <path d="M18,13c0,3.31-2.69,6-6,6s-6-2.69-6-6s2.69-6,6-6v4l5-5l-5-5v4c-4.42,0-8,3.58-8,8c0,4.42,3.58,8,8,8s8-3.58,8-8H18z"/><polygon points="10.86,15.94 10.86,11.67 10.77,11.67 9,12.3 9,12.99 10.01,12.68 10.01,15.94"/><path d="M12.25,13.44v0.74c0,1.9,1.31,1.82,1.44,1.82c0.14,0,1.44,0.09,1.44-1.82v-0.74c0-1.9-1.31-1.82-1.44-1.82 C13.55,11.62,12.25,11.53,12.25,13.44z M14.29,13.32v0.97c0,0.77-0.21,1.03-0.59,1.03c-0.38,0-0.6-0.26-0.6-1.03v-0.97 c0-0.75,0.22-1.01,0.59-1.01C14.07,12.3,14.29,12.57,14.29,13.32z"/></g></g></svg>
                     </button>
                     <!-- VOLUME -->
                     <div class="volume-container">
@@ -45,25 +58,12 @@
                             <input type="range" @change="changeVolume($event)" class="volume-slider" min="0" max="1" step="any" :value="volumeLevel"> 
                         </button>
                     </div>
-                    <!-- TIME -->
-                    <div class="video-duration-container">
-                        <div class="current-time">
-                            {{ current }}
-                        </div>
-                        /
-                        <div class="total-time">
-                            {{ total }}
-                        </div>
+
+                    <!-- TITLE -->
+                    <div class="title">
+                    {{displayVideo.Title}}
                     </div>
-                    <!-- SKIP -->
-                    <button class="rewind">
-                        <svg @click="rewind" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M11.99,5V1l-5,5l5,5V7c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6h-2c0,4.42,3.58,8,8,8s8-3.58,8-8S16.41,5,11.99,5z"/><g>
-                            <path d="M10.89,16h-0.85v-3.26l-1.01,0.31v-0.69l1.77-0.63h0.09V16z"/><path d="M15.17,14.24c0,0.32-0.03,0.6-0.1,0.82s-0.17,0.42-0.29,0.57s-0.28,0.26-0.45,0.33s-0.37,0.1-0.59,0.1 s-0.41-0.03-0.59-0.1s-0.33-0.18-0.46-0.33s-0.23-0.34-0.3-0.57s-0.11-0.5-0.11-0.82V13.5c0-0.32,0.03-0.6,0.1-0.82 s0.17-0.42,0.29-0.57s0.28-0.26,0.45-0.33s0.37-0.1,0.59-0.1s0.41,0.03,0.59,0.1c0.18,0.07,0.33,0.18,0.46,0.33 s0.23,0.34,0.3,0.57s0.11,0.5,0.11,0.82V14.24z M14.32,13.38c0-0.19-0.01-0.35-0.04-0.48s-0.07-0.23-0.12-0.31 s-0.11-0.14-0.19-0.17s-0.16-0.05-0.25-0.05s-0.18,0.02-0.25,0.05s-0.14,0.09-0.19,0.17s-0.09,0.18-0.12,0.31 s-0.04,0.29-0.04,0.48v0.97c0,0.19,0.01,0.35,0.04,0.48s0.07,0.24,0.12,0.32s0.11,0.14,0.19,0.17s0.16,0.05,0.25,0.05 s0.18-0.02,0.25-0.05s0.14-0.09,0.19-0.17s0.09-0.19,0.11-0.32s0.04-0.29,0.04-0.48V13.38z"/></g></g></g></svg>
-                    </button>
-                    <button class="fast-forward">
-                        <svg @click="forward" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><g><rect fill="none" height="24" width="24"/></g><g><g>
-                            <path d="M18,13c0,3.31-2.69,6-6,6s-6-2.69-6-6s2.69-6,6-6v4l5-5l-5-5v4c-4.42,0-8,3.58-8,8c0,4.42,3.58,8,8,8s8-3.58,8-8H18z"/><polygon points="10.86,15.94 10.86,11.67 10.77,11.67 9,12.3 9,12.99 10.01,12.68 10.01,15.94"/><path d="M12.25,13.44v0.74c0,1.9,1.31,1.82,1.44,1.82c0.14,0,1.44,0.09,1.44-1.82v-0.74c0-1.9-1.31-1.82-1.44-1.82 C13.55,11.62,12.25,11.53,12.25,13.44z M14.29,13.32v0.97c0,0.77-0.21,1.03-0.59,1.03c-0.38,0-0.6-0.26-0.6-1.03v-0.97 c0-0.75,0.22-1.01,0.59-1.01C14.07,12.3,14.29,12.57,14.29,13.32z"/></g></g></svg>
-                    </button>
+                   
                     <!-- SPEED -->
                     <button @click="changeSpeed" class="speed-btn text-wide">
                         x{{speed}}
@@ -110,8 +110,7 @@ export default {
             captions: '',
             displayVideo: null,
             volumeLevel: .25,
-            current: 0,
-            total: 0,
+            remainingTime: 0,
             isMuted: false,
             speed: 1,
             isScrubbing: false,
@@ -123,7 +122,6 @@ export default {
         const videoId = this.$route.params.videoId
         this.displayVideo = (await videoService.show(videoId)).data
         
-
         //Captions
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange=function() {
@@ -139,9 +137,6 @@ export default {
 
         //Getting video duration
         setInterval(this.getCurrent, 250)
-
-        //Updating timeline
-        //setInterval(this.updateTimeline, 100)
         
     },
     created() {
@@ -217,7 +212,7 @@ export default {
             const captionsBtn = document.querySelector(".subtitle-btn")
             if(captions.mode === "hidden"){
                 captions.mode = "showing"
-                captionsBtn.classList.add(".underline")
+                //captionsBtn.classList.add(".underline")
             } else {
                 captions.mode = "hidden"
             }
@@ -226,7 +221,6 @@ export default {
 
         changeVolume(event){
             const video = document.querySelector("video")
-
             this.volumeLevel = event.target.value
             video.volume = this.volumeLevel
         },
@@ -253,9 +247,8 @@ export default {
         const timelineContainer = document.querySelector(".timeline-container")
         const percent = video.currentTime / video.duration
         timelineContainer.style.setProperty("--progress", percent)
-        
-        this.total = this.formatTime(video.duration)
-        this.current = this.formatTime(video.currentTime)
+    
+        this.remainingTime = this.formatTime(video.duration - video.currentTime)
         },
         // getTotalTime(){
         // const video = document.querySelector("video")
@@ -338,10 +331,11 @@ video{
 }
 
 svg{
+    scale: 1.20;
     transition: all .3s ease-in-out;
 }
 svg:hover{
-    scale: 1.05;
+    scale: 1.45;
 }
 
 .title{

@@ -131,14 +131,8 @@ export default {
             this.categories[j] = temp;
         }
     },
-
+    //Favorites
     toggleFavorites(video){
-      // let index = this.favoriteList.indexOf(video);
-      //       if (index != -1) {
-      //           this.favoriteList.splice(index, 1);
-      //       } else {
-      //           this.favoriteList.push(video);
-      //       }
       if(this.favoritesId.includes(video.id)){
         this.removeFavorite(video.id)
       } else {
@@ -146,8 +140,7 @@ export default {
       }
     },
 
-    async setFavorite(videoId){ // combine add and remove, if video id is in favorite list, then ...
-      //if videoId is a favorite, ignore request
+    async setFavorite(videoId){ 
       try{
          await FavoriteService.post({
         VideoId: videoId,
@@ -188,7 +181,7 @@ export default {
       console.log(err)
     }
     },
-
+    //Modal
     toggleModal(video) {
             this.modal = video;
             if(this.modalActive == true){
@@ -201,7 +194,7 @@ export default {
     updateModal(video){
       this.modal = video
     },
-
+    //Filter/Search
     toggleYearFilter(year){
       let index = this.filteredYears.indexOf(year)
       if(index != -1){
@@ -237,8 +230,6 @@ export default {
         this.$router.replace({name: "gallery"})
       }
     },
-
-    
   },
   computed: {
     searchVideos(){
