@@ -4,6 +4,6 @@
 
 #### Tech Stack
 * Vue
-* Express
+* Node + Express
 * Sequelize
 ![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
