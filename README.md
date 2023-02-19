@@ -5,5 +5,5 @@
 #### Tech Stack
 * Vue
 * Express
-
-![Object Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ObjectMap.png)
+* Sequelize
+![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
