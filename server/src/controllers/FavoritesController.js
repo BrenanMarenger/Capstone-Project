@@ -16,24 +16,13 @@ module.exports = {
             })
         }
     },
+    //fav = findAll
+    // key:value -> videoId:numFavorites
+    //for each video of videoId
+    //
 
     async post(req, res) {
         try {
-            //const userId = req.body.userId
-            //const videoId = req.body.videoId
-
-            // const favorite = await Favorites.findOne({
-            //     where: {
-            //         videoId: videoId,
-            //         userId: userId
-            //     }
-            // })
-            // if (favorite) {
-            //     return res.status(400).send({
-            //         error: 'Already in favorites'
-            //     })
-            // }
-
             const newFavorite = await Favorites.create(req.body) //req.body is both
             res.send(newFavorite)
         } catch (err) {

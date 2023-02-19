@@ -4,7 +4,7 @@
 
     <div class="watch-again-container"> 
         <div v-for="video in videos" :key="video.Path">
-            <div v-if="watchAgainVideos.includes(video.id)" > <!--  -->
+            <div v-if="watchAgainVideos.includes(video.id)" >
                 <h3>{{ video.Title }}</h3>
                 <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
                 Play
@@ -34,25 +34,28 @@ export default {
     props: ['videos','favoritesId'],
     data(){
         return {
+            history: [],
             watchAgainVideos: []
         }
     },
     async mounted() {
-        let history = (await WatchAgainService.index({
+        this.history = (await WatchAgainService.index({
             userId: this.$store.state.user.id
         })).data
         
-        this.watchAgainVideos = history.map(vid => vid.VideoId)
+        this.watchAgainVideos = this.history.map(vid => vid.VideoId)
         },
     methods: {
     sendToggleFavorite(video){
-            this.$emit('recieveToggleFavorites', video)
-        },
+        this.$emit('recieveToggleFavorites', video)
+    },
 
     sendToggleModal(video){
     this.$emit('recieveToggleModal', video)
-  }
+    }
   },
+  computed: {
+  }
 }
 
 

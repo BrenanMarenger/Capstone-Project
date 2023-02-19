@@ -60,7 +60,7 @@
                     </div>
 
                     <!-- TITLE -->
-                    <div class="title">
+                    <div class="title" v-if="displayVideo">
                     {{displayVideo.Title}}
                     </div>
                    

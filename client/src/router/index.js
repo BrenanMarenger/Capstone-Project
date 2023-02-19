@@ -46,7 +46,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const token = JSON.parse(window.localStorage.getItem('vuex'))
-  console.log(token.isLoggedIn)
   // If logged in, or going to the login page.
   if (token.isLoggedIn || to.name === 'register' || to.name === 'login') {
     next()
