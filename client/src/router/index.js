@@ -5,10 +5,12 @@ import register from '@/components/register'
 import login from '@/components/login'
 import start from '@/components/start'
 import display from '@/components/display'
+//import store from '@/store/store'
+
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -42,7 +44,17 @@ export default new Router({
   ]
 })
 
-// const router = VueRouter.createRouter({
-//   history: VueRouter.createWebHashHistory(),
-//   routes,
-// })
+router.beforeEach((to, from, next) => {
+  const token = JSON.parse(window.localStorage.getItem('vuex'))
+  console.log(token.isLoggedIn)
+  // If logged in, or going to the login page.
+  if (token.isLoggedIn || to.name === 'register' || to.name === 'login') {
+    next()
+  } else {
+    // Not logged in, redirect to login.
+    next({ name: 'login' })
+  }
+}
+);
+
+export default router

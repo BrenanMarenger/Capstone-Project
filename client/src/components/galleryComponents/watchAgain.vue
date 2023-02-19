@@ -43,10 +43,7 @@ export default {
         })).data
         
         this.watchAgainVideos = history.map(vid => vid.VideoId)
-        
-
-        console.log(this.watchAgainVideos) //give the id, map through it
-    },
+        },
     methods: {
     sendToggleFavorite(video){
             this.$emit('recieveToggleFavorites', video)
