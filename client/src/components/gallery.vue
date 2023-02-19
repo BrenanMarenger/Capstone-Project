@@ -14,6 +14,11 @@
       <Category v-show="hideItems" :videos="videos" :favoritesId="favoritesId" :currentCategory="category" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/> <!--<button @click="toggleFavorites(video)">⭐</button>-->
     </div>
 
+    <!-- Watch again -->
+    <div class="watch-again" v-show="hideItems" > 
+      <WatchAgain :videos="videos" :favoritesId="favoritesId" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/>
+    </div>
+
     <!--FAVORITES-->
     <Favorite v-show="hideItems" @recieveToggleFavorites="toggleFavorites($event)" :favoriteList="favoriteList" />
 
@@ -55,6 +60,7 @@ import Category from "./galleryComponents/category.vue"
 import Navbar from "./galleryComponents/navbar.vue"
 import Modal from "./galleryComponents/modal.vue"
 import Favorite from "./galleryComponents/favorite.vue"
+import WatchAgain from "./galleryComponents/watchAgain.vue"
 import {mapState} from 'vuex'
 
 export default {
@@ -85,7 +91,8 @@ export default {
     Category,
     Navbar,
     Modal,
-    Favorite
+    Favorite,
+    WatchAgain
   },
   async mounted(){
     if(this.$route.query.search){

@@ -4,13 +4,15 @@ const {
     sequelize,
     Video,
     User,
-    Favorites
+    Favorites,
+    History
 } = require('../src/models')
 
 const Promise = require('bluebird')
 const videos = require('./video-config.json')
-const users = requre('./user-config.json')
-const favorites = requre('./favorites.json')
+const users = require('./user-config.json')
+const favorites = require('./favorites.json')
+const history = require('./history.json')
 
 sequelize.sync({ force: true })
     .then(async function () {
@@ -29,6 +31,12 @@ sequelize.sync({ force: true })
         await Promise.all(
             favorites.map(favorite => {
                 Favorites.create(favorite)
+            })
+        )
+
+        await Promise.all(
+            history.map(history => {
+                History.create(history)
             })
         )
     })

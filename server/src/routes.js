@@ -1,7 +1,7 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const videoController = require('./controllers/videoController')
 const FavoritesController = require('./controllers/FavoritesController')
-
+const HistoriesController = require('./controllers/HistoriesController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 
 module.exports = (app) => {
@@ -24,4 +24,9 @@ module.exports = (app) => {
         FavoritesController.post)
     app.delete('/favorites/:favoriteId/:userId',
         FavoritesController.remove)
+
+    app.get('/histories',
+        HistoriesController.index)
+    app.post('/histories',
+        HistoriesController.post)
 }

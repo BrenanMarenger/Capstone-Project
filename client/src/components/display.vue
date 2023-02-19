@@ -15,7 +15,7 @@
                             {{ remainingTime }}
                         </div>
                     </div>
-                    
+
                 <!-- Timeline -->
                 <div class="timeline-container" @mousemove="updateTimeline" @click="toggleScrubbing" @mouseup="toggleScrubbing" >
                     <div class="timeline" >
@@ -103,6 +103,8 @@
 
 <script>
 import videoService from '../services/VideoService'
+import WatchAgainService from '../services/WatchAgainService'
+
 export default {
     name: 'display',
     data(){
@@ -121,6 +123,12 @@ export default {
         //GET request for the video
         const videoId = this.$route.params.videoId
         this.displayVideo = (await videoService.show(videoId)).data
+
+        //Posting to user history
+        WatchAgainService.post({
+            videoId: videoId,
+            userId: this.$store.state.user.id
+        })
         
         //Captions
         var xmlhttp = new XMLHttpRequest();
@@ -136,7 +144,7 @@ export default {
         xmlhttp.send();
 
         //Getting video duration
-        setInterval(this.getCurrent, 250)
+        setInterval(this.getCurrent, 250) //stop on exit
         
     },
     created() {
@@ -170,6 +178,10 @@ export default {
             }
         })
         
+    },
+    beforeRouteLeave (to, from , next) {
+        clearInterval(this.getCurrent)
+        next()
     },
     methods: {
         togglePlay(){
@@ -319,9 +331,6 @@ export default {
 </script>
 
 <style scoped>
-video{
-     
-}
 .nav{
     filter: drop-shadow(0px 1px 5px black);
     position: absolute;
