@@ -116,6 +116,7 @@ export default {
             isMuted: false,
             speed: 1,
             isScrubbing: false,
+            interval: null
             
         }
     },
@@ -144,8 +145,11 @@ export default {
         xmlhttp.send();
 
         //Getting video duration
-        setInterval(this.getCurrent, 250) //stop on exit
+        this.interval = setInterval(this.getCurrent, 250) //stop on exit
         
+    },
+    destroyed() {
+        clearInterval(this.interval)
     },
     created() {
         
