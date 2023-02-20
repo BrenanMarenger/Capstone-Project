@@ -1,6 +1,6 @@
 # Netflix-Clone
 ### Objective
-> A Vue.js app for my senior project replicating Netflix using VHS tapes. My goal of this project is to 
+> A website app for my senior project, replicating Netflix with my childhood VHS tapes. My goal of this project is to prepare myself and learn industry standard of web development on a full-stack level
 
 ### Tech Stack
 * Vue
@@ -31,6 +31,7 @@
 * Whimsical
 * Postman
 * Google Fonts Icons
+* Elgato Video Capture
 
 ### Unique Features
 * Accounts with personal favorites and watch history
