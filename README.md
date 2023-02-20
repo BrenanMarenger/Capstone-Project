@@ -5,5 +5,6 @@
 #### Tech Stack
 * Vue
 * Node + Express
-* Sequelize
+* SQLite
+* Webkit
 ![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
