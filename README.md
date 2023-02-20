@@ -56,6 +56,7 @@
 * Passport for better authenticaiton
 * Vitest for testing
 * Rating system to display number of like/top rated videos
+* Profile system for each account
 * Video scrubbing
 * Loading page/animations
 * Describe features with code and in-app examples
