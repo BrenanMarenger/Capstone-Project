@@ -7,7 +7,7 @@
 * Express
 * SQLite
 * AWS - S3, Cloudfront
-* Webkit
+* Webpack
 
 ## Project Map
 ![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
@@ -51,4 +51,5 @@
 * Rating system to display number of like/top rated videos
 * Video scrubbing
 * Loading page/animations
+* Describe features with code and in-app examples
 
