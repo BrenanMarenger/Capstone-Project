@@ -43,8 +43,8 @@
 ## Unique Features
 * Account system with personal favorites and watch history
 * Authentication with appropriate redirection, token storage, and policies
-* Custom video player with key bind and a variety of features
-* Dynamic gallery page with different feature and arragement of categories/videos
+* Custom video player with keybinds and a variety of features
+* Dynamic gallery page with different featured video and changing arragement of categories/videos
 * Scalable project, adapting to new videos and users. Automatically adding new categories
 * Dynamic searching and filtering, query urls
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
