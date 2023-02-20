@@ -10,11 +10,16 @@
 * Webpack
 
 ## Project Map
-![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
-## Wireframes
-![Wireframes](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Wireframs.png)
+<p align="center">
+  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png" width="700" />
+</p>
 
-## Tools
+## Wireframes
+<p align="center">
+  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Wireframs.png" width="700" />
+</p>
+
+## Other Tools
 ### Client
 * Vue Router
 * Vuex + Persistedstate
