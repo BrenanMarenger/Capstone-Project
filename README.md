@@ -11,6 +11,8 @@
 
 ## Project Map
 ![Project Map](https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png)
+## Wireframes
+![Wireframes](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Wireframs.png)
 
 ## Tools
 ### Client
