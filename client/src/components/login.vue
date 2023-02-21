@@ -1,6 +1,6 @@
 <template>
     <div> 
-        <h1>Login</h1>
+        <div class="text-3xl font-bold underline">Login</div>
         <br>
         <input name="email" v-model="email" placeholder="example@gmail.com"/>
         <br>
@@ -10,6 +10,11 @@
             {{ err }}
         </p>
         <button @click="login">Login</button>
+        <br>
+        <router-link to="register">
+        Dont have an account? Register
+        </router-link>
+        
     </div>
     
 </template>

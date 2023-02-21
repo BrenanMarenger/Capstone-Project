@@ -1,48 +1,6 @@
 <template>
-    <!--
-    <v-content>
-        <v-container fluid fill-height>
-            <v-layout align-center justify-center>
-                <v-flex xs12 sm8 md4>
-                    <v-card class="elevation-12">
-                        <v-toolbar dark color="primary">
-                            <v-toolbar-title>Register</v-toolbar-title>
-                        </v-toolbar>
-                        <v-card-text>
-                            <v-form>
-                                <v-text-field
-                                prepend-icon="person"
-                                name="email"
-                                label="Email"
-                                v-model="email"
-                                ></v-text-field>
-                                <v-text-field
-                                prepend-icon="lock"
-                                name="password"
-                                label="Password"
-                                type="password"
-                                v-model="password"
-                                ></v-text-field>
-                                <v-text-field
-                                name="confirmPassword"
-                                label="Confirm Password"
-                                v-model="confirmPassword"
-                                ></v-text-field>
-                            </v-form>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn color="primary" @click="register">
-                            Register
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-container>
-    </v-content>
-    -->
     <div> 
-        <h1>Register</h1>
+        <h1 className="text-3xl font-bold underline">Register</h1>
         <br>
         <input name="email" v-model="email" placeholder="example@gmail.com"/>
         <br>
@@ -53,6 +11,10 @@
             {{ err }}
         </p>
         <button @click="register">Register</button>
+        <br>
+        <router-link to="login">
+        Have an accout? Log In
+        </router-link>
     </div>
 </template>
 
@@ -90,10 +52,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-.error{
-    color: red
-}
-
-</style>

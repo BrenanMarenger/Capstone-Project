@@ -3,20 +3,12 @@ import Router from 'vue-router'
 import gallery from '@/components/gallery'
 import register from '@/components/register'
 import login from '@/components/login'
-import start from '@/components/start'
 import display from '@/components/display'
-//import store from '@/store/store'
-
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
-    {
-      path: '/',
-      name: 'start',
-      component: start
-    },
     {
       path: '/register',
       name: 'register',
@@ -37,9 +29,10 @@ const router = new Router({
       name: 'display',
       component: display
     },
+    //
     {
-      path: '*',
-      redirect: 'gallery' //use this if the user is not logged in?
+      path: '/*',
+      redirect: 'gallery'
     }
   ]
 })
