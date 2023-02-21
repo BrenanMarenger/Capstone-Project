@@ -4,7 +4,6 @@ module.exports = {
     async index(req, res) {
         try {
             const userId = req.query.userId
-            console.log("history for user: " + userId)
             const history = await History.findAll({
                 where: {
                     userId: userId
@@ -20,7 +19,6 @@ module.exports = {
 
     async post(req, res) {
         try {
-            console.log("Called!: " + req.body.videoId + req.body.userId)
             const newHistory = await History.create({
                 UserId: req.body.userId,
                 VideoId: req.body.videoId

@@ -19,7 +19,6 @@ module.exports = {
     //fav = findAll
     // key:value -> videoId:numFavorites
     //for each video of videoId
-    //
 
     async post(req, res) {
         try {

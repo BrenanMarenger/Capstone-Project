@@ -1,26 +1,49 @@
 <template>
   <div class="gallery">
     <!--NAV BAR -->
-    <Navbar  @recieveSearch="applySearch($event)" @toggleYearFilter="toggleYearFilter($event)" :yearList="years" :categoryList="categories"/>
+    <Navbar  
+      @recieveSearch="applySearch($event)" 
+      @toggleYearFilter="toggleYearFilter($event)" 
+      :yearList="years" 
+      :categoryList="categories"/>
 
     <!--FEATURE-->
-    <Feature v-if="videos.length > 1" :videos="videos" :modalActive="modalActive" v-show="hideItems" />
+    <Feature v-if="videos.length > 1" :videos="videos" 
+      :modalActive="modalActive" 
+      v-show="hideItems" />
 
     <!--MODAL-->
-    <Modal v-if="modalActive" :videos="videos" :favoritesId="favoritesId" :modal="modal" @receiveModal="updateModal($event)" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorite="toggleFavorites($event)"/>
+    <Modal v-if="modalActive" 
+      :videos="videos" 
+      :favoritesId="favoritesId" 
+      :modal="modal" 
+      @receiveModal="updateModal($event)" 
+      @recieveToggleModal="toggleModal($event)" 
+      @recieveToggleFavorite="toggleFavorites($event)"/>
 
     <!--CATEGORIES-->
     <div v-for="category in categories" :key="category" > 
-      <Category v-show="hideItems" :videos="videos" :favoritesId="favoritesId" :currentCategory="category" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/> <!--<button @click="toggleFavorites(video)">⭐</button>-->
+      <Category v-show="hideItems" 
+        :videos="videos" 
+        :favoritesId="favoritesId" 
+        :currentCategory="category" 
+        @recieveToggleModal="toggleModal($event)" 
+        @recieveToggleFavorites="toggleFavorites($event)"/>
     </div>
 
     <!-- Watch again -->
     <div class="watch-again" v-show="hideItems" > 
-      <WatchAgain :videos="videos" :favoritesId="favoritesId" @recieveToggleModal="toggleModal($event)" @recieveToggleFavorites="toggleFavorites($event)"/>
+      <WatchAgain 
+        :videos="videos" 
+        :favoritesId="favoritesId" 
+        @recieveToggleModal="toggleModal($event)" 
+        @recieveToggleFavorites="toggleFavorites($event)"/>
     </div>
 
     <!--FAVORITES-->
-    <Favorite v-show="hideItems" @recieveToggleFavorites="toggleFavorites($event)" :favoriteList="favoriteList" />
+    <Favorite v-show="hideItems" 
+      @recieveToggleFavorites="toggleFavorites($event)" 
+      :favoriteList="favoriteList" />
 
     <!--ALL-->
     <h2> All {{search}} Videos </h2>
