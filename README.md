@@ -51,10 +51,11 @@
 
 
 ## TODO
-* Bootstrap or Vuetify for Styling
+* Bootstrap or Vuetify for styling
 * Loading page/animations
 * Profile system for each account
 * Debug and clean code
+* Modal displays video length
 * Passport for better authenticaiton
 * Vitest for testing
 * Rating system to display number of like/top rated videos
