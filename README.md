@@ -11,7 +11,7 @@
 
 ## Project Map
 <p align="center">
-  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Map%20(1).png" width="700" />
+  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Map%20(1).png" width="800" />
 </p>
 
 ## Wireframes
