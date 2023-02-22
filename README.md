@@ -11,7 +11,7 @@
 
 ## Project Map
 <p align="center">
-  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/ProjectMap.png" width="700" />
+  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Map%20(1).png" width="700" />
 </p>
 
 ## Wireframes
@@ -51,13 +51,13 @@
 
 
 ## TODO
-* Tailwind for Styling
+* Bootstrap or Vuetify for Styling
+* Loading page/animations
+* Profile system for each account
 * Debug and clean code
 * Passport for better authenticaiton
 * Vitest for testing
 * Rating system to display number of like/top rated videos
-* Profile system for each account
 * Video scrubbing
-* Loading page/animations
 * Describe features with code and in-app examples
 
