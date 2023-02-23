@@ -38,7 +38,13 @@ export default {
     }
 }
 
+h1{
+    color:white
+}
+
 .loading{
+    display: flex;
+    flex-direction: column;
     position: absolute;
     align-items: center;
     justify-content: center;
