@@ -12,7 +12,8 @@ export default new Vuex.Store({
     state: {
         token: null,
         user: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        loading: false,
     },
     mutations: {
         setToken(state, token) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         },
         setUser(state, user) {
             state.user = user
+        },
+        setLoading(state, loading) {
+            state.loading = loading
         }
     },
     actions: {

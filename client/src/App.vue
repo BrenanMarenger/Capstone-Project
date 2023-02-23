@@ -1,6 +1,10 @@
 <template>
   <div id="app">
+    
+    <loader v-if="isLoading" />
+    
     <router-view/>
+    
   </div>
 </template>
 
@@ -8,20 +12,21 @@
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
+import loader from './components/loading.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    loader
+  },
+  computed: {
+    isLoading() {
+      //console.log("loading!", this.$store.state.loading)
+      return this.$store.state.loading
+    }
+  }
 }
 </script>
 
 <style>
-/*
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-*/
+
 </style>

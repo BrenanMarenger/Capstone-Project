@@ -85,6 +85,7 @@ import Modal from "./galleryComponents/modal.vue"
 import Favorite from "./galleryComponents/favorite.vue"
 import WatchAgain from "./galleryComponents/watchAgain.vue"
 import {mapState} from 'vuex'
+import store from '../store/store'
 
 export default {
   name: 'gallery',
@@ -117,16 +118,25 @@ export default {
     Favorite,
     WatchAgain
   },
+  // beforeRouteEnter(to, from, next) {
+  //   
+  //   
+  // },
   async mounted(){
     if(this.$route.query.search){
       this.search = this.$route.query.search
     }
   },
   async created() {
+    store.commit('setLoading', true);
     this.videos = (await videoService.getAllVideos()).data   
     this.getYears();
     this.getCategories();
     this.updateFavorites();
+    setTimeout(function(){
+      store.commit('setLoading', false)
+    }, 2500);
+    
   },
   methods: {
     applySearch(updateSearch){
