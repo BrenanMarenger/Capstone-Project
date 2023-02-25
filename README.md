@@ -40,8 +40,10 @@
 * **Vuex**          - persistedstate, stores states (token, loading, user id, etc.)
 * **Axios**         - API to make HTTP requests to my server
 * **Vuetify?** - TBD component based styling library
+* **Google Icons** - SVG icons
 ### Server
 * **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
+* **Postman**     - server endpoint functional, integration, and regression testing
 * **Nodemon**       - restarts server when a change is detected (QoL)
 * **Eslint**        - help debug and find issues
 * **Bcrypt**        - password hashing
@@ -53,8 +55,6 @@
 ### Misc
 * **Whisper**     - API to generate captions
 * **Whimsical**   - Visualizing and planning project
-* **Postman**     - server endpoint functional, integration, and regression testing
-* **Google Icons** - SVG icons
 * **Elgato Video Capture** - Converting VHS tapes to digital download
 
 ## Features
