@@ -4,17 +4,17 @@
 
 ## Contents
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
-<br>
+
 [Project Map](https://github.com/BrenanMarenger/Capstone-Project#project-map)
-<br>
+
 [Wireframes](https://github.com/BrenanMarenger/Capstone-Project#wireframes)
-<br>
+
 [Tools](https://github.com/BrenanMarenger/Capstone-Project#tools)
-<br>
+
 [Features](https://github.com/BrenanMarenger/Capstone-Project#features)
-<br>
+
 [Screenshots](https://github.com/BrenanMarenger/Capstone-Project#screenshots)
-<br>
+
 [TODO](https://github.com/BrenanMarenger/Capstone-Project#todo)
 
 ## Tech Stack
