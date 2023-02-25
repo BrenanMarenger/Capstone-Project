@@ -2,6 +2,10 @@
 ## Objective
 > A website app for my senior project, replicating Netflix with my childhood VHS tapes. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level.
 
+## Contents
+[Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
+[Screenshots](https://github.com/BrenanMarenger/Capstone-Project#screenshots)
+
 ## Tech Stack
 * Vue
 * Express
@@ -49,6 +53,7 @@
 * Dynamic searching and filtering, query urls
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
 
+## Screenshots
 
 ## TODO
 * Bootstrap or Vuetify for styling
