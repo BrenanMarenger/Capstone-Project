@@ -2,7 +2,7 @@
 ## Objective
 > A website app for my senior project, replicating Netflix with my childhood VHS tapes. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level.
 
-## Contents
+## Content
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
 
 [Project Map](https://github.com/BrenanMarenger/Capstone-Project#project-map)
