@@ -4,7 +4,18 @@
 
 ## Contents
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
+<br>
+[Project Map](https://github.com/BrenanMarenger/Capstone-Project#project-map)
+<br>
+[Wireframes](https://github.com/BrenanMarenger/Capstone-Project#wireframes)
+<br>
+[Tools](https://github.com/BrenanMarenger/Capstone-Project#tools)
+<br>
+[Features](https://github.com/BrenanMarenger/Capstone-Project#features)
+<br>
 [Screenshots](https://github.com/BrenanMarenger/Capstone-Project#screenshots)
+<br>
+[TODO](https://github.com/BrenanMarenger/Capstone-Project#todo)
 
 ## Tech Stack
 * Vue
@@ -23,7 +34,7 @@
   <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Wireframs.png" width="700" />
 </p>
 
-## Other Tools
+## Tools
 ### Client
 * Vue Router
 * Vuex + Persistedstate
@@ -44,7 +55,7 @@
 * Google Fonts Icons
 * Elgato Video Capture
 
-## Unique Features
+## Features
 * Account system with personal favorites and watch history
 * Authentication with appropriate redirection, token storage, and policies
 * Custom video player with keybinds and a variety of features
