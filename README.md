@@ -71,12 +71,10 @@ Coming Soon
 
 ## TODO
 * Styling
-* Loading page/animations
 * Profile system for each account
 * Debug and clean code
 * Modal displays video length
 * Passport for better authenticaiton
 * Vitest for testing
 * Rating system to display number of like/top rated videos
-* Describe features with code and in-app examples
 
