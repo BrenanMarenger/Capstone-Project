@@ -36,24 +36,26 @@
 
 ## Tools
 ### Client
-* Vue Router
-* Vuex + Persistedstate
-* Axious
+* **Vue Router**    - allow multi-page navigation, redirection 
+* **Vuex**          - persistedstate, stores states (token, loading, user id, etc.)
+* **Axios**         - API to make HTTP requests to my server
+* **Vuetify?** - TBD component based styling library
 ### Server
-* Sequelize
-* Nodemon
-* Eslint
-* Bcrypt
-* Bluebird
-* Morgan
-* Joi
-* JSON Web Token
+* **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
+* **Nodemon**       - restarts server when a change is detected (QoL)
+* **Eslint**        - help debug and find issues
+* **Bcrypt**        - password hashing
+* **Bluebird**      - allows promisifying node modules (async)
+* **Morgan**        - logs requests, helps visualize server interactions 
+* **Joi**           - used to enfore email and password schema
+* **JWT**           - "JSON Web Token" generates user token for logged in users
+* **Cors**          - fetching resources 
 ### Misc
-* Whisper
-* Whimsical
-* Postman
-* Google Fonts Icons
-* Elgato Video Capture
+* **Whisper**     - API to generate captions
+* **Whimsical**   - Visualizing and planning project
+* **Postman**     - server endpoint functional, integration, and regression testing
+* **Google Icons** - SVG icons
+* **Elgato Video Capture** - Converting VHS tapes to digital download
 
 ## Features
 * Account system with personal favorites and watch history
@@ -65,9 +67,10 @@
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
 
 ## Screenshots
+Coming Soon
 
 ## TODO
-* Bootstrap or Vuetify for styling
+* Styling
 * Loading page/animations
 * Profile system for each account
 * Debug and clean code
@@ -75,6 +78,5 @@
 * Passport for better authenticaiton
 * Vitest for testing
 * Rating system to display number of like/top rated videos
-* Video scrubbing
 * Describe features with code and in-app examples
 
