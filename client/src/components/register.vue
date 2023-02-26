@@ -1,23 +1,32 @@
 <template>
     <div class="body"> 
         <div class="register"> 
-            <div class="title">Register</div>
+            <h1>Register</h1>
+            <form>
+                <div class="text">
+                    <input name="email" v-model="email" required="true"/>
+                    <span></span>
+                    <label for="email">Email</label>
+                </div>
+                <div class="text">
+                    <input name="password" v-model="password" type="password" required="true"/>
+                    <span></span>
+                    <label for="password">Password</label>
+                </div>
+                <div class="text">
+                    <input name="confirmPassword" v-model="confirmPassword" type="password" required="true"/>
+                    <span></span>
+                    <label for="confirmPassword">Confirm Password</label>
+                </div>
+            </form>
             
-            <label for="email">Email</label>
-            <input name="email" v-model="email" placeholder="example@gmail.com"/>
-            
-            <label for="password">Password</label>
-            <input name="password" v-model="password" type="password"/>
-            
-            <label for="confirmPassword">Confirm Password</label>
-            <input name="confirmPassword" v-model="confirmPassword" type="password"/>
-            <p class="error">
-                {{ err }}
-            </p>
             <button class="submit-btn" @click="register">Register</button>
-            <br>
+            <span class="error">
+                {{ err }}
+            </span>
+            
             <div class="login-link"> 
-                <router-link to="login">
+                <router-link style="text-decoration: none; color: inherit;" to="login">
                     Have an accout? Log In
                 </router-link>
             </div>
@@ -61,6 +70,7 @@ export default {
 </script>
 
 <style scoped>
+
 .body{
     position: relative;
     display: flex;
@@ -68,61 +78,120 @@ export default {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: grey;
+    background: linear-gradient(120deg, rgb(34, 34, 34),darkgrey);
     overflow: hidden;
     font-family: 'Rubbik', sans-serif;
 
 }
 
 .register{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     display: flex;
     flex-direction: column;
-    background: rgba(0,0,0,0.75);
-    border-radius: 4px;
+    background: rgba(0,0,0,0.65);
+    border-radius: 6px;
     padding: 60px 68px 40px;
-    height: 50%;
-    width: 15%;
-}
-label{
-    margin:5px;
-    color:grey;
-}
-.title{
-    color: white;
-    font-size: 2.2rem;
-    margin: 10px;
+    height: 525px;
+    width: 400px;
 }
 
-input{
-    width: 100%;
+.register h1{
+text-align: center;
+padding: 0 0 20px 0;
+border-bottom: 1px solid silver;
+color: white;
+font-size: 2.3rem;
+margin: 15px;
+}
+
+.register form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+form .text{
     position: relative;
-    background: #333;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    border: none;
-    opacity: 1;
-    font-size: 1rem;
+    border-bottom: 2px solid white;
+    margin: 39px 0;
+}
+.text input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
     color:white;
-    line-height: 35px;
-    
+    border: none;
+    background: none;
+    outline: none;
+}
 
+.text label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: grey;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.text span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width: 0%;
+    height: 2px;
+    background: rgb(255, 70, 70);
+    transition: .5s;
+}
+
+.text input:focus ~ label,
+.text input:valid ~ label{
+    font-size: 13px;
+    top: -6px;
+    color: rgb(255, 70, 70);
+}
+
+.text input:focus ~ span::before,
+.text input:valid ~ span::before{
+    width: 100%;
 }
 
 .submit-btn{
+    height: 50px;
     margin: 5px 0 5px;
     padding: 16px;
     color: white;
     background: red;
-    font-size: 0.9rem;
+    font-size: 18px;
+    font-weight: 700;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    outline: none;
+}
+
+.submit-btn:hover {
+    background: rgb(221, 0, 0);
+    transition: .2s;
+    scale: 1.01;
+
 }
 
 .login-link{
-    margin: 5px;
+    margin: 30px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
     color: grey;
-    font-size: 0.9rem;
+}
+.login-link:hover{
+    text-decoration: underline;
 }
 
 .error{
