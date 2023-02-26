@@ -7,8 +7,6 @@
 
 [Project Map](https://github.com/BrenanMarenger/Capstone-Project#project-map)
 
-[Wireframes](https://github.com/BrenanMarenger/Capstone-Project#wireframes)
-
 [Tools](https://github.com/BrenanMarenger/Capstone-Project#tools)
 
 [Features](https://github.com/BrenanMarenger/Capstone-Project#features)
@@ -27,11 +25,6 @@
 ## Project Map
 <p align="center">
   <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Map%401.25x.png" width="950" />
-</p>
-
-## Wireframes
-<p align="center">
-  <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Wireframs.png" width="700" />
 </p>
 
 ## Tools
