@@ -19,7 +19,9 @@ module.exports = (app) => {
         videoController.post)
 
     app.get('/favorites',
-        FavoritesController.index)
+        FavoritesController.getAllFavorites)
+    app.get('/favorites/:userId',
+        FavoritesController.show)
     app.post('/favorites',
         FavoritesController.post)
     app.delete('/favorites/:favoriteId/:userId',

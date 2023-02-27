@@ -1,9 +1,22 @@
-const { Favorites, Video } = require('../models')
+const { Favorites } = require('../models')
 
 module.exports = {
-    async index(req, res) {
+    async getAllFavorites(req, res) {
+        console.log("!!!!!!!!!!!!MAKES IT TO HERE*******************************")
         try {
-            const userId = req.query.userId
+            const favorites = await Favorites.findAll()
+            res.send(favorites)
+        } catch (err) {
+            res.status(500).send({
+                error: '500: Error trying to get all favorites'
+            })
+        }
+    },
+
+    async show(req, res) {
+        try {
+            const userId = req.params.userId
+            console.log("!!!!!!!!!!!!!!!!!Finding all favs with user id: ")
             const favorite = await Favorites.findAll({
                 where: {
                     userId: userId
@@ -16,12 +29,12 @@ module.exports = {
             })
         }
     },
-    //fav = findAll
-    // key:value -> videoId:numFavorites
-    //for each video of videoId
 
     async post(req, res) {
         try {
+            console.log("Called******")
+            console.log(req)
+
             const newFavorite = await Favorites.create(req.body) //req.body is both
             res.send(newFavorite)
         } catch (err) {
@@ -33,6 +46,7 @@ module.exports = {
 
     async remove(req, res) {
         try {
+            console.log("Called!!**")
 
             const favoriteId = req.params.favoriteId
             const userId = req.params.userId

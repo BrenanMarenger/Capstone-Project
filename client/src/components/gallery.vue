@@ -5,7 +5,10 @@
       @recieveSearch="applySearch($event)" 
       @toggleYearFilter="toggleYearFilter($event)" 
       :yearList="years" 
-      :categoryList="categories"/>
+      :search="search"
+      :filteredYears="filteredYears"
+      @recieveResetFilters="resetFilters()"
+      />
 
     <!--FEATURE-->
     <Feature v-if="videos.length > 1" :videos="videos" 
@@ -20,6 +23,17 @@
       @receiveModal="updateModal($event)" 
       @recieveToggleModal="toggleModal($event)" 
       @recieveToggleFavorite="toggleFavorites($event)"/>
+
+    <!--FAVORITES-->
+    <Favorite v-show="hideItems" 
+      @recieveToggleFavorites="toggleFavorites($event)" 
+      :favoriteList="favoriteList" />
+
+    <!-- TOP 5 -->
+    <h1>Top 5 Films</h1>
+    <div class="top5-container" v-for="video in topRated">
+      <img class="top5-video" :src="video.Thumbnail"/>
+    </div>
 
     <!--CATEGORIES-->
     <div v-for="category in categories" :key="category" > 
@@ -40,10 +54,7 @@
         @recieveToggleFavorites="toggleFavorites($event)"/>
     </div>
 
-    <!--FAVORITES-->
-    <Favorite v-show="hideItems" 
-      @recieveToggleFavorites="toggleFavorites($event)" 
-      :favoriteList="favoriteList" />
+    
 
     <!--ALL-->
     <h2> All {{search}} Videos </h2>
@@ -60,10 +71,10 @@
             <button @click="toggleModal(video)">
               More Info
             </button>
-            <button @click="setFavorite(video.id)" v-if="favoritesId.includes(video.id)">
+            <button @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </button>
-            <button @click="removeFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
+            <button @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
             </button>
             <img class="all-videos-video" :src="video.Thumbnail" />
@@ -99,6 +110,7 @@ export default {
       favoriteList: [],
       favorites: [],
       favoritesId: [],
+      topRated: [],
       modal: {
                 "Path": "",
                 "Title": "",
@@ -118,10 +130,6 @@ export default {
     Favorite,
     WatchAgain
   },
-  // beforeRouteEnter(to, from, next) {
-  //   
-  //   
-  // },
   async mounted(){
     if(this.$route.query.search){
       this.search = this.$route.query.search
@@ -130,17 +138,24 @@ export default {
   async created() {
     store.commit('setLoading', true);
     this.videos = (await videoService.getAllVideos()).data   
+    
+    //await videoService.getAllVideos().then(data => { this.videos = data; isLoading = false; })
     this.getYears();
     this.getCategories();
     this.updateFavorites();
+    this.parseRating();
     setTimeout(function(){
       store.commit('setLoading', false)
-    }, 2500);
-    
+    }, 1500);
+  
   },
   methods: {
     applySearch(updateSearch){
       this.search = updateSearch
+    },
+    resetFilters(){
+      this.search= ''
+      this.filteredYears = []
     },
 
     getYears(){
@@ -163,6 +178,7 @@ export default {
           }
         }
       }
+      
       //Shuffle
       for(let i = this.categories.length - 1;i > 0; i--){
             let j = Math.floor(Math.random() * (i + 1));
@@ -170,6 +186,32 @@ export default {
             this.categories[i] = this.categories[j];
             this.categories[j] = temp;
         }
+    },
+    //Rating System
+    async parseRating(){ 
+      let ratings = (await FavoriteService.getAllFavorites()).data
+      let ratingObject = {} //make key pair for each video in videos?
+      for(let video in ratings){
+        if((ratingObject[ratings[video].VideoId]) == null){
+          ratingObject[ratings[video].VideoId] = 1;
+        } else{
+          ratingObject[ratings[video].VideoId] += 1;
+        }
+      }
+      let ratingArray =[]
+      for(var videoId in ratingObject){
+        ratingArray.push([videoId, ratingObject[videoId]])
+      }
+      let topFive = ratingArray.sort((a,b) => {
+        return b[1] - a[1];
+      })
+
+      this.topRated[0] = (await videoService.show(topFive[0][0])).data
+      this.topRated[1] = (await videoService.show(topFive[1][0])).data
+      this.topRated[2] = (await videoService.show(topFive[2][0])).data
+      this.topRated[3] = (await videoService.show(topFive[3][0])).data
+      this.topRated[4] = (await videoService.show(topFive[4][0])).data
+      
     },
     //Favorites
     toggleFavorites(video){
@@ -206,17 +248,14 @@ export default {
     },
     async updateFavorites(){
       try{
-      let favorites = await FavoriteService.index({
-        userId: this.$store.state.user.id
-        })
+      let favorites = await FavoriteService.show(this.$store.state.user.id)
         this.favorites = favorites.data
         this.favoriteList = [];
         for(let fav of this.favorites){
           this.favoriteList.push((await videoService.show(fav.VideoId)).data)
         }
     
-        this.favoritesId = this.favoriteList.map(fav => fav.id)
-        
+        this.favoritesId = this.favoriteList.map(fav => fav.id)        
     } catch (err) {
       console.log(err)
     }
@@ -302,6 +341,10 @@ hiddenVideos.forEach((el) => observer.observe(el))
 
 <style scoped>
 
+.gallery{
+  background: linear-gradient(95deg, rgb(34, 34, 34),darkgrey);
+
+}
 .all-videos-container{
   display: flex;
   flex-direction: row;
@@ -320,6 +363,14 @@ video{
   scale: 1.1;
 }
 
+.top5-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.top5-video{
+width: 300px
+}
 .hidden {
     opacity: 0;
     filter: blur(5px);
