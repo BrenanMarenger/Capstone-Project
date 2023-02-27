@@ -190,6 +190,7 @@ export default {
     },
     destroyed() {
         clearInterval(this.interval)
+        clearTimeout(this.timer)
     },
     created() {
         //Key Binds
@@ -339,9 +340,7 @@ export default {
                 controlsContainer.style.opacity = '0'
                 document.body.style.cursor = 'none';
                 //video-controls-container
-            }, 4000)
-
-            
+            }, 4000)   
         }
         
     },

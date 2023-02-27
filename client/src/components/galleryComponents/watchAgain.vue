@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="watchAgainVideos">
     <h2> Watch Again </h2>
 
     <div class="watch-again-container"> 
