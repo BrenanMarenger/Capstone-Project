@@ -1,6 +1,6 @@
 <template>
     <div class="body"> 
-        <div class="video-container full-screen"> 
+        <div class="video-container full-screen" @mousemove="mouseHideTimer()"> 
             <div class="video-controls-container" >
                 <!-- Navigation -->
                 <div class="nav"> 
@@ -144,7 +144,8 @@ export default {
             remainingTime: 0,
             isMuted: false,
             speed: 1,
-            interval: null
+            interval: null,
+            timer: null,
             
         }
     },
@@ -325,6 +326,23 @@ export default {
             video.playbackRate = this.speed
             
         },
+        mouseHideTimer(){
+            const controlsContainer = document.querySelector('.video-container .video-controls-container')
+            //opacity 1
+            controlsContainer.style.opacity = '1'
+            document.body.style.cursor = 'initial';
+            if(this.timer){
+                clearTimeout(this.timer)
+            }
+
+            this.timer = setTimeout(function(){
+                controlsContainer.style.opacity = '0'
+                document.body.style.cursor = 'none';
+                //video-controls-container
+            }, 4000)
+
+            
+        }
         
     },
 }
