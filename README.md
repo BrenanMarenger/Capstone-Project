@@ -33,6 +33,7 @@
 * **Vuex**          - persistedstate, stores states (token, loading, user id, etc.)
 * **Axios**         - API to make HTTP requests to my server
 * **Vuetify?** - TBD component based styling library
+* **Scss?** - TBD make styling easier
 * **Google Icons** - SVG icons
 ### Server
 * **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
@@ -52,12 +53,14 @@
 
 ## Features
 * Account system with personal favorites and watch history
+* Top 5 rating system based on favorites from all accounts
 * Authentication with appropriate redirection, token storage, and policies
-* Custom video player with keybinds and a variety of features
+* Custom video player with keybinds and a variety of features, including ai generated captions
 * Dynamic gallery page with different featured video and changing arragement of categories/videos
 * Scalable project, adapting to new videos and users. Automatically adding new categories
-* Dynamic searching and filtering, query urls
+* Dynamic searching and filtering (combinations will work), query urls
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
+
 
 ## Screenshots
 Coming Soon
@@ -65,9 +68,10 @@ Coming Soon
 ## TODO
 * Styling
 * Profile system for each account
+* increase search capabilities 
 * Debug and clean code
 * Modal displays video length
 * Passport for better authenticaiton
 * Vitest for testing
-* Rating system to display number of like/top rated videos
+
 
