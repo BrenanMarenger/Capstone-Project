@@ -218,6 +218,13 @@ export default {
                 case "arrowleft":
                 case "j":
                     this.rewind()
+                    break
+                case "arrowup":
+                    this.volumeLevel += .1
+                    break
+                case "arrowdown":
+                    this.volumeLevel -= .1
+                    break
             }
         })
         
