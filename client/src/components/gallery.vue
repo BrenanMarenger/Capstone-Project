@@ -31,7 +31,7 @@
 
     <!-- TOP 5 -->
     <h1>Top 5 Films</h1>
-    <div class="top5-container" v-for="video in topRated">
+    <div class="top5-container" v-for="video in topRated" :key="video">
       <img class="top5-video" :src="video.Thumbnail"/>
     </div>
 

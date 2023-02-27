@@ -2,28 +2,19 @@
     <div class="loading"> 
         <div id="loading-animation"> 
         </div>
-        <h1>Loading...</h1>
+        <h1>RetroFlix</h1>
     </div>
     
 </template>
 
 <script>
 export default {
-    name: "loading",
-    data(){
-        return {
-        }
-    },
-    mounted() {
-    },
-    methods: {
-        
-    }
+    name: "loading", 
 }
 
 </script>
 
-<style>
+<style scoped>
 #loading-animation {
     border: 8px solid rgba(0, 0, 0, 0.1);
     border-left-color: #e50931;
@@ -48,8 +39,8 @@ h1{
     position: absolute;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     background-color: #141414;
     z-index: 999;
 }
