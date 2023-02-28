@@ -13,7 +13,9 @@
     <!--FEATURE-->
     <Feature v-if="videos.length > 1" :videos="videos" 
       :modalActive="modalActive" 
-      v-show="hideItems" />
+      v-show="hideItems" 
+      @recieveToggleModal="toggleModal($event)"
+      />
 
     <!--MODAL-->
     <Modal v-if="modalActive" 
@@ -30,9 +32,20 @@
       :favoriteList="favoriteList" />
 
     <!-- TOP 5 -->
-    <h1>Top 5 Films</h1>
-    <div class="top5-container" v-for="video in topRated" :key="video">
-      <img class="top5-video" :src="video.Thumbnail"/>
+    <div v-show="hideItems">
+      <h1>Top 5 Films</h1>
+      <div class="top5-container">
+        <div class="top5-number">
+          <h1>1</h1>
+          <h1>2</h1>
+          <h1>3</h1>
+          <h1>4</h1>
+          <h1>5</h1>
+        </div> 
+        <div  v-for="video in topRated" :key="video.title">
+          <img class="top5-video" :src="video.Thumbnail"/>
+        </div>
+      </div>
     </div>
 
     <!--CATEGORIES-->
@@ -363,13 +376,23 @@ video{
   scale: 1.1;
 }
 
+/* Top 5 */
 .top5-container{
   display: flex;
+  left: 5%;
   flex-direction: row;
-  flex-wrap: wrap;
 }
 .top5-video{
-width: 300px
+width: 300px;
+display: flex;
+margin: 5px;
+}
+.top5-number{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  left: 50%;
+  font-size: 110px;
 }
 .hidden {
     opacity: 0;
