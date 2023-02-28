@@ -1,6 +1,6 @@
 <template>
-    <div class="body">
-        <!-- Welcome -->
+    <div class="body" id="narbar">
+        
         <div> 
             <h1 class="title"> RetroFlix </h1>
         </div>
@@ -67,11 +67,29 @@ export default {
     },
     mounted(){
         this.currentUser = this.$store.state.user.id
+        window.addEventListener("scroll", this.onScroll)
 
     },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.onScroll)
+    },
     methods: {
+        onScroll(e){
+            const narbar = document.getElementById("narbar")
+            if(window.pageYOffset == 0){
+                narbar.style.background = "rgba(0,0,0,0)"
+            } else {
+                narbar.style.background = "black"
+            }
+
+        },
         openSearch(){
+            const narbar = document.getElementById("narbar")
+
            this.isSearching = !this.isSearching;
+           if(this.isSearching){
+            narbar.style.background = "black"
+           }
         },
         sendSearch() {
             this.$emit('recieveSearch', this.navSearch)
@@ -87,9 +105,12 @@ export default {
             })
         },
         showFilters(){
+            const narbar = document.getElementById("narbar")
             this.isFiltering = !this.isFiltering
-            console.log(this.isFiltering)
-            console.log(document.getElementById("filterList").classList)
+            if(this.isFiltering){
+                narbar.style.background = "black"
+
+            }
 
         },
         sendResetFilters(){
@@ -121,6 +142,7 @@ export default {
     left: 0;
     justify-content: space-between;
     background: black;
+    transition: all .3s ease-in-out;
 
 }
 button{
@@ -166,6 +188,7 @@ svg:hover{
     left: 35%;
     background-color: #000;
     box-shadow: none;
+    display: none;
     padding-left: 5px;
     font-size: 16px;
     border: 1px solid transparent;
@@ -175,6 +198,7 @@ svg:hover{
     transition: all .3s ease-in;
 }
 .search-container .searchToggle{
+    display: block;
     width: 160px;
     border-color: #fff;
 }
@@ -216,6 +240,7 @@ top: 25px;
     transition: all .3s ease-in-out;
 }
 .filter-container .filterToggle{
+    
     display: flex !important;
 }
 .filter-container .filter-list{
@@ -227,7 +252,7 @@ top: 25px;
     color:white;
     background: rgb(24, 24, 24);
     justify-content: center;
-    transition: all .3s ease-in-out;
+    transition: all .3s ease-in;
 }
 li{
     padding: 10px;
