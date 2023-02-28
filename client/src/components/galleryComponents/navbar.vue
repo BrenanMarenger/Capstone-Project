@@ -8,10 +8,14 @@
         <!--Filtering-->
         <div class="filter-container"> 
             <button class="filter-btn" @click="showFilters">Filter</button>
-            <ul class="filter-list">
-                <div v-for="year in yearList" :key="year">
+            <ul class="filter-list"
+                :class="{filterToggle: isFiltering}"
+                id="filterList"
+            >
+                <div v-for="year in yearList" :key="year" >
                     <li>
-                        <input type="checkbox" class="filter-item" @click="toggleYearFilter(year)"> {{ year }}
+                        <input type="checkbox" class="filter-item" @click="toggleYearFilter(year)">
+                        <label>{{ year }}</label>
                     </li>
                 </div>
             </ul>
@@ -58,6 +62,7 @@ export default {
             navSearch: '',
             currentUser: '',
             isSearching: false,
+            isFiltering: false
         }
     },
     mounted(){
@@ -82,6 +87,9 @@ export default {
             })
         },
         showFilters(){
+            this.isFiltering = !this.isFiltering
+            console.log(this.isFiltering)
+            console.log(document.getElementById("filterList").classList)
 
         },
         sendResetFilters(){
@@ -109,10 +117,10 @@ export default {
     
     display: flex;
     padding: 20px;
-    height: 30px;
+    height: 35px;
     left: 0;
     justify-content: space-between;
-    background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0.5));
+    background: black;
 
 }
 button{
@@ -129,7 +137,7 @@ button{
     color: red;
     position: fixed;
     top: 0px;
-    left: 45%;
+    left: 2%;
 }
 
 h1{
@@ -143,22 +151,22 @@ svg{
     transition: all .3s ease-in-out;
 }
 svg:hover{
-    scale: 1.05;
+    
 }
 /* SEARCH */
 .search-container{
     display: inline-block;
     position: fixed;
     top: 9px;
-    left: 10%;
+    left: 45%;
 }
 .search-container .search-box{
     position: fixed;
-    top: 20px;
-    left: 2%;
+    top: 30px;
+    left: 35%;
     background-color: #000;
     box-shadow: none;
-    padding-left: 35px;
+    padding-left: 5px;
     font-size: 16px;
     border: 1px solid transparent;
     outline: none;
@@ -172,9 +180,9 @@ svg:hover{
 }
 .search-icon{
     position: fixed;
-    height: 34px;
-    left: 2%;
-    top: 16px;
+    height: 25px;
+    left: 35%;
+    top: 29px;
     z-index: 5;
     transition: all .3s ease-in-out;
     /* transform: translate(-200px); */
@@ -194,34 +202,62 @@ top: 25px;
 
 .reset-container{
     position: fixed;
-    left: 27%;
+    left: 50%;
     top: 25px;
 }
 /* Filter btn */
 .filter-btn{
     position: fixed;
     top: 25px;
-    left: 300px;
+    left: 25%;
 }
 .filter-btn:hover, .signout-container:hover, .reset-container:hover{
     scale: 1.1;
     transition: all .3s ease-in-out;
 }
-.filter-btn:hover .filter-list{
+.filter-container .filterToggle{
+    display: flex !important;
 }
-.filter-list{
+.filter-container .filter-list{
     position: fixed;
-    top: 7%;
+    top: 57px;
     left: 12.5%;
+    display: none;
     list-style: none;
-    display: flex;
     color:white;
-    background: grey;
+    background: rgb(24, 24, 24);
     justify-content: center;
+    transition: all .3s ease-in-out;
 }
 li{
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
+}
+input[type="checkbox"]{
+    appearance: none;
+    
+    display: grid;
+    place-content: center;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.20em solid white;
+    border-radius: 0.25em;
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 2em 2em red;
+  border-radius: 0.15em;
+
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1.09);
+}
+label{
 }
 
 
