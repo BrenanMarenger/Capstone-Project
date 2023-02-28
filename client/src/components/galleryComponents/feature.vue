@@ -1,15 +1,15 @@
 <template>
     
     <div class="feature-container playing muted">
-        <div class="title">
+        <div class="title" id="title">
             <strong>
             {{ feature.Title }}
             </strong>
         </div>
-        <div class="description"> 
+        <div class="description" id="description"> 
             {{ feature.Description }}
         </div>
-        <div class="categories"> 
+        <div class="categories" id="categories"> 
             {{ feature.Categories }} 
             -
             {{ feature.Year }}
@@ -73,7 +73,7 @@ export default {
         }
     },
     async mounted(){
-        setTimeout(this.hideInfo, 5000)
+        setTimeout(this.hideInfo, 6000)
   },
   async created(){
     this.feature = await this.videos[Math.floor(Math.random() * this.videos.length)];
@@ -81,7 +81,12 @@ export default {
   },
   methods: {
     hideInfo(){
-        console.log("NOWNOWNOWNOWNNWNOOWOOWOOW")
+        const title = document.getElementById("title")
+        const categories = document.getElementById("categories")
+        const description = document.getElementById("description")
+        categories.style.opacity = 0;
+        description.style.opacity=0;
+        title.style.top = "46%"
     },
     sendToggleModal(video){
         this.$emit('recieveToggleModal', video)
@@ -154,9 +159,10 @@ export default {
     position: absolute;
     font-size: 50px;
     z-index: 5;
-    top: 30%;
+    top: 35%;
     left: 8%;
     text-shadow: rgb(235, 235, 235) 1px 0 10px;
+    transition: all 1s ease-in-out;
 }
 .description{
     position: absolute;
@@ -165,6 +171,7 @@ export default {
     top: 42%;
     left: 10%;
     text-shadow: rgb(235, 235, 235) 1px 0 10px;
+    transition: all .6s ease-in-out;
 
 }
 .categories{
@@ -175,6 +182,7 @@ export default {
     top: 48%;
     left: 11%;
     opacity: .8;
+    transition: all .6s ease-in-out;
 }
 
 .button-container{
