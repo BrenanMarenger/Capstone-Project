@@ -20,23 +20,31 @@
         <!--Searching-->
         <div class="search-container"> 
             <svg 
-            id="searchIcon" 
+            id="searchIcon"
+            :class="{searchIconToggle: isSearching}" 
             @click="openSearch" 
             class="search-icon" 
             xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
            
             <input 
             id="searchBox"
-            class="search-box" type="text" placeholder="Search by title..." 
+            class="search-box"
+            :class="{searchToggle: isSearching}" 
+            type="text" placeholder="Search by title..." 
             v-model="navSearch" 
             @keydown.enter="sendSearch"
             >
         </div>
         <!-- Reset filters -->
-        <button @click="sendResetFilters" v-if="filteredYears.length > 0 || search!=''" >Clear</button> <!--ONLY SHOW WHEN SEARCH OR FILTERING v-if="hasFilters"-->
+        <div class="reset-container"> 
+            <button @click="sendResetFilters" v-if="filteredYears.length > 0 || search!=''" >Clear Filters</button>
+        </div>
         
         <!-- Sign out -->
-        <button v-if="$store.state.isLoggedIn" @click="logout">Sign out</button>
+        <div class="signout-container">
+            <button v-if="$store.state.isLoggedIn" @click="logout">Sign out</button>
+
+        </div>
     </div>
 
 </template>
@@ -48,7 +56,8 @@ export default {
     data() {
         return {
             navSearch: '',
-            currentUser: ''
+            currentUser: '',
+            isSearching: false,
         }
     },
     mounted(){
@@ -57,7 +66,7 @@ export default {
     },
     methods: {
         openSearch(){
-           
+           this.isSearching = !this.isSearching;
         },
         sendSearch() {
             this.$emit('recieveSearch', this.navSearch)
@@ -116,10 +125,16 @@ button{
     font-weight: 600;
 }
 .title{
+    position: fixed;
     color: red;
     position: fixed;
     top: 0px;
-    left: 50px;
+    left: 45%;
+}
+
+h1{
+    font-weight: 800;
+
 }
 
 svg{
@@ -135,20 +150,52 @@ svg:hover{
     display: inline-block;
     position: fixed;
     top: 9px;
-    right: 500px;
+    left: 10%;
 }
-.search-box{
+.search-container .search-box{
     position: fixed;
     top: 20px;
-    right: 350px;
-    width: 120px;
-    transition: all .3s ease-in-out;
+    left: 2%;
+    background-color: #000;
+    box-shadow: none;
+    padding-left: 35px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    outline: none;
+    width: 0px;
+    color: white;
+    transition: all .3s ease-in;
+}
+.search-container .searchToggle{
+    width: 160px;
+    border-color: #fff;
 }
 .search-icon{
+    position: fixed;
+    height: 34px;
+    left: 2%;
+    top: 16px;
     z-index: 5;
     transition: all .3s ease-in-out;
     /* transform: translate(-200px); */
     /* on click translate left 200px */
+}
+
+.search-container .searchIconToggle{
+    transform: translateX(310%);
+}
+/* Sign out */
+.signout-container{
+position: fixed;
+right: 10%;
+top: 25px;
+}
+/* Reset */
+
+.reset-container{
+    position: fixed;
+    left: 27%;
+    top: 25px;
 }
 /* Filter btn */
 .filter-btn{
@@ -156,19 +203,20 @@ svg:hover{
     top: 25px;
     left: 300px;
 }
-.filter-btn:hover{
-    text-decoration: underline;
-
+.filter-btn:hover, .signout-container:hover, .reset-container:hover{
+    scale: 1.1;
+    transition: all .3s ease-in-out;
 }
 .filter-btn:hover .filter-list{
-    display: block;
 }
 .filter-list{
+    position: fixed;
+    top: 7%;
+    left: 12.5%;
     list-style: none;
     display: flex;
     color:white;
     background: grey;
-    margin-top: 53px;
     justify-content: center;
 }
 li{
