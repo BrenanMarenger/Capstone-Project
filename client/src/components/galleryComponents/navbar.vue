@@ -117,6 +117,8 @@ export default {
             document.querySelectorAll('input[type="checkbox"]')
             .forEach(el => el.checked = false);
             this.navSearch = ''
+            this.showFilters()
+            this.openSearch()
             
             this.$emit('recieveResetFilters')
         }
@@ -226,7 +228,7 @@ top: 25px;
 
 .reset-container{
     position: fixed;
-    left: 50%;
+    left: 55%;
     top: 25px;
 }
 /* Filter btn */
