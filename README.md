@@ -35,6 +35,7 @@
 * **Vuetify?** - TBD component based styling library
 * **Scss?** - TBD make styling easier
 * **Google Icons** - SVG icons
+* **VueUse** - Vue library providing additional hooks, event listeners
 ### Server
 * **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
 * **Postman**     - server endpoint functional, integration, and regression testing
@@ -68,9 +69,9 @@ Coming Soon
 ## TODO
 * Styling
 * Profile system for each account
-* increase search capabilities 
+* Increase search/filtering capabilities
+* Video history shows and stores the watched time 
 * Debug and clean code
-* Modal displays video length
 * Passport for better authenticaiton
 * Vitest for testing
 
