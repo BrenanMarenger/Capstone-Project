@@ -67,6 +67,7 @@ export default {
     },
     mounted(){
         this.currentUser = this.$store.state.user.id
+        this.onScroll
         window.addEventListener("scroll", this.onScroll)
 
     },
@@ -140,10 +141,10 @@ export default {
     
     display: flex;
     padding: 20px;
-    height: 35px;
+    height: 40px;
     left: 0;
     justify-content: space-between;
-    background: black;
+    background: rgba(0,0,0,0);
     transition: all .3s ease-in-out;
 
 }

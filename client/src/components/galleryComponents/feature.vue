@@ -87,6 +87,7 @@ export default {
         categories.style.opacity = 0;
         description.style.opacity=0;
         title.style.top = "46%"
+        title.style.fontSize = "50px"
     },
     sendToggleModal(video){
         this.$emit('recieveToggleModal', video)
@@ -149,7 +150,7 @@ export default {
     position: relative;
     
     margin-inline: auto;
-    color:beige;
+    color:white;
     
     background: rgb(30, 30, 30);
     width: 100%;
@@ -157,20 +158,21 @@ export default {
 }
 .title{
     position: absolute;
-    font-size: 50px;
+    font-size: 80px;
     z-index: 5;
     top: 35%;
     left: 8%;
     text-shadow: rgb(235, 235, 235) 1px 0 10px;
+    font-weight: 700;
     transition: all 1s ease-in-out;
 }
 .description{
     position: absolute;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 5;
-    top: 42%;
-    left: 10%;
-    text-shadow: rgb(235, 235, 235) 1px 0 10px;
+    top: 44%;
+    left: 8%;
+    
     transition: all .6s ease-in-out;
 
 }
