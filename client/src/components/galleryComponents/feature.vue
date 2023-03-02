@@ -15,20 +15,6 @@
             {{ feature.Year }}
         </div>
         <div class="button-container"> 
-            <div class="play-now">
-                <router-link :to="{name: 'display', params: {videoId: feature.id}}" tag="button">
-                    <svg viewBox="0 0 24 24" >
-                        <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
-                    </svg>
-                    Play
-                </router-link>
-            </div>
-            <div class="more-info"> 
-                <button @click="sendToggleModal(feature)">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                    More Info
-                </button>
-            </div>
             <div class="play-pause"> 
                 <button  @click="togglePlay" class="play">
                     <svg viewBox="0 0 24 24" >
@@ -53,6 +39,23 @@
                     </svg>
                 </button>
             </div>
+        <div class="video-controls"> 
+            <div class="play-now">
+                <router-link :to="{name: 'display', params: {videoId: feature.id}}" tag="button">
+                    <svg viewBox="0 0 24 24" >
+                        <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                    </svg>
+                    <span>Play</span>
+                </router-link>
+            </div>
+            <div class="more-info"> 
+                <button @click="sendToggleModal(feature)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <span>More Info</span>
+                    
+                </button>
+            </div>
+        </div>
             
         </div>
         
@@ -151,8 +154,6 @@ export default {
     
     margin-inline: auto;
     color:white;
-    
-    background: rgb(30, 30, 30);
     width: 100%;
     padding-bottom: 20px;
 }
@@ -202,6 +203,9 @@ export default {
     top: -40%;
 }
 
+.play-now span{
+    line-height: 1.5;
+}
 .play-now button{
     position: relative;
     display: flex;
@@ -288,6 +292,11 @@ button:hover{
 .more-info{
     position: absolute;
     left: 110%;
+    top: 0;
+}
+
+.more-info span{
+    line-height: 1.5;
 }
 
 .more-info button{

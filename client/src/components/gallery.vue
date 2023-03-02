@@ -10,6 +10,19 @@
       @recieveResetFilters="resetFilters()"
       />
 
+      <!-- TOP 5 -->
+    <div v-show="hideItems" class="top5">
+      <h1>Top 5 Films</h1>
+      <div class="top5-container">
+        <div  v-for="(video, index) in topRated" :key="video.title">
+          <span class="top5-number">
+            {{ index +1}}
+          </span>
+          <img class="top5-video" :src="video.Thumbnail"/>
+        </div>
+      </div>
+    </div>
+
     <!--FEATURE-->
     <Feature v-if="videos.length > 1" :videos="videos" 
       :modalActive="modalActive" 
@@ -26,27 +39,14 @@
       @recieveToggleModal="toggleModal($event)" 
       @recieveToggleFavorite="toggleFavorites($event)"/>
 
+      
+
     <!--FAVORITES-->
     <Favorite v-show="hideItems" 
       @recieveToggleFavorites="toggleFavorites($event)" 
       :favoriteList="favoriteList" />
 
-    <!-- TOP 5 -->
-    <div v-show="hideItems">
-      <h1>Top 5 Films</h1>
-      <div class="top5-container">
-        <div class="top5-number">
-          <h1>1</h1>
-          <h1>2</h1>
-          <h1>3</h1>
-          <h1>4</h1>
-          <h1>5</h1>
-        </div> 
-        <div  v-for="video in topRated" :key="video.title">
-          <img class="top5-video" :src="video.Thumbnail"/>
-        </div>
-      </div>
-    </div>
+    
 
     <!--CATEGORIES-->
     <div v-for="category in categories" :key="category" > 
@@ -355,8 +355,14 @@ hiddenVideos.forEach((el) => observer.observe(el))
 <style scoped>
 
 .gallery{
-  background: linear-gradient(95deg, rgb(34, 34, 34),darkgrey);
+  background: rgb(35, 35, 35);
 
+}
+
+h1{
+  color: white;
+  font-family: 'Rubbik', Arial;
+  font-weight: 700;
 }
 .all-videos-container{
   display: flex;
@@ -366,7 +372,7 @@ hiddenVideos.forEach((el) => observer.observe(el))
 }
 
 video{
-  width: 300px;
+  width: 200px;
 }
 
 .all-videos-video{
@@ -374,25 +380,6 @@ video{
 }
 .all-videos-video:hover{
   scale: 1.1;
-}
-
-/* Top 5 */
-.top5-container{
-  display: flex;
-  left: 5%;
-  flex-direction: row;
-}
-.top5-video{
-width: 300px;
-display: flex;
-margin: 5px;
-}
-.top5-number{
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  left: 50%;
-  font-size: 110px;
 }
 .hidden {
     opacity: 0;
@@ -403,5 +390,56 @@ margin: 5px;
 .show {
     opacity: 1;
     filter: blur(0);
+}
+
+
+/* Top 5 */
+.top5-container{
+  display: flex;
+  left: 5%;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.top5-video {
+width: 250px;
+display: flex;
+margin: 5px;
+}
+
+.top5{
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  top: 15%;
+  background: linear-gradient(to top, rgb(35, 35, 35) 40%, rgba(0,0,0,0) 100%);
+}
+
+.top5 h1{
+  font-size: 25px;
+  position: absolute;
+  top: -30%;
+  margin-left: 20px;
+}
+.top5-container .top5-number{
+  z-index: 11;
+  position:absolute;
+  display: flex;
+  justify-content:flex-start;  
+  color:black;
+  font-weight: 700;
+}
+
+.top5-number{
+  display: flex;
+  flex-direction: row;
+  font-size: 200px;
+  font-family: 'Rubbik', Arial;
+  text-shadow:
+   -1px -1px 0 grey,  
+    1px -1px 0 grey,
+    -1px 1px 0 grey,
+     1px 1px 0 grey;
+  
 }
 </style>

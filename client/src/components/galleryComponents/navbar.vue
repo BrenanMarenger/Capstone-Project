@@ -2,7 +2,7 @@
     <div class="body" id="narbar">
         
         <div> 
-            <h1 class="title"> RetroFlix </h1>
+            <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
         </div>
         
         <!--Filtering-->
@@ -154,7 +154,7 @@ button{
     background: none;
     color: white;
     border: none;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
 }
 .title{
@@ -163,6 +163,12 @@ button{
     position: fixed;
     top: 0px;
     left: 2%;
+}
+
+img{
+    width: 150px;
+    position: fixed;
+    top: 2%;
 }
 
 h1{
@@ -188,17 +194,17 @@ svg:hover{
 .search-container .search-box{
     position: fixed;
     top: 30px;
-    left: 35%;
+    right: 10%;
     background-color: #000;
     box-shadow: none;
     display: none;
-    padding-left: 5px;
+    padding-left: 30px;
     font-size: 16px;
     border: 1px solid transparent;
     outline: none;
     width: 0px;
     color: white;
-    transition: all .3s ease-in;
+    transition: all .5s ease-in;
 }
 .search-container .searchToggle{
     display: block;
@@ -208,22 +214,22 @@ svg:hover{
 .search-icon{
     position: fixed;
     height: 25px;
-    left: 35%;
+    right: 10%;
     top: 29px;
     z-index: 5;
     transition: all .3s ease-in-out;
-    /* transform: translate(-200px); */
-    /* on click translate left 200px */
 }
 
 .search-container .searchIconToggle{
-    transform: translateX(310%);
+    transform: translateX(-310%);
 }
 /* Sign out */
 .signout-container{
 position: fixed;
-right: 10%;
+right: 2%;
 top: 25px;
+font-size: 15px !important;
+
 }
 /* Reset */
 
@@ -236,7 +242,8 @@ top: 25px;
 .filter-btn{
     position: fixed;
     top: 25px;
-    left: 25%;
+    left: 15%;
+    font-size: 15px;
 }
 .filter-btn:hover, .signout-container:hover, .reset-container:hover{
     scale: 1.1;
