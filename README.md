@@ -39,6 +39,7 @@
 ### Server
 * **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
 * **Postman**     - server endpoint functional, integration, and regression testing
+* **DB Browser for SQLite** - help visualize and build tables in the database
 * **Nodemon**       - restarts server when a change is detected (QoL)
 * **Eslint**        - help debug and find issues
 * **Bcrypt**        - password hashing
@@ -53,12 +54,13 @@
 * **Elgato Video Capture** - Converting VHS tapes to digital download
 
 ## Features
-* Account system with personal favorites and watch history
+* Account system with personal favorites
 * Top 5 rating system based on favorites from all accounts
+* Viewers have a history, resuming where they left off
 * Authentication with appropriate redirection, token storage, and policies
 * Custom video player with keybinds and a variety of features, including ai generated captions
-* Dynamic gallery page with different featured video and changing arragement of categories/videos
-* Scalable project, adapting to new videos and users. Automatically adding new categories
+* Dynamic gallery page with different featured videos and changing arragements of categories/videos
+* Scalable project, adapting to new videos and users. Automatically adding new categories and filters
 * Dynamic searching and filtering (combinations will work), query urls
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
 
@@ -70,8 +72,6 @@ Coming Soon
 * Styling
 * Profile system for each account
 * Increase search/filtering capabilities
-* Video history shows and stores the watched time 
-* Debug and clean code
 * Passport for better authenticaiton
 * Vitest for testing
 
