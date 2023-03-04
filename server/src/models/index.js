@@ -26,6 +26,13 @@ Object.keys(db).forEach(function (modelName) {
     }
 });
 
+sequelize.getQueryInterface().showAllSchemas().then((tableObj) => {
+    console.log('// Tables in database');
+    console.log(tableObj);
+}).catch((err) => {
+    console.log('showAllSchemas ERROR', err);
+})
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 

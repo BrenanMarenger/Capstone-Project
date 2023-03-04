@@ -1,5 +1,5 @@
 <template>
-<div v-if="watchAgainVideos">
+<div v-if="watchAgainVideos.length > 0">
     <h2> Watch Again </h2>
 
     <div class="watch-again-container"> 
@@ -35,15 +35,27 @@ export default {
     data(){
         return {
             history: [],
-            watchAgainVideos: []
+            watchAgainVideos: [],
+            watchedPercent: []
         }
     },
     async mounted() {
         this.history = (await WatchAgainService.index({
             userId: this.$store.state.user.id
         })).data
-        
-        this.watchAgainVideos = this.history.map(vid => vid.VideoId)
+        for(let item of this.history){
+            var key = item.VideoId
+            var value = item.Spot
+            this.watchAgainVideos.push({ key : value })
+        }
+        this.watchAgainVideos.forEach(e => {
+            console.log(Object.keys(e))
+        })
+        //console.log(this.watchAgainVideos)
+        //this.watchedPercent = this.history.map(perc => perc.Spot)
+        //this.watchAgainVideos = this.history.map(vid => vid.VideoId)
+        //console.log(this.watchAgainVideos)
+        //console.log(this.watchedPercent)
         },
     methods: {
     sendToggleFavorite(video){

@@ -142,10 +142,12 @@ export default {
             hasCaptions: true,
             volumeLevel: .25,
             remainingTime: 0,
+            durationPercent: 0,
             isMuted: false,
             speed: 1,
             interval: null,
             timer: null,
+            videoId: null,
             
         }
     },
@@ -154,15 +156,10 @@ export default {
         store.commit('setLoading', true);
 
         //GET request for the video
-        const videoId = this.$route.params.videoId
-        this.displayVideo = (await videoService.show(videoId)).data
-        
+        this.videoId = this.$route.params.videoId
+        this.displayVideo = (await videoService.show(this.videoId)).data
 
-        //Posting to user history
-        WatchAgainService.post({
-            videoId: videoId,
-            userId: this.$store.state.user.id
-        })
+        
         
         //Captions
         var xmlhttp = new XMLHttpRequest();
@@ -188,9 +185,19 @@ export default {
 
         
     },
+    beforeDestroy(){
+        //Posting to user history
+        WatchAgainService.post({
+            videoId: this.videoId,
+            userId: this.$store.state.user.id,
+            time: this.durationPercent
+        })
+
+    },
     destroyed() {
         clearInterval(this.interval)
         clearTimeout(this.timer)
+        
     },
     created() {
         //Key Binds
@@ -305,7 +312,7 @@ export default {
         const percent = (video.currentTime / video.duration) * 100
         const watchedBar = document.querySelector('.video-container .timeline-container .progress-bar .watched-bar')
         watchedBar.style.width = percent + '%'
-    
+        this.durationPercent = percent;
         this.remainingTime = this.formatTime(video.duration - video.currentTime)
         },
         updateTime(event){
@@ -364,7 +371,7 @@ export default {
     height: 100vh;
     overflow: hidden;
     background: black;
-    font-family: 'Rubbik', sans-serif;
+    font-family: 'Rubbik', Arial;
 }
 
 svg, .speed-btn{
