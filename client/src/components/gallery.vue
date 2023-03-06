@@ -14,11 +14,28 @@
     <div v-show="hideItems" class="top5">
       <h1>Top 5 Films</h1>
       <div class="top5-container">
-        <div  v-for="(video, index) in topRated" :key="video.title">
+        <div class="top5-item" v-for="(video, index) in topRated" :key="video.title">
           <span class="top5-number">
             {{ index +1}}
           </span>
           <img class="top5-video" :src="video.Thumbnail"/>
+          <span class="top5-controls">
+            <button class="top5-play">
+              <svg viewBox="0 0 24 24" >
+                  <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+              </svg>
+            </button>
+            <button class="top5-fav" @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
+              <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+            <button class="top5-fav" @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
+              <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+            </button>
+            <button class="top5-more-info">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </button>
+            {{ video.Categories }}
+          </span>
         </div>
       </div>
     </div>
@@ -441,5 +458,56 @@ margin: 5px;
     -1px 1px 0 grey,
      1px 1px 0 grey;
   
+}
+
+.top5-item:hover{
+  transition: all .5s ease-in-out;
+  transform: translateY(-50px);
+  scale: 1.1;
+}
+
+/* Buttons */
+
+.top5-item:hover .top5-controls{
+  transition: all .5s ease-in-out;
+opacity: 1;
+}
+
+.top5-controls{
+  opacity: 0;
+  position:relative;
+  background: rgb(61, 61, 61);
+  width: 250px;
+  padding: 20px;
+  padding-bottom: 60px;
+  z-index: 20;
+}
+.top5-controls svg{
+  width: 24px;
+}
+
+.top5-controls button{
+  background: rgb(74, 74, 74);
+  color: white;
+  border: solid 2px grey;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: .8;
+}
+
+.top5-controls button:hover{
+  scale: 1.03;
+  opacity: 1;
+}
+.top5-play{
+  color: black !important;
+  background: white !important;
+  border: solid 1px white !important;
+}
+.top5-play button{
+  background: white !important;
 }
 </style>

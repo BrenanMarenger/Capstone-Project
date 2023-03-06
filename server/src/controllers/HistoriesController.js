@@ -28,14 +28,37 @@ module.exports = {
             const videoId = req.body.videoId
             const userId = req.body.userId
             const spot = parseInt(req.body.time)
-            const newHistory = await History.create({
-                Spot: spot,
-                VideoId: videoId,
-                UserId: userId,
+
+            const checkHist = await History.findOne({
+                where: {
+                    UserId: userId,
+                    VideoId: videoId
+                }
 
             })
 
-            res.send(newHistory)
+            if (checkHist) { //update
+                console.log("Updating the history")
+                const updateHistory = await History.update({
+                    Spot: spot
+                }, {
+                    where: {
+                        VideoId: videoId,
+                        UserId: userId,
+                    }
+                })
+                res.send(updateHistory)
+            } else { //create a new
+                console.log("Creating a new history")
+                const newHistory = await History.create({
+                    Spot: spot,
+                    VideoId: videoId,
+                    UserId: userId,
+
+                })
+                res.send(newHistory)
+            }
+
         } catch (err) {
             console.log(err)
             res.status(500).send({
