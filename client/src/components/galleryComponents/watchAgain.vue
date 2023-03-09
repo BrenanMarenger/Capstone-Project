@@ -5,9 +5,9 @@
     <div class="watch-again-container"> 
         <div v-for="video in watchAgainVideos" :key="video.Path">
             <div  > <!-- v-if="watchAgainVideos.includes(video.id)"-->
-                <h3>{{ video.Title }} {{ video.Spot }}</h3>
+                <h3>{{ video.Title }}</h3>
                 <!-- PASS THE DURATION AS A PROP -->
-                <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                <router-link :to="{name: 'display', params: {videoId: video.id}, query: { time: video.Spot }}" tag="button">
                 Play
                 </router-link>
                 <button @click="sendToggleModal(video)">

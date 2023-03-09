@@ -25,9 +25,10 @@ const router = new Router({
       component: gallery
     },
     {
-      path: '/display/:videoId',
+      path: '/display/:videoId/:time?',
       name: 'display',
-      component: display
+      component: display,
+      props: true //{ timeInVideo: 0 },
     },
     //
     {

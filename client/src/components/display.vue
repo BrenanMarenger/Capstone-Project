@@ -134,6 +134,7 @@ import store from '../store/store'
 
 export default {
     name: 'display',
+    props: ['time'],
     data(){
         return {
             displayVideo: null,
@@ -181,6 +182,9 @@ export default {
         setTimeout(() => {
             store.commit('setLoading', false),
             this.togglePlay();
+            if(this.$route.query.time){
+                this.setTime(this.$route.query.time)
+            }
         }, 2500);
 
         
@@ -321,6 +325,11 @@ export default {
 
             const pos = (event.pageX - (progrss.offsetLeft + progrss.offsetParent.offsetLeft)) / progrss.offsetWidth
             video.currentTime = pos * video.duration
+        },
+        setTime(time){
+            const video = document.querySelector("video")
+            time = time.slice(0, -1);
+            video.currentTime = (time / 100) * video.duration
         },
 
         forward(){
