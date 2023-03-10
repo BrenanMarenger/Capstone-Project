@@ -1,6 +1,6 @@
 # Netflix-Clone
 ## Objective
-> A website app for my senior project, replicating Netflix with my childhood VHS tapes. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level.
+> A website app for my capstone project, replicating Netflix with my childhood VHS tapes and mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level.
 
 ## Content
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
