@@ -163,7 +163,7 @@ export default {
     z-index: 5;
     top: 35%;
     left: 8%;
-    text-shadow: rgb(235, 235, 235) 1px 0 10px;
+    text-shadow: black 1px 0 10px;
     font-weight: 700;
     transition: all 1s ease-in-out;
 }

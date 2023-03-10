@@ -1,54 +1,55 @@
 <template>
     <div class="body" id="narbar">
-        
-        <div> 
-            <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
-        </div>
-        
-        <!--Filtering-->
-        <div class="filter-container"> 
-            <button class="filter-btn" @click="showFilters">Filter</button>
-            <ul class="filter-list"
-                :class="{filterToggle: isFiltering}"
-                id="filterList"
-            >
-                <div v-for="year in yearList" :key="year" >
-                    <li>
-                        <input type="checkbox" class="filter-item" @click="toggleYearFilter(year)">
-                        <label>{{ year }}</label>
-                    </li>
-                </div>
-            </ul>
-        </div>
-        
-        <!--Searching-->
-        <div class="search-container"> 
-            <svg 
-            id="searchIcon"
-            :class="{searchIconToggle: isSearching}" 
-            @click="openSearch" 
-            class="search-icon" 
-            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-           
-            <input 
-            id="searchBox"
-            class="search-box"
-            :class="{searchToggle: isSearching}" 
-            type="text" placeholder="Search by title..." 
-            v-model="navSearch" 
-            @keydown.enter="sendSearch"
-            >
-        </div>
-        <!-- Reset filters -->
-        <div class="reset-container"> 
-            <button @click="sendResetFilters" v-if="filteredYears.length > 0 || search!=''" >Clear Filters</button>
-        </div>
-        
-        <!-- Sign out -->
-        <div class="signout-container">
-            <button v-if="$store.state.isLoggedIn" @click="logout">Sign out</button>
+        <span id="navbar-container">
+            <div> 
+                <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
+            </div>
+            
+            <!--Filtering-->
+            <div class="filter-container"> 
+                <button class="filter-btn" @click="showFilters">Filter</button>
+                <ul class="filter-list"
+                    :class="{filterToggle: isFiltering}"
+                    id="filterList"
+                >
+                    <div v-for="year in yearList" :key="year" >
+                        <li>
+                            <input type="checkbox" class="filter-item" @click="toggleYearFilter(year)">
+                            <label>{{ year }}</label>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            
+            <!--Searching-->
+            <div class="search-container"> 
+                <svg 
+                id="searchIcon"
+                :class="{searchIconToggle: isSearching}" 
+                @click="openSearch" 
+                class="search-icon" 
+                xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            
+                <input 
+                id="searchBox"
+                class="search-box"
+                :class="{searchToggle: isSearching}" 
+                type="text" placeholder="Search by title..." 
+                v-model="navSearch" 
+                @keydown.enter="sendSearch"
+                >
+            </div>
+            <!-- Reset filters -->
+            <div class="reset-container"> 
+                <button @click="sendResetFilters" v-if="filteredYears.length > 0 || search!=''" >Clear Filters</button>
+            </div>
+            
+            <!-- Sign out -->
+            <div class="signout-container">
+                <button v-if="$store.state.isLoggedIn" @click="logout">Sign out</button>
 
-        </div>
+            </div>
+        </span>
     </div>
 
 </template>
@@ -76,11 +77,13 @@ export default {
     },
     methods: {
         onScroll(e){
-            const narbar = document.getElementById("narbar")
+            const navbar = document.getElementById("narbar")
+            const container = document.getElementById("navbar-container")
             if(window.pageYOffset == 0){
-                narbar.style.background = "rgba(0,0,0,0)"
+                navbar.style.background = "rgba(0,0,0,0)"
             } else {
-                narbar.style.background = "black"
+                navbar.style.background = "black"
+                //container.style.background = "linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
             }
 
         },
@@ -89,7 +92,7 @@ export default {
 
            this.isSearching = !this.isSearching;
            if(this.isSearching){
-            narbar.style.background = "black"
+            narbar.style.background = "black"//"linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
            }
         },
         sendSearch() {
@@ -109,7 +112,7 @@ export default {
             const narbar = document.getElementById("narbar")
             this.isFiltering = !this.isFiltering
             if(this.isFiltering){
-                narbar.style.background = "black"
+                narbar.style.background = "black"//"linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
 
             }
 
@@ -145,9 +148,10 @@ export default {
     left: 0;
     justify-content: space-between;
     background: rgba(0,0,0,0);
-    transition: all .3s ease-in-out;
+    transition: all .5s ease-in-out;
 
 }
+
 button{
     height: 30px;
     cursor: pointer;

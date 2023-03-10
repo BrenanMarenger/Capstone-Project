@@ -20,7 +20,7 @@
           </span>
           <img class="top5-video" :src="video.Thumbnail"/>
           <span class="top5-controls">
-            <button class="top5-play">
+            <button class="play">
               <svg viewBox="0 0 24 24" >
                   <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
               </svg>
@@ -56,58 +56,53 @@
       @recieveToggleModal="toggleModal($event)" 
       @recieveToggleFavorite="toggleFavorites($event)"/>
 
-      
+  <div class="below-container"> 
+      <!--FAVORITES-->
+      <Favorite v-show="hideItems" 
+        @recieveToggleFavorites="toggleFavorites($event)" 
+        :favoriteList="favoriteList" />
 
-    <!--FAVORITES-->
-    <Favorite v-show="hideItems" 
-      @recieveToggleFavorites="toggleFavorites($event)" 
-      :favoriteList="favoriteList" />
+      <!--CATEGORIES-->
+      <div v-for="category in categories" :key="category" > 
+        <Category v-show="hideItems" 
+          :videos="videos" 
+          :favoritesId="favoritesId" 
+          :currentCategory="category" 
+          @recieveToggleModal="toggleModal($event)" 
+          @recieveToggleFavorites="toggleFavorites($event)"/>
+      </div>
 
-    
+      <!-- Watch again -->
+      <div class="watch-again" v-show="hideItems" > 
+        <WatchAgain 
+          :videos="videos" 
+          :favoritesId="favoritesId" 
+          @recieveToggleModal="toggleModal($event)" 
+          @recieveToggleFavorites="toggleFavorites($event)"/>
+      </div>
 
-    <!--CATEGORIES-->
-    <div v-for="category in categories" :key="category" > 
-      <Category v-show="hideItems" 
-        :videos="videos" 
-        :favoritesId="favoritesId" 
-        :currentCategory="category" 
-        @recieveToggleModal="toggleModal($event)" 
-        @recieveToggleFavorites="toggleFavorites($event)"/>
-    </div>
-
-    <!-- Watch again -->
-    <div class="watch-again" v-show="hideItems" > 
-      <WatchAgain 
-        :videos="videos" 
-        :favoritesId="favoritesId" 
-        @recieveToggleModal="toggleModal($event)" 
-        @recieveToggleFavorites="toggleFavorites($event)"/>
-    </div>
-
-    
-
-    <!--ALL-->
-    <h2> All {{search}} Videos </h2>
-    <div class="all-videos-container">
-      <div class="" v-for="video in videos" :key="video.id">
-        <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function || video.Categories.toLowerCase().includes(search.toLowerCase()) || video.Year.includes(search)-->
-          <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
-
-            <h3> {{video.Title}} </h3>
-            <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
-             Play
-            </router-link>
-            
-            <button @click="toggleModal(video)">
-              More Info
-            </button>
-            <button @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            </button>
-            <button @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
-            </button>
-            <img class="all-videos-video" :src="video.Thumbnail" />
+      <!--ALL-->
+      <h2> All {{search}} Videos </h2>
+      <div class="all-videos-container">
+        <div class="" v-for="video in videos" :key="video.id">
+          <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function || video.Categories.toLowerCase().includes(search.toLowerCase()) || video.Year.includes(search)-->
+            <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
+              <img class="all-videos-video" :src="video.Thumbnail" />
+              <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                <svg viewBox="0 0 24 24" >
+                  <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                </svg>
+              </router-link>
+              <button @click="toggleModal(video)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              </button>
+              <button @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </button>
+              <button @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -167,16 +162,15 @@ export default {
   },
   async created() {
     store.commit('setLoading', true);
-    this.videos = (await videoService.getAllVideos()).data   
-    
-    //await videoService.getAllVideos().then(data => { this.videos = data; isLoading = false; })
+    this.videos = (await videoService.getAllVideos()).data  
+    await this.parseRating();
     this.getYears();
     this.getCategories();
     this.updateFavorites();
-    this.parseRating();
     setTimeout(function(){
       store.commit('setLoading', false)
     }, 1500);
+    console.log(this.topRated)
   
   },
   methods: {
@@ -220,7 +214,7 @@ export default {
     //Rating System
     async parseRating(){ 
       let ratings = (await FavoriteService.getAllFavorites()).data
-      let ratingObject = {} //make key pair for each video in videos?
+      let ratingObject = {}
       for(let video in ratings){
         if((ratingObject[ratings[video].VideoId]) == null){
           ratingObject[ratings[video].VideoId] = 1;
@@ -235,7 +229,6 @@ export default {
       let topFive = ratingArray.sort((a,b) => {
         return b[1] - a[1];
       })
-
       this.topRated[0] = (await videoService.show(topFive[0][0])).data
       this.topRated[1] = (await videoService.show(topFive[1][0])).data
       this.topRated[2] = (await videoService.show(topFive[2][0])).data
@@ -386,6 +379,7 @@ h1{
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
+  width: 70%;
 }
 
 video{
@@ -393,7 +387,7 @@ video{
 }
 
 .all-videos-video{
-  width:300px;
+  width:250px;
 }
 .all-videos-video:hover{
   scale: 1.1;
@@ -428,8 +422,9 @@ margin: 5px;
   position: absolute;
   z-index: 10;
   width: 100%;
-  top: 15%;
-  background: linear-gradient(to top, rgb(35, 35, 35) 40%, rgba(0,0,0,0) 100%);
+  height: 300px;
+  top: 85%;
+  background: linear-gradient(to top, rgb(35, 35, 35) 50%, rgba(0,0,0,0) 100%);
 }
 
 .top5 h1{
@@ -437,12 +432,14 @@ margin: 5px;
   position: absolute;
   top: -30%;
   margin-left: 20px;
+  filter: drop-shadow(2px 2px 4px black);
+
 }
 .top5-container .top5-number{
   z-index: 11;
   position:absolute;
   display: flex;
-  justify-content:flex-start;  
+  justify-content:space-between;  
   color:black;
   font-weight: 700;
 }
@@ -470,15 +467,15 @@ margin: 5px;
 
 .top5-item:hover .top5-controls{
   transition: all .5s ease-in-out;
-opacity: 1;
+  display: block;
 }
 
 .top5-controls{
-  opacity: 0;
   position:relative;
+  display: none;
   background: rgb(61, 61, 61);
   width: 250px;
-  padding: 20px;
+  padding-bottom: 20px;
   padding-bottom: 60px;
   z-index: 20;
 }
@@ -486,7 +483,7 @@ opacity: 1;
   width: 24px;
 }
 
-.top5-controls button{
+button{
   background: rgb(74, 74, 74);
   color: white;
   border: solid 2px grey;
@@ -502,12 +499,19 @@ opacity: 1;
   scale: 1.03;
   opacity: 1;
 }
-.top5-play{
+.play{
   color: black !important;
   background: white !important;
   border: solid 1px white !important;
 }
-.top5-play button{
+.play button{
   background: white !important;
+}
+
+.below-container{
+  position: absolute;
+  top: 105%;
+  background: rgb(35, 35, 35);
+  z-index: 21;
 }
 </style>

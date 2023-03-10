@@ -1,6 +1,6 @@
 <template>
-<div> 
-    <h2 v-if="favoriteList.length > 0">Your Favorites</h2>
+<div v-if="favoriteList.length > 0"> 
+    <h1>Your Favorites</h1>
         <div class="favorite-container"> 
         <div v-for="video in favoriteList" :key="video.Path">
             <div class="favorite-video">
@@ -9,7 +9,6 @@
                       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                     </button>
                 </div>
-                <h3>{{ video.Title }}</h3>
                 <div class="favorite-play-btn"> 
                   <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
                   Play
@@ -48,6 +47,15 @@ export default {
 
 <style scoped>
 
+h1{
+  color: white;
+  font-size: 25px;
+  margin-left: 20px;
+  font-family: 'Rubbik', Arial;
+  font-weight: 700;
+  filter: drop-shadow(2px 2px 4px black);
+
+}
 .favorite-container{
   display: flex;
   flex-direction: row;
@@ -92,7 +100,7 @@ export default {
 }
 
 img{
-    width: 300px;
+    width: 250px;
 }
 
 </style>

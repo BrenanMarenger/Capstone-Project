@@ -54,14 +54,13 @@
 * **Elgato Video Capture** - Converting VHS tapes to digital download
 
 ## Features
-* Account system with personal favorites
+* Account system with personal favorites and watch history (resuming where left off)
 * Top 5 rating system based on favorites from all accounts
-* Viewers have a history, resuming where they left off
-* Authentication with appropriate redirection, token storage, and policies
+* Authentication with appropriate redirection, token storage, policies, and hashing
 * Custom video player with keybinds and a variety of features, including ai generated captions
-* Dynamic gallery page with different featured videos and changing arragements of categories/videos
-* Scalable project, adapting to new videos and users. Automatically adding new categories and filters
-* Dynamic searching and filtering (combinations will work), query urls
+* Dynamic gallery page with different featured videos and changing arrangements of categories/videos
+* Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
+* Dynamic searching and filtering (combinations work), query urls/links
 * UI/UX Design with responsive and dynamic buttons, scaling to all screens
 
 
