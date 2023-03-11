@@ -1,8 +1,11 @@
 <template>
     <div class="loading"> 
+        <div> 
+            <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
+        </div>
         <div id="loading-animation"> 
         </div>
-        <h1>RetroFlix</h1>
+        
     </div>
     
 </template>

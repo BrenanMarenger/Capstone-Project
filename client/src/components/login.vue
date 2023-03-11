@@ -1,5 +1,8 @@
 <template>
     <div class="body"> 
+        <div class="logo"> 
+            <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
+        </div>
         <div class="login">
             <h1>Login</h1>
             <form>
@@ -73,6 +76,16 @@ export default {
     overflow: hidden;
     font-family: 'Rubbik', sans-serif;
 
+}
+
+.logo{
+    position: absolute;
+    top: 3%;
+    left: 1%;
+}
+
+img{
+    width: 200px;
 }
 
 .login{
