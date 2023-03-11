@@ -22,7 +22,7 @@
             </div>
             
             <!--Searching-->
-            <div class="search-container"> 
+            <div ref="search" class="search-container"> 
                 <svg 
                 id="searchIcon"
                 :class="{searchIconToggle: isSearching}" 
@@ -41,7 +41,7 @@
             </div>
             <!-- Reset filters -->
             <div class="reset-container"> 
-                <button @click="sendResetFilters" v-if="filteredYears.length > 0 || search!=''" >Clear Filters</button>
+                <button @click="sendResetFilters" v-if="filteredYears.length > 0 || navSearch.length > 0" >Clear Filters</button>
             </div>
             
             <!-- Sign out -->
@@ -55,9 +55,18 @@
 </template>
 
 <script>
+import {ref} from 'vue'
+import {onClickOutside} from '@vueuse/core'
 export default {
     name: 'Navbar',
     props: ['categoryList', 'yearList', 'filteredYears', 'search'],
+    setup(){
+        const search = ref(null)
+        const isSearching = ref(false)
+
+        onClickOutside(search, (event) => console.log("clicked outside"))
+        return { search }
+    },
     data() {
         return {
             navSearch: '',
@@ -121,8 +130,14 @@ export default {
             document.querySelectorAll('input[type="checkbox"]')
             .forEach(el => el.checked = false);
             this.navSearch = ''
-            this.showFilters()
-            this.openSearch()
+            if(this.isFiltering){
+                this.isFiltering = false
+            }
+            if(this.isSearching){
+                this.isSearching = false
+            }
+            //this.showFilters()
+            //this.openSearch()
             
             this.$emit('recieveResetFilters')
         }
