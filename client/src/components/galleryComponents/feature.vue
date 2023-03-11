@@ -73,13 +73,17 @@ export default {
     data(){
         return {
             feature: '',
+            featureVideos: []
         }
     },
     async mounted(){
         setTimeout(this.hideInfo, 6000)
   },
   async created(){
-    this.feature = await this.videos[Math.floor(Math.random() * this.videos.length)];
+    this.featureVideos = this.videos
+    this.featureVideos.splice(11, 1);
+    console.log(this.featureVideos) //remove 11
+    this.feature = this.featureVideos[Math.floor(Math.random() * this.featureVideos.length)]; 
 
   },
   methods: {
