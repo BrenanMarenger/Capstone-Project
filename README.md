@@ -35,7 +35,7 @@
 * **Vuetify?** - TBD component based styling library
 * **Scss?** - TBD make styling easier
 * **Google Icons** - SVG icons
-* **VueUse** - Vue library providing additional hooks, event listeners
+* **VueUse** - Vue library providing additional hooks, event listeners (onClickOutside, Screen Observer)
 ### Server
 * **Sequelize**     - connects to my SQLite DB, allowing operations, associations 
 * **Postman**     - server endpoint functional, integration, and regression testing
@@ -68,7 +68,8 @@
 Coming Soon
 
 ## TODO
-* Styling
+* Styling (General, carousel, filtering/searching video layout)
+* Transitions and animations
 * Profile system for each account
 * Increase search/filtering capabilities
 * Passport for better authenticaiton
