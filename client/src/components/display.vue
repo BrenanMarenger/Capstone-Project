@@ -407,6 +407,7 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .video-container video{
@@ -416,7 +417,7 @@ button{
 
 .nav{
     position: fixed;
-    top:0;
+    top:2%;
 }
 .video-container .video-controls-container{
     position: fixed;
@@ -427,8 +428,6 @@ button{
     justify-content: flex-end;
     min-height: 40vh;
     background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9));
-    transition: opacity 0.5s linear;
-
     z-index: 2;
 }
 
@@ -438,7 +437,10 @@ button{
 
 .video-container .controls{
     width: 100%;
+    height: 100px;
+    bottom: 0;
     display: flex;
+    position: absolute;
     justify-content: space-between;
     align-items: center;
 }
@@ -459,18 +461,25 @@ button{
 .volume-slider{
     -webkit-appearance: slider-vertical;
     width: 8px;
-    height: 100px;
     padding: 0 5px;
     display: none;
+    position: absolute;
 }
 .volume-btn:hover .volume-slider{
-    display: inline-block;
+    transition: all .4s ease-in-out !important;
+    display: flex;
+    left: 20.5%;
+    bottom: 79%;
+    height: 100px;
+
 }
 
 /*TIMELINE*/
 .video-container .timeline-container{
     width: 100%;
     display: flex;
+    position: absolute;
+    bottom: 23%;
     justify-content: center;
     align-content: center;
     color: white
@@ -479,6 +488,10 @@ button{
 .video-container .timeline-container .video-duration-container{
     margin: 1vw;
     width: 4vw;
+    font-weight: 700;
+    font-size: 20px;
+    position: relative;
+    top: -20px;
 }
 
 .video-container .timeline-container .progress-bar{
