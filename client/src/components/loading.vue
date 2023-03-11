@@ -39,12 +39,13 @@ h1{
 .loading{
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     align-items: center;
     justify-content: center;
-    width: 110%;
-    height: 110%;
+    width: 100%;
+    height: 100%;
     background-color: #141414;
+    overflow: hidden;
     z-index: 999;
 }
 </style>

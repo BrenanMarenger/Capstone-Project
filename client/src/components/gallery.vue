@@ -48,9 +48,11 @@
 
     <!--FEATURE-->
     <Feature v-if="videos.length > 1" :videos="videos" 
-      :modalActive="modalActive" 
+      :modalActive="modalActive"
+      :isFeaturePlaying="isFeaturePlaying" 
       v-show="hideItems" 
       @recieveToggleModal="toggleModal($event)"
+      @recieveFeatureStatus="setFeatureStatus()"
       />
 
     <!--MODAL-->
@@ -62,7 +64,15 @@
       @recieveToggleModal="toggleModal($event)" 
       @recieveToggleFavorite="toggleFavorites($event)"/>
 
-  <div class="below-container"> 
+  <div class="below-container">
+      <!-- Watch again -->
+      <div class="watch-again" v-show="hideItems" > 
+        <WatchAgain 
+          :videos="videos" 
+          :favoritesId="favoritesId" 
+          @recieveToggleModal="toggleModal($event)" 
+          @recieveToggleFavorites="toggleFavorites($event)"/>
+      </div>
       <!--FAVORITES-->
       <Favorite v-show="hideItems" 
         @recieveToggleFavorites="toggleFavorites($event)" 
@@ -78,20 +88,11 @@
           @recieveToggleFavorites="toggleFavorites($event)"/>
       </div>
 
-      <!-- Watch again -->
-      <div class="watch-again" v-show="hideItems" > 
-        <WatchAgain 
-          :videos="videos" 
-          :favoritesId="favoritesId" 
-          @recieveToggleModal="toggleModal($event)" 
-          @recieveToggleFavorites="toggleFavorites($event)"/>
-      </div>
-
       <!--ALL-->
       <h1> All {{search}} Videos </h1>
       <div class="all-videos-container">
         <div class="" v-for="video in videos" :key="video.id">
-          <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" > <!-- < and v into a computed function || video.Categories.toLowerCase().includes(search.toLowerCase()) || video.Year.includes(search)-->
+          <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" >
             <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
               <img class="all-videos-video" :src="video.Thumbnail" />
               <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
@@ -113,7 +114,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -151,6 +151,8 @@ export default {
                 "Year": "",
             },
       modalActive: false,
+      isFeaturePlaying: false,
+      interval: null,
     }
   },
   components: {
@@ -165,6 +167,14 @@ export default {
     if(this.$route.query.search){
       this.search = this.$route.query.search
     }
+
+    this.interval = setInterval(() =>{
+      console.log(this.isFeaturePlaying)
+      if(this.isFeaturePlaying == true){
+        store.commit('setLoading', false)
+        clearInterval(this.interval)
+      }
+    }, 100); 
   },
   async created() {
     store.commit('setLoading', true);
@@ -173,13 +183,14 @@ export default {
     this.getYears();
     this.getCategories();
     this.updateFavorites();
-    setTimeout(function(){
-      store.commit('setLoading', false)
-    }, 1500);
-    console.log(this.topRated)
-  
+    
+     
   },
   methods: {
+    setFeatureStatus(){
+      console.log("IT IS PLAYING")
+      this.isFeaturePlaying = true;
+    },
     applySearch(updateSearch){
       this.search = updateSearch
     },
@@ -313,6 +324,11 @@ export default {
     },
   },
   watch: {
+    // isFeaturePlaying(){
+    //   console.log("it is!")
+    //   this.isFeaturePlaying = true
+    // },
+    //Query urls
     search(){
       if(this.search == ''){
         this.$router.replace({name: "gallery"})
@@ -372,7 +388,6 @@ hiddenVideos.forEach((el) => observer.observe(el))
 
 .gallery{
   background: rgb(35, 35, 35);
-
 }
 
 h1{
@@ -465,8 +480,9 @@ margin: 5px;
 
 .top5-item:hover{
   transition: all .5s ease-in-out;
-  transform: translateY(-50px);
+  transform: translateY(-60px);
   scale: 1.1;
+
 }
 
 /* Buttons */
@@ -474,6 +490,7 @@ margin: 5px;
 .top5-item:hover .top5-controls{
   transition: all .5s ease-in-out;
   display: block;
+
 }
 
 .top5-controls{
@@ -483,10 +500,8 @@ margin: 5px;
   border: 3px solid black;
   width: 255px;
   padding-bottom: 60px;
-  z-index: 25;
   height: 50px;
   font-family: 'Rubbik', Arial;
-
 }
 .top5-controls svg{
   width: 24px;
@@ -554,8 +569,14 @@ button{
 
 .below-container{
   position: absolute;
-  top: 109%;
-  background: rgb(35, 35, 35);
-  z-index: 21;
+  top: 110%;
+  background: rgba(0,0,0,0);
+  
+
 }
+
+.below-container h1{
+}
+
+
 </style>

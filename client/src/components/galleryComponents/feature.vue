@@ -69,24 +69,32 @@
 <script>
 export default {
     name: 'Feature',
-    props: ['videos', 'modalActive'],
+    props: ['videos', 'modalActive', 'isFeaturePlaying'],
     data(){
         return {
             feature: '',
-            featureVideos: []
+            featureVideos: [],
+            interval: null,
         }
     },
     async mounted(){
-        setTimeout(this.hideInfo, 6000)
+        this.interval = setInterval(this.checkIfPlaying, 250) 
   },
   async created(){
     this.featureVideos = this.videos
     this.featureVideos.splice(11, 1);
-    console.log(this.featureVideos) //remove 11
     this.feature = this.featureVideos[Math.floor(Math.random() * this.featureVideos.length)]; 
-
   },
   methods: {
+    checkIfPlaying(){
+        let video = document.querySelector("video")
+        if(!video.paused){
+            this.$emit('recieveFeatureStatus', true)
+            clearInterval(this.interval)
+            setTimeout(this.hideInfo, 6000)
+        }
+
+    },
     hideInfo(){
         const title = document.getElementById("title")
         const categories = document.getElementById("categories")
