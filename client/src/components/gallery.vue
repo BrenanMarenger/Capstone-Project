@@ -169,22 +169,24 @@ export default {
     }
 
     this.interval = setInterval(() =>{
-      console.log(this.isFeaturePlaying)
       if(this.isFeaturePlaying == true){
         store.commit('setLoading', false)
         clearInterval(this.interval)
+        document.body.style.overflowY = "scroll";    
+
       }
     }, 100); 
   },
   async created() {
     store.commit('setLoading', true);
+    //class gallery, disable scrolling while loads
+    //window.body.style.overflowY = "hidden";    
     this.videos = (await videoService.getAllVideos()).data  
     await this.parseRating();
     this.getYears();
     this.getCategories();
     this.updateFavorites();
     
-     
   },
   methods: {
     setFeatureStatus(){
@@ -324,11 +326,8 @@ export default {
     },
   },
   watch: {
-    // isFeaturePlaying(){
-    //   console.log("it is!")
-    //   this.isFeaturePlaying = true
-    // },
     //Query urls
+    
     search(){
       if(this.search == ''){
         this.$router.replace({name: "gallery"})
@@ -350,8 +349,11 @@ export default {
     modalActive(){
       if(this.modalActive){
         this.$router.replace({query: {video: this.modal.Title.toLowerCase()}})
+        document.body.style.overflowY ="hidden"
       } else {
         this.$router.replace({name: "gallery"})
+        document.body.style.overflowY = "scroll";    
+
       }
     },
   },
@@ -432,6 +434,8 @@ video{
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
+  border: 2px solid blue;
+  height: 200px;
 }
 .top5-video {
 width: 250px;
@@ -443,7 +447,7 @@ margin: 5px;
   position: absolute;
   z-index: 10;
   width: 100%;
-  height: 300px;
+  height: 200px;
   top: 85%;
   background: linear-gradient(to top, rgb(35, 35, 35) 50%, rgba(0,0,0,0) 100%);
 }
@@ -463,6 +467,7 @@ margin: 5px;
   justify-content:space-between;  
   color:black;
   font-weight: 700;
+  transform: translateX(-30px);
 }
 
 .top5-number{
@@ -475,14 +480,26 @@ margin: 5px;
     1px -1px 0 grey,
     -1px 1px 0 grey,
      1px 1px 0 grey;
+  transition: all .2s ease-in-out;
+
   
 }
 
+.top5-item{
+  transition: all .2s ease-in-out;
+
+}
 .top5-item:hover{
   transition: all .5s ease-in-out;
   transform: translateY(-60px);
-  scale: 1.1;
+  scale: 1.2;
+  margin: 0 40px;
 
+}
+
+.top5-item:hover .top5-number{
+  transition: all .5s ease-in-out;
+  opacity: 0;
 }
 
 /* Buttons */
@@ -500,7 +517,7 @@ margin: 5px;
   border: 3px solid black;
   width: 255px;
   padding-bottom: 60px;
-  height: 50px;
+  height: 70px;
   font-family: 'Rubbik', Arial;
 }
 .top5-controls svg{
@@ -569,7 +586,7 @@ button{
 
 .below-container{
   position: absolute;
-  top: 110%;
+  top: 100%;
   background: rgba(0,0,0,0);
   
 
