@@ -10,7 +10,7 @@
                 </div>
                 
                 <!-- Timeline -->
-                <div class="timeline-container">
+                <div class="timeline-container" id="timeline-container">
                     <div class="progress-bar" @click="updateTime($event)">
                         <div class="watched-bar"></div>
                         <div class="head-btn"></div>
@@ -51,7 +51,7 @@
 
                     <!-- VOLUME -->
                     <div>
-                        <button class="volume-btn">
+                        <button class="volume-btn" @mouseover="hideTimeline" @mouseleave="showTimeline">
                             <input 
                                 type="range" 
                                 @change="changeVolume($event)" 
@@ -287,6 +287,14 @@ export default {
             }
 
         },
+        hideTimeline(){
+            const timeline = document.getElementById("timeline-container")
+            timeline.style.opacity = "0"
+        },
+        showTimeline(){
+            const timeline = document.getElementById("timeline-container")
+            timeline.style.opacity = "1"
+        },
 
         changeVolume(event){
             const video = document.querySelector("video")
@@ -352,7 +360,6 @@ export default {
         },
         mouseHideTimer(){
             const controlsContainer = document.querySelector('.video-container .video-controls-container')
-            //opacity 1
             controlsContainer.style.opacity = '1'
             document.body.style.cursor = 'initial';
             if(this.timer){
@@ -363,7 +370,7 @@ export default {
                 controlsContainer.style.opacity = '0'
                 document.body.style.cursor = 'none';
                 //video-controls-container
-            }, 4000)   
+            }, 2000)   
         }
         
     },
@@ -423,16 +430,24 @@ button{
     position: fixed;
     bottom: 0px;
     width: 100%;
-    display: none;
+    /* display: none; */
+    display: flex;
+    opacity: 0;
     flex-direction: column;
     justify-content: flex-end;
     min-height: 40vh;
     background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9));
     z-index: 2;
+    transition: all .2s ease-in-out;
+
+    
 }
 
 .video-container:hover .video-controls-container{
-    display: flex;
+    /* display: flex;     */
+    opacity: 1;
+    transition: all .2s ease-in-out;
+
 }
 
 .video-container .controls{
@@ -443,6 +458,7 @@ button{
     position: absolute;
     justify-content: space-between;
     align-items: center;
+    
 }
 .speed-btn{
     font-size: larger;
@@ -482,7 +498,9 @@ button{
     bottom: 23%;
     justify-content: center;
     align-content: center;
-    color: white
+    color: white;
+    transition: all .2s ease-in-out !important;
+
 }
 
 .video-container .timeline-container .video-duration-container{
