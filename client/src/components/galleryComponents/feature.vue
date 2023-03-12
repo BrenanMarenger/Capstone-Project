@@ -236,6 +236,8 @@ height: 50px;
 cursor: pointer;
 opacity: .85;
 transition: 150ms ease-in-out;
+box-shadow: 1px 1px 4px 3px rgba(81, 81, 81, 0.2);
+
 }
 
 button:hover{
