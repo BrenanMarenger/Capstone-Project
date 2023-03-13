@@ -1,6 +1,6 @@
 # Netflix-Clone
 ## Objective
-> A website app for my capstone project, replicating Netflix with my childhood VHS tapes and mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level.
+> A web app for my capstone project, replicating Netflix with my childhood VHS tapes using mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level, using all my own assets. With little to no previous knowledge, I'm testing how well I'm able to adapt and learn new web and software techniques in under a 4 month timeframe.
 
 ## Content
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
@@ -14,6 +14,8 @@
 [Screenshots](https://github.com/BrenanMarenger/Capstone-Project#screenshots)
 
 [TODO](https://github.com/BrenanMarenger/Capstone-Project#todo)
+
+[Recreation](https://github.com/BrenanMarenger/Capstone-Project#recreation)
 
 ## Tech Stack
 * Vue
@@ -56,12 +58,13 @@
 ## Features
 * Account system with personal favorites and watch history (resuming where left off)
 * Top 5 rating system based on favorites from all accounts
+* Modal showing related videos (based on shared categories)
 * Authentication with appropriate redirection, token storage, policies, and hashing
 * Custom video player with keybinds and a variety of features, including ai generated captions
 * Dynamic gallery page with different featured videos and changing arrangements of categories/videos
 * Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
 * Dynamic searching and filtering (combinations work), query urls/links
-* UI/UX Design with responsive and dynamic buttons, scaling to all screens
+* Seamless UI/UX interaction with responsive and dynamic buttons
 
 
 ## Screenshots
@@ -70,9 +73,20 @@ Coming Soon
 ## TODO
 * Styling (General, carousel, filtering/searching video layout)
 * Transitions and animations
+* Vitest for testing
 * Profile system for each account
+* Cast section
 * Increase search/filtering capabilities
 * Passport for better authenticaiton
-* Vitest for testing
+* Deploy to host
+
+## Recreation
+> If I had to remake this project, I would have taken a different route and used different technologies
+* Firebase - simplify the server-side/backend, allowing for more features and dynamic DB setup
+* Scss - better organized, easier to read, and use for CSS 
+* Vue 3 - more up-to-date, more features, easier configuration with imported tools
+* Methodology - follow an agile system while developing a more consistent, effient, and fine-tuned product
+* 
+
 
 
