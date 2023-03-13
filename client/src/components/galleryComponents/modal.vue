@@ -3,10 +3,9 @@
 
         <div class="modal"> 
             <video id="modal" :src="modal.Path" autoplay muted></video>
-            <!-- PLACE HOLDER HERE, div with same height and width, gradiet left to right -->
-            <div class="placeholder" id="placeholder">
 
-            </div>
+            <div class="placeholder" id="placeholder"></div>
+
             <h3 class="title">{{ modal.Title }}</h3>
 
             <div class="button-container">
@@ -37,21 +36,25 @@
                 </button>
 
             </div>
-            <div class="divider">
+            <div class="divider"></div>
 
-            </div>
             <div class="below-container">
                 <div class="info">
-                    <p class="description">{{ modal.Description }}</p>
-                    <p class="categories">{{ modal.Categories }} - {{ modal.Year }}</p>
+                    <p class="match"> {{ match }}% Match</p>
+                    <p class="year"> {{ modal.Year }}</p>
                     <p class="duration">{{ duration }}</p>
+                    <p class="description">{{ modal.Description }}</p>
+                    <p class="categories"> <span>Genres:</span> {{ modal.Categories }} </p>
                 </div>
                 
                 <div class="related-container"> 
-                    <h4>Watch more like this: </h4>
-                    <div class="related-videos" v-for="rVideo in relatedVideos" :key="rVideo.Path"> 
-                        <img @click="updateModal(rVideo)" v-if="rVideo.Path != modal.Path " :src="rVideo.Thumbnail"/>
-                    </div>
+                        <h1 class="related-title">Watch more like this</h1>
+                        <div class="related-videos">
+                            <div  v-for="rVideo in relatedVideos" :key="rVideo.Path">
+                                <img class="related-item" @click="updateModal(rVideo)" v-if="rVideo.Path != modal.Path " :src="rVideo.Thumbnail"/>
+                            </div>
+                        </div>
+                        
                 </div>
 
             </div>
@@ -74,6 +77,7 @@ export default {
             duration: 0,
             isMuted: true,
             interval: null,
+            match: 0
         }
     },
     methods: {
@@ -108,14 +112,15 @@ export default {
                  min = "0" + min
             }
             if(hr == 0){
-            return `${min}:${sec}`
+            return `${min}m`
             } else {
-                return `${hr}:${min}:${sec}`
+                return `${hr}h ${min}m`
             }
         }
     },
     mounted() {
 
+        this.match = Math.floor(Math.random() * (100 - 0 + 1) + 0)
         // Finding related videos (shares a category, skipping repeats)
 
         this.modalCategories = this.modal.Categories.split(',')
@@ -166,7 +171,7 @@ img {
     
 }
 .modal-container {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -188,10 +193,10 @@ img {
     width: 700px;
     max-width: 100%;
     overflow-y: scroll;
-    height: 80vh;
+    height: 85vh;
     border-radius: 4px;
-    border: 1px solid grey;
-
+    filter: drop-shadow(0px 3px 3px black);
+    margin-bottom: 20px;
 }
 
 .modal::-webkit-scrollbar {
@@ -235,7 +240,7 @@ svg{
 }
 
 .modal .close{
-    position: absolute;
+    position: fixed;
     top: 2%;
     right: 2%;
 
@@ -306,7 +311,92 @@ button{
     position: absolute;
     top: 70%;
     z-index: 5;
+    color: white;
+    height: 100%;
 }
+
+.below-container .year{
+    font-weight: 600;
+    position: absolute;
+    top: 5%;
+    left: 24%;
+}
+
+.below-container .match{
+    color: rgb(0, 195, 0);
+    position: absolute;
+    top: 5%;
+    left: 8%;
+    font-weight: 700;
+
+}
+
+.below-container .duration{
+    font-weight: 600;
+    position: absolute;
+    top: 5%;
+    left: 35%;
+}
+
+.below-container .categories{
+    position: absolute;
+    top: 5%;
+    right: 8%; 
+}
+
+.below-container .categories span{
+    color: rgb(209, 209, 209);
+}
+
+.below-container .description{
+    position: absolute;
+    top: 10%;
+    left: 8%;
+}
+
+.below-container .related-container{
+    position: relative;
+    top: 22%;
+    left: 4%;
+    width: 650px;
+}
+
+.related-container .related-item{
+    display: flex;
+    margin: 8px;
+    justify-content: center;
+    opacity: .8;
+    filter: drop-shadow(0px 3px 3px black);
+
+    transition: all .2s ease-in-out;
+
+}
+
+.related-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.related-videos{
+    position: static;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    top: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.related-item:hover{
+    transition: all .3s ease-in-out;
+    scale: 1.1;
+    opacity: 1;
+    cursor: pointer;
+}
+
 
 
 </style>
