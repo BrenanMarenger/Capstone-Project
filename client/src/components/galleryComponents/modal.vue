@@ -1,7 +1,7 @@
 <template>
     <div class="modal-container">
 
-        <div class="modal" id="modalContainer"> 
+        <div class="modal" id="modalContainer" ref="modalBox"> 
             <video id="modal" :src="modal.Path" autoplay muted></video>
 
             <div class="placeholder" id="placeholder"></div>
@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 
 export default {
     name: 'Modal',
@@ -79,6 +81,16 @@ export default {
             interval: null,
             match: 0
         }
+    },
+    setup(props, context) {
+        const modalBox = ref(null)
+        onClickOutside(modalBox, (event) => {
+    
+            context.emit('recieveToggleModal', null)
+            
+        })
+
+    return { modalBox }
     },
     methods: {
         sendToggleModal(modal){
@@ -98,8 +110,11 @@ export default {
                 this.duration = this.formatTime(video.duration)
                 clearInterval(this.interval)
             }
-            
-        }, 250)
+            }, 250)
+
+            //set scroll position of modal to top
+            let modal = document.getElementById("modalContainer")
+            modal.scrollTo(0,0)
 
         },
         toggleSound(){
@@ -129,6 +144,9 @@ export default {
                 return `${hr}h ${min}m`
             }
         }
+    },
+    beforeDestroy(){
+        clearInterval(this.interval)
     },
     mounted() {
         this.match = Math.floor(Math.random() * (100 - 0 + 1) + 0)
@@ -183,15 +201,16 @@ img {
 }
 .modal-container {
     background-color: rgba(0, 0, 0, 0.5);
-    width: 100vw;
-    height: 100vh;
+    width: 120vw;
+    height: 120vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
     pointer-events: auto;
     z-index: 120;
-    top:0;
+    top:-5%;
+    left: -5%;
     color: black;
     font-family: 'Rubbik', Arial;
 
@@ -208,6 +227,7 @@ img {
     border-radius: 4px;
     filter: drop-shadow(0px 3px 3px black);
     margin-bottom: 20px;
+    z-index: 800;
 }
 
 .modal::-webkit-scrollbar {
