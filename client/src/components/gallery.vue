@@ -18,7 +18,7 @@
           <span class="top5-number">
             {{ index +1}}
           </span>
-          <img class="top5-video" :src="video.Thumbnail"/>
+          <img class="top5-video" @click="toggleModal(video)" :src="video.Thumbnail"/>
           <span class="top5-controls">
             <div class="top5-title">
               {{ video.Title }}
@@ -505,12 +505,14 @@ filter: drop-shadow(0px 3px 3px black);
   transform: translateY(-60px);
   scale: 1.2;
   margin: 0 15px;
+  cursor: pointer;
 
 }
 
 .top5-item:hover .top5-number{
   transition: all .5s ease-in-out;
   opacity: 0;
+  z-index: 0;
 }
 
 /* Buttons */
@@ -518,6 +520,8 @@ filter: drop-shadow(0px 3px 3px black);
 .top5-item:hover .top5-controls{
   transition: all .5s ease-in-out;
   display: block;
+  filter: drop-shadow(2px 2px 4px black);
+
 
 }
 
@@ -529,7 +533,8 @@ filter: drop-shadow(0px 3px 3px black);
   border-radius: 3px;
   padding-bottom: 60px;
   height: 50px;
-  top: 0;
+  top: -5px;
+  left: 2px;
   font-family: 'Rubbik', Arial;
 }
 .top5-controls svg{
@@ -560,13 +565,15 @@ filter: drop-shadow(0px 3px 3px black);
   font-weight: 700;
   font-size: 20;
   padding: 9px;
+  margin: 1px;
 }
 
 .top5-categories{
   position: absolute;
-  bottom: 5%;
+  bottom: 9%;
   left: 5%;
   color: gray;
+  font-size: 12px;
 }
 
 
