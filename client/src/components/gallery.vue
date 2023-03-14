@@ -434,13 +434,15 @@ video{
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   height: 200px;
 }
 .top5-video {
 width: 250px;
 display: flex;
 margin: 5px;
+filter: drop-shadow(0px 3px 3px black);
+
 }
 
 .top5{
@@ -539,7 +541,7 @@ margin: 5px;
 
 .top5-controls .top5-fav{
   position: absolute;
-  right: 18%;
+  right: 20%;
   top: 30%;
 }
 

@@ -1,5 +1,5 @@
 <template>
-<div v-if="favoriteList.length > 0"> 
+<div v-if="favoriteList.length > 0" class="favorite-wrapper">  
     <h1>Your Favorites</h1>
         <div class="favorite-container"> 
         <div v-for="video in favoriteList" :key="video.Path">
@@ -46,6 +46,11 @@ export default {
 </script>
 
 <style scoped>
+
+.favorite-wrapper{
+  border: 2px solid yellow;
+ 
+}
 
 h1{
   color: white;
