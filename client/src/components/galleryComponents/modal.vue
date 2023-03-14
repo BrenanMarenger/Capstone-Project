@@ -1,7 +1,7 @@
 <template>
     <div class="modal-container">
 
-        <div class="modal"> 
+        <div class="modal" id="modalContainer"> 
             <video id="modal" :src="modal.Path" autoplay muted></video>
 
             <div class="placeholder" id="placeholder"></div>
@@ -89,6 +89,18 @@ export default {
         },
         updateModal(video){
             this.$emit('receiveModal', video)
+            this.match = Math.floor(Math.random() * (100 - 0 + 1) + 0)
+
+            this.interval = setInterval(()=>{
+            var video = document.getElementById("modal")
+            if(!video.paused){
+                document.getElementById("placeholder").style.opacity = '0'
+                this.duration = this.formatTime(video.duration)
+                clearInterval(this.interval)
+            }
+            
+        }, 250)
+
         },
         toggleSound(){
             const video = document.getElementById("modal")
@@ -119,7 +131,6 @@ export default {
         }
     },
     mounted() {
-
         this.match = Math.floor(Math.random() * (100 - 0 + 1) + 0)
         // Finding related videos (shares a category, skipping repeats)
 
@@ -340,6 +351,7 @@ button{
 
 .below-container .categories{
     position: absolute;
+    width: 200px;
     top: 5%;
     right: 8%; 
 }
