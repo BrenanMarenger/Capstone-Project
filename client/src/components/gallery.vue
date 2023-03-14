@@ -56,13 +56,15 @@
       />
 
     <!--MODAL-->
-    <Modal v-if="modalActive" 
-      :videos="videos" 
-      :favoritesId="favoritesId" 
-      :modal="modal" 
-      @receiveModal="updateModal($event)" 
-      @recieveToggleModal="toggleModal($event)" 
-      @recieveToggleFavorite="toggleFavorites($event)"/>
+    <transition name="fade">
+      <Modal v-if="modalActive" 
+        :videos="videos" 
+        :favoritesId="favoritesId" 
+        :modal="modal" 
+        @receiveModal="updateModal($event)" 
+        @recieveToggleModal="toggleModal($event)" 
+        @recieveToggleFavorite="toggleFavorites($event)"/>
+    </transition>
 
   <div class="below-container">
       <!-- Watch again -->
@@ -190,7 +192,6 @@ export default {
   },
   methods: {
     setFeatureStatus(){
-      console.log("IT IS PLAYING")
       this.isFeaturePlaying = true;
     },
     applySearch(updateSearch){
@@ -387,6 +388,14 @@ hiddenVideos.forEach((el) => observer.observe(el))
 </script>
 
 <style scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+.fade-enter, .fade-leave-to {
+  scale: .9;
+  opacity: 0;
+}
 
 .gallery{
   background: rgb(35, 35, 35);
