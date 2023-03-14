@@ -1,6 +1,6 @@
 <template>
     <div class="body" id="narbar">
-        <span id="navbar-container">
+        <span id="navbar-container" class="navbar-container">
             <div> 
                 <img src="https://d3dg8a58k5opnp.cloudfront.net/logo.png">
             </div>
@@ -8,6 +8,7 @@
             <!--Filtering-->
             <div class="filter-container"> 
                 <button class="filter-btn" @click="showFilters">Filter</button>
+                
                 <ul class="filter-list"
                     :class="{filterToggle: isFiltering}"
                     id="filterList"
@@ -50,6 +51,9 @@
 
             </div>
         </span>
+        <transition name="fade">
+            <div class="cover" v-show="scollPosition != 0 || isFiltering || isSearching"></div>
+        </transition>
     </div>
 
 </template>
@@ -72,7 +76,8 @@ export default {
             navSearch: '',
             currentUser: '',
             isSearching: false,
-            isFiltering: false
+            isFiltering: false,
+            scollPosition: 0,
         }
     },
     mounted(){
@@ -88,21 +93,23 @@ export default {
         onScroll(e){
             const navbar = document.getElementById("narbar")
             const container = document.getElementById("navbar-container")
-            if(window.pageYOffset == 0){
-                navbar.style.background = "rgba(0,0,0,0)"
-            } else {
-                navbar.style.background = "black"
-                //container.style.background = "linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
-            }
+
+            this.scollPosition = window.pageYOffset
+
+            // if(window.pageYOffset == 0){
+            //     navbar.style.background = "rgba(0,0,0,0)"
+            // } else {
+            //     navbar.style.background = "black"
+            // }
 
         },
         openSearch(){
             const narbar = document.getElementById("narbar")
 
            this.isSearching = !this.isSearching;
-           if(this.isSearching){
-            narbar.style.background = "black"//"linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
-           }
+        //    if(this.isSearching){
+        //     narbar.style.background = "black"
+        //    }
         },
         sendSearch() {
             this.$emit('recieveSearch', this.navSearch)
@@ -120,10 +127,9 @@ export default {
         showFilters(){
             const narbar = document.getElementById("narbar")
             this.isFiltering = !this.isFiltering
-            if(this.isFiltering){
-                narbar.style.background = "black"//"linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1))"
-
-            }
+            // if(this.isFiltering){
+            //     narbar.style.background = "black"
+            // }
 
         },
         sendResetFilters(){
@@ -165,6 +171,27 @@ export default {
     background: rgba(0,0,0,0);
     transition: all .5s ease-in-out;
 
+}
+
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    z-index: 5;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1));
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.navbar-container{
+    z-index: 10;
 }
 
 button{
@@ -212,7 +239,7 @@ svg:hover{
 }
 .search-container .search-box{
     position: fixed;
-    top: 30px;
+    top: 25px;
     right: 10%;
     background-color: #000;
     box-shadow: none;
@@ -220,8 +247,10 @@ svg:hover{
     padding-left: 30px;
     font-size: 16px;
     border: 1px solid transparent;
+    border-radius: 3px;
     outline: none;
     width: 0px;
+    height: 30px;
     color: white;
     transition: all .5s ease-in;
 }
@@ -269,24 +298,27 @@ font-size: 15px !important;
     transition: all .3s ease-in-out;
 }
 .filter-container .filterToggle{
-    
     display: flex !important;
+    opacity: 1 !important;
+    transition: all .3s ease-in;
+
 }
 .filter-container .filter-list{
     position: fixed;
-    top: 57px;
+    top: 64px;
     left: 12.5%;
     display: none;
     list-style: none;
     color:white;
     background: rgb(24, 24, 24);
     justify-content: center;
+    opacity: 0;
+
     transition: all .3s ease-in;
 }
 li{
     padding: 10px;
     margin: 10px;
-    cursor: pointer;
 }
 input[type="checkbox"]{
     appearance: none;
@@ -297,6 +329,7 @@ input[type="checkbox"]{
     height: 1.15em;
     border: 0.20em solid white;
     border-radius: 0.25em;
+    cursor: pointer;
 }
 input[type="checkbox"]::before {
   content: "";
