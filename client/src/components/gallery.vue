@@ -504,7 +504,7 @@ filter: drop-shadow(0px 3px 3px black);
   transition: all .5s ease-in-out;
   transform: translateY(-60px);
   scale: 1.2;
-  margin: 0 40px;
+  margin: 0 15px;
 
 }
 
@@ -525,10 +525,11 @@ filter: drop-shadow(0px 3px 3px black);
   position:relative;
   display: none;
   background: rgb(61, 61, 61);
-  border: 3px solid black;
   width: 255px;
+  border-radius: 3px;
   padding-bottom: 60px;
-  height: 70px;
+  height: 50px;
+  top: 0;
   font-family: 'Rubbik', Arial;
 }
 .top5-controls svg{
@@ -538,7 +539,7 @@ filter: drop-shadow(0px 3px 3px black);
 .top5-controls .play{
   position: absolute;
   top: 30%;
-  left: 2%;
+  left: 5%;
 }
 
 .top5-controls .top5-more-info{
@@ -558,14 +559,13 @@ filter: drop-shadow(0px 3px 3px black);
   color: white;
   font-weight: 700;
   font-size: 20;
-  padding: 5px;
-  background: rgb(18, 18, 18);
+  padding: 9px;
 }
 
 .top5-categories{
   position: absolute;
-  bottom: 3%;
-  left: 3%;
+  bottom: 5%;
+  left: 5%;
   color: gray;
 }
 
