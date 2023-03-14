@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     
-    <loader v-if="isLoading" />
+    <transition name="fade">
+      <loader v-if="isLoading" />
+    </transition>
     
     <router-view/>
     
@@ -27,6 +29,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+/* .fade-enter, */
+ .fade-leave-to {
+  opacity: 0;
+  scale: 1.2;
+}
 
 </style>
