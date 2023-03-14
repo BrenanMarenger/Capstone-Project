@@ -64,7 +64,7 @@
 * Dynamic gallery page with different featured videos and changing arrangements of categories/videos
 * Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
 * Dynamic searching and filtering (combinations work), query urls/links
-* Seamless UI/UX interaction with responsive and dynamic buttons
+* Seamless UI/UX interaction with responsive and dynamic buttons, transitions and animations
 
 
 ## Screenshots
@@ -81,12 +81,12 @@ Coming Soon
 * Deploy to host
 
 ## Recreation
-> If I had to remake this project, I would have taken a different route and used different technologies
+> If I had to remake this project, using what I learned now, I would have taken a different route and used different technologies
 * Firebase - simplify the server-side/backend, allowing for more features and dynamic DB setup
 * Scss - better organized, easier to read, and use for CSS 
 * Vue 3 - more up-to-date, more features, easier configuration with imported tools
 * Methodology - follow an agile system while developing a more consistent, effient, and fine-tuned product
-* 
+* Better Practices - small code organization and optimization techniques that I've picked up on
 
 
 
