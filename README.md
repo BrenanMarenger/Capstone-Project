@@ -73,6 +73,7 @@ Coming Soon
 ## TODO
 * Styling (General, carousel, filtering/searching video layout)
 * Transitions and animations
+* Calculated "Match" system, based on favorited videos shared categories (weighted higher on appearing more)
 * Vitest for testing
 * Profile system for each account
 * Cast section
