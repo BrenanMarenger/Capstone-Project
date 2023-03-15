@@ -225,17 +225,51 @@ export default {
     line-height: 1.5;
 }
 .play-now button{
-    position: absolute;
+    position: relative;
     display: flex;
     width: 150px;
     border-radius: 5px;
     font-size: 20px;
     font-weight: 600;
     border: none;
-    top: 53%;
-    left: 10%;
-    z-index: 100;
     
+    z-index: 5;
+    
+}
+
+.more-info{
+    z-index: 5;
+}
+
+.more-info span{
+    line-height: 1.5;
+}
+
+.more-info button{
+    background: rgb(81, 81, 81);
+    color: white;
+    position: relative;
+    display: flex;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    z-index: 5;
+    margin-left: 10px;
+}
+.more-info svg{
+    height: 30px;
+    padding-right: 5px;
+}
+
+.video-controls{
+    position: absolute;
+    display: flex;
+    
+    top: 55%;
+    left: 6%;
+
 }
 
 button{
@@ -312,31 +346,5 @@ button:hover{
     top: -23%;
 }
 
-.more-info{
-    position: absolute;
-    
-    top: 53%;
-    left: 19%;
-    z-index: 100;
-}
 
-.more-info span{
-    line-height: 1.5;
-}
-
-.more-info button{
-    background: rgb(81, 81, 81);
-    color: white;
-    position: relative;
-    display: flex;
-    width: 150px;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-}
-.more-info svg{
-    height: 30px;
-    padding-right: 5px;
-}
 </style>

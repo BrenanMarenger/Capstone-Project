@@ -332,8 +332,8 @@ button{
     position: absolute;
     background: linear-gradient(to top,  rgb(35, 35, 35) 30%, rgba(0,0,0,0) 100%);
     /* rgb(35, 35, 35) */
-    top: 300px;
-    height: 270px;
+    top: 230px;
+    height: 350px;
     width: 100%;
 
 }
