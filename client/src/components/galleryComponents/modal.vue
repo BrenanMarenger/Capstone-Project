@@ -237,7 +237,7 @@ img {
 .title{
     color: white;
     left: 5%;
-    top: 42%;
+    top: 250px;
     font-weight: 700;
     font-size: 29px;
     position: absolute;
@@ -249,8 +249,8 @@ img {
 
 .button-container .play{
     position: absolute;
-    top: 55%;
-    left: 5%;
+    top: 350px;
+    left: 6%;
     display: flex;
     width: 100px;
     height: 40px;
@@ -288,7 +288,7 @@ svg{
 
 .fav{
     position: absolute;
-    top: 55%;
+    top: 350px;
     left: 22%;
     background: rgb(74, 74, 74);
     color: white;
@@ -303,7 +303,7 @@ svg{
 .mute-unmute{
     position: absolute;
     right: 10%;
-    top: 55%;
+    top: 350px;
     background: rgb(74, 74, 74);
     color: white;
     border: solid 2px grey;
@@ -332,7 +332,7 @@ button{
     position: absolute;
     background: linear-gradient(to top,  rgb(35, 35, 35) 30%, rgba(0,0,0,0) 100%);
     /* rgb(35, 35, 35) */
-    top: 45%;
+    top: 300px;
     height: 270px;
     width: 100%;
 
@@ -340,10 +340,10 @@ button{
 .below-container{
 
     position: absolute;
-    top: 70%;
+    top: 450px;
     z-index: 5;
     color: white;
-    height: 100%;
+    height: 80%;
 }
 
 .below-container .year{

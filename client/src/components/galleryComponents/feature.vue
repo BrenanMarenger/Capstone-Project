@@ -1,6 +1,7 @@
 <template>
     
     <div class="feature-container playing muted">
+        <!-- INFO -->
         <div class="title" id="title">
             <strong>
             {{ feature.Title }}
@@ -14,6 +15,8 @@
             -
             {{ feature.Year }}
         </div>
+
+        <!-- Video Buttons -->
         <div class="button-container"> 
             <div class="play-pause"> 
                 <button  @click="togglePlay" class="play">
@@ -39,6 +42,9 @@
                     </svg>
                 </button>
             </div>
+        </div>
+
+        <!-- Action Buttons -->
         <div class="video-controls"> 
             <div class="play-now">
                 <router-link :to="{name: 'display', params: {videoId: feature.id}}" tag="button">
@@ -57,8 +63,8 @@
             </div>
         </div>
             
-        </div>
         
+        <!-- Video -->
       <video autoplay muted  loop class="feature-video" id="feature"
                 :src="feature.Path" >
         </video>
@@ -202,8 +208,8 @@ export default {
 
 .button-container{
     position: absolute;
-    top: 55%;
-    left: 7%;
+    top: 70%;
+    right: 7%;
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -219,13 +225,17 @@ export default {
     line-height: 1.5;
 }
 .play-now button{
-    position: relative;
+    position: absolute;
     display: flex;
     width: 150px;
     border-radius: 5px;
     font-size: 20px;
     font-weight: 600;
     border: none;
+    top: 53%;
+    left: 10%;
+    z-index: 100;
+    
 }
 
 button{
@@ -282,8 +292,7 @@ button:hover{
 
 .play-pause{
     position: absolute;
-    top: 350%;
-    right: -710%;
+    
 }
 
 .play-pause button{
@@ -305,8 +314,10 @@ button:hover{
 
 .more-info{
     position: absolute;
-    left: 110%;
-    top: 0;
+    
+    top: 53%;
+    left: 19%;
+    z-index: 100;
 }
 
 .more-info span{
