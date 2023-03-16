@@ -14,11 +14,8 @@
             </div>
 
             <div :id="currentCategory" class="slider">
-                <div class="index-bar">
-                    
-                </div>
                 <div v-for="(video,  index) in catVideos" :key="video.Path" class="item">   
-                        <h1 v-if="(index % 6) == 0 && index != 0"> {{ (index % 6) + 1 }}</h1>                   
+                        <!-- <h1 v-if="(index % 6) == 0 && index != 0"> </h1>  {{ (index % 6) + 1 }} -->
                         <img :src="video.Thumbnail" @click="sendToggleModal(video)"/>
                         <div class="category-controls">
                             <div class="item-title">
@@ -95,6 +92,8 @@ export default {
         let sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
         if(sliderIndex == 0){
             console.log("Jump all the way right!")
+            scroll.style.setProperty("--slider-index", sliderIndex + 1)
+
         } else {
             scroll.style.setProperty("--slider-index", sliderIndex - 1)
 
@@ -137,7 +136,6 @@ img{
 }
 
 .item{
-    flex: 0 0 12%;
     padding: .25rem;
     max-width: 12%;
 }
@@ -156,6 +154,7 @@ img{
 }
 
 .slider{
+    --items-per-screen: 6;
     --slider-index: 0;
     display: flex;
     width: calc(100% - 10rem);
