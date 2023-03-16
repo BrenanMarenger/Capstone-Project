@@ -192,7 +192,7 @@ video{
     top: 0;
     background: linear-gradient(to right, rgb(40,40,40)50%, rgba(70,70,70) 100%);
     width: 700px;
-    height: 525px;
+    height: 725px;
 }
 
 img {
@@ -223,7 +223,9 @@ img {
     width: 700px;
     max-width: 100%;
     overflow-y: scroll;
-    height: 85vh;
+    height: 75vh;
+    top: -2%;
+    left: -2%;
     border-radius: 4px;
     filter: drop-shadow(0px 3px 3px black);
     margin-bottom: 20px;

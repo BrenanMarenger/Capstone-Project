@@ -67,6 +67,17 @@
     </transition>
 
   <div class="below-container">
+      
+      <!--CATEGORIES-->
+      <div v-for="category in categories" :key="category" > 
+        <Category v-show="hideItems" 
+          :videos="videos" 
+          :favoritesId="favoritesId" 
+          :currentCategory="category" 
+          @recieveToggleModal="toggleModal($event)" 
+          @recieveToggleFavorites="toggleFavorites($event)"/>
+      </div>
+
       <!-- Watch again -->
       <div class="watch-again" v-show="hideItems" > 
         <WatchAgain 
@@ -79,16 +90,6 @@
       <Favorite v-show="hideItems" 
         @recieveToggleFavorites="toggleFavorites($event)" 
         :favoriteList="favoriteList" />
-
-      <!--CATEGORIES-->
-      <div v-for="category in categories" :key="category" > 
-        <Category v-show="hideItems" 
-          :videos="videos" 
-          :favoritesId="favoritesId" 
-          :currentCategory="category" 
-          @recieveToggleModal="toggleModal($event)" 
-          @recieveToggleFavorites="toggleFavorites($event)"/>
-      </div>
 
       <!--ALL-->
       <h1> All {{search}} Videos </h1>
@@ -416,13 +417,15 @@ h1{
 
 video{
   width: 200px;
+  border-radius: 2px;
+
 }
 
 .all-videos-video{
   width:250px;
 }
 .all-videos-video:hover{
-  scale: 1.1;
+  
 }
 .hidden {
     opacity: 0;
@@ -443,7 +446,6 @@ video{
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
-  /* border: 2px solid blue; */
   height: 200px;
 }
 .top5-video {
@@ -451,6 +453,8 @@ width: 250px;
 display: flex;
 margin: 5px;
 filter: drop-shadow(0px 3px 3px black);
+border-radius: 2px;
+
 
 }
 
@@ -460,7 +464,8 @@ filter: drop-shadow(0px 3px 3px black);
   width: 100%;
   height: 200px;
   top: 85%;
-  background: linear-gradient(to top, rgb(35, 35, 35) 50%, rgba(0,0,0,0) 100%);
+
+  background: linear-gradient(to top, rgb(35, 35, 35)40%, rgba(0,0,0,0) );
 }
 
 .top5 h1{
@@ -603,6 +608,7 @@ button{
 }
 
 .below-container{
+  
   position: absolute;
   top: 100%;
   background: rgba(0,0,0,0);

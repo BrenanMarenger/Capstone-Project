@@ -44,6 +44,11 @@
             </div>
         </div>
 
+        <div class="rated-container">
+            <div class="bar"></div>
+            <p>PG</p>
+        </div>
+
         <!-- Action Buttons -->
         <div class="video-controls"> 
             <div class="play-now">
@@ -209,7 +214,7 @@ export default {
 .button-container{
     position: absolute;
     top: 70%;
-    right: 7%;
+    right: 10%;
     z-index: 3;
     display: flex;
     flex-direction: column;
@@ -268,7 +273,7 @@ export default {
     display: flex;
     
     top: 55%;
-    left: 6%;
+    left: 7%;
 
 }
 
@@ -346,5 +351,29 @@ button:hover{
     top: -23%;
 }
 
+.rated-container{
+    position: absolute;
+    background-color: rgb(46, 46, 46);
+    height: 50px;
+    width: 100px;
+    top: 70%;
+    right: 0%;
+    z-index: 2;
+}
+
+.rated-container p{
+    position: absolute;
+    top: -8%;
+    left: 22%;
+    font-size: 20px;
+    color: rgb(206, 206, 206);
+    font-weight: 600;
+}
+
+.bar{
+    height: 50px;
+    background-color: rgb(206, 206, 206);
+    width: 5px;
+}
 
 </style>
