@@ -1,13 +1,9 @@
 <template>
     <div class="body"> 
         <h1> {{ currentCategory }}</h1>
-        
-        
-
         <div  class="category-container"> 
-            <div class="side-buttons">
-                <svg 
-                v-show="sideScroller == 0" 
+            <div class="side-buttons" v-if="catVideos.length > 6">
+                <svg  
                 class="left-arrow" 
                 @click="scrollLeft"
                 xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"/></svg>
@@ -16,6 +12,7 @@
             <div :id="currentCategory" class="slider">
                 <div v-for="(video,  index) in catVideos" :key="video.Path" class="item">   
                         <!-- <h1 v-if="(index % 6) == 0 && index != 0"> </h1>  {{ (index % 6) + 1 }} -->
+                        
                         <img :src="video.Thumbnail" @click="sendToggleModal(video)"/>
                         <div class="category-controls">
                             <div class="item-title">
@@ -42,7 +39,7 @@
                 </div>
             </div>
             
-            <div class="side-buttons">
+            <div class="side-buttons" v-if="catVideos.length > 6">
                 <svg  
                 @click="scrollRight"
                 class="right-arrow" 
@@ -59,9 +56,9 @@ export default {
     data(){
         return {
             catVideos: [],
-            sideScroller: 0,
-            left: 0,
-            right: 0,
+            sliderIndex: 0,
+            numberOfVideos: 0,
+            
         }
     },
     mounted(){
@@ -87,15 +84,14 @@ export default {
         this.$emit('recieveToggleModal', video)
     },
     scrollLeft(){
-
         let scroll = document.getElementById(this.currentCategory) //gives me the slider for specific cat
-        let sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
-        if(sliderIndex == 0){
-            console.log("Jump all the way right!")
-            scroll.style.setProperty("--slider-index", sliderIndex + 1)
+        this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
+        if(this.sliderIndex == 0){
+    
+            scroll.style.setProperty("--slider-index", this.sliderIndex + 1)
 
         } else {
-            scroll.style.setProperty("--slider-index", sliderIndex - 1)
+            scroll.style.setProperty("--slider-index", this.sliderIndex - 1)
 
         }
         
@@ -103,12 +99,17 @@ export default {
     },
     scrollRight(){
         let scroll = document.getElementById(this.currentCategory) //gives me the slider for specific cat
-        let sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
-        console.log(sliderIndex)
+        this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
+        
 
-        scroll.style.setProperty("--slider-index", sliderIndex + 1)
+        if(this.sliderIndex >= 2){
+            scroll.style.setProperty("--slider-index", this.sliderIndex - 2)
+        } else {
+            scroll.style.setProperty("--slider-index", this.sliderIndex + 1)
+        }
+        
     
-    }
+    },
   },
   
 }
@@ -124,7 +125,7 @@ h1{
   font-weight: 700;
   filter: drop-shadow(2px 2px 4px black);
   padding: 10px;
-  z-index: 0;
+  z-index: 2;
 
 }
 img{
@@ -136,8 +137,12 @@ img{
 }
 
 .item{
-    padding: .25rem;
+    padding: .5rem;
     max-width: 12%;
+    transition: all .2s ease-in-out;
+   
+    
+
 }
 
 .item:hover{
@@ -185,7 +190,7 @@ svg{
     top: -5px;
     left: -2px;
     font-family: 'Rubbik', Arial;
-    z-index: 100;
+    z-index: 500;
 }
 
 .item-title{
@@ -281,7 +286,7 @@ button:hover{
     top: 0%;
     z-index: 6;
     width: 70px;
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.3);
     opacity: .1;
     height: 200px;
     z-index: 5;
@@ -294,13 +299,13 @@ button:hover{
     opacity: 1;
     transition: all .3s ease-in-out;
     cursor: pointer;
-    background: rgba(0,0,0,.6);
+    background: rgba(0,0,0,1) !important;
     width: 90px;
 
 
 }
 .category-container:hover .side-buttons .left-arrow, .category-container:hover .side-buttons .right-arrow{
-    opacity: .4;
+    opacity: .5;
     transition: all .3s ease-in-out;
 }
 .left-arrow{
