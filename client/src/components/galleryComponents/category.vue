@@ -1,8 +1,17 @@
 <template>
     <div class="body"> 
+
         <h1> {{ currentCategory }}</h1>
+        <div class="index-container" v-if="numIndexes > 1">
+            <div v-for="index in (numIndexes + 1)" class="index" @click="changeIndex(index)">
+                <div v-show="((sliderIndex + 1) == index) " class="current-index">
+                
+                </div>
+            </div>
+        </div>
+
         <div  class="category-container"> 
-            <div class="side-buttons" v-if="catVideos.length > 6">
+            <div class="side-buttons" v-show="numIndexes > 1">
                 <svg  
                 class="left-arrow" 
                 @click="scrollLeft"
@@ -39,7 +48,7 @@
                 </div>
             </div>
             
-            <div class="side-buttons" v-if="catVideos.length > 6">
+            <div class="side-buttons" v-show="numIndexes > 1">
                 <svg  
                 @click="scrollRight"
                 class="right-arrow" 
@@ -58,8 +67,15 @@ export default {
             catVideos: [],
             sliderIndex: 0,
             numberOfVideos: 0,
+            numIndexes: 0,
             
         }
+    },
+    created(){
+        window.addEventListener("resize", this.updateNumIndexes);
+    },
+    destroyed(){
+        window.removeEventListener("resize", this.updateNumIndexes);
     },
     mounted(){
         for(let vid of this.videos){
@@ -75,6 +91,11 @@ export default {
             this.catVideos[i] = this.catVideos[j];
             this.catVideos[j] = temp;
         }
+
+        this.setNumIndex(window.screen.width)
+  },
+  watch:{
+   
   },
   methods: {
     sendToggleFavorite(video){
@@ -86,14 +107,17 @@ export default {
     scrollLeft(){
         let scroll = document.getElementById(this.currentCategory) //gives me the slider for specific cat
         this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
+        console.log(this.numIndexes)
         if(this.sliderIndex == 0){
     
-            scroll.style.setProperty("--slider-index", this.sliderIndex + 1)
+            scroll.style.setProperty("--slider-index", this.sliderIndex + this.numIndexes)
 
         } else {
             scroll.style.setProperty("--slider-index", this.sliderIndex - 1)
 
         }
+        this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
+        
         
     
     },
@@ -102,14 +126,53 @@ export default {
         this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
         
 
-        if(this.sliderIndex >= 2){
-            scroll.style.setProperty("--slider-index", this.sliderIndex - 2)
+        if(this.sliderIndex >= this.numIndexes){
+            scroll.style.setProperty("--slider-index", this.sliderIndex - this.numIndexes)
         } else {
             scroll.style.setProperty("--slider-index", this.sliderIndex + 1)
         }
-        
+        this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
     
     },
+    updateNumIndexes(e){
+        //console.log(e.target.innerWidth) 
+        let screenWidth = e.target.innerWidth
+        if(screenWidth >= 1680 && screenWidth < 1899){
+            this.numIndexes = Math.ceil( this.catVideos.length / 6 )
+            
+        } else if(screenWidth >= 1510 && screenWidth < 1679){
+            this.numIndexes = Math.ceil( this.catVideos.length / 5 )
+            
+        }else if(screenWidth >= 1147 && screenWidth < 1509){
+            this.numIndexes = Math.ceil( this.catVideos.length / 4 )
+            
+        } else if(screenWidth >= 1900) {
+            this.numIndexes = Math.ceil( this.catVideos.length / 7 )
+            
+        }
+    },
+    setNumIndex(screenWidth){
+        if(screenWidth >= 1680 && screenWidth < 1899){
+            this.numIndexes = Math.ceil( this.catVideos.length / 6 )
+            
+        } else if(screenWidth >= 1510 && screenWidth < 1679){
+            this.numIndexes = Math.ceil( this.catVideos.length / 5 )
+            
+        }else if(screenWidth >= 1147 && screenWidth < 1509){
+            this.numIndexes = Math.ceil( this.catVideos.length / 4 )
+            
+        } else if(screenWidth >= 1900) {
+            this.numIndexes = Math.ceil( this.catVideos.length / 7 )
+            
+        }
+    },
+    changeIndex(index){
+        console.log(index)
+        let scroll = document.getElementById(this.currentCategory)
+        this.sliderIndex = index - 1
+        scroll.style.setProperty("--slider-index", this.sliderIndex)
+        
+    }
   },
   
 }
@@ -134,13 +197,14 @@ img{
     filter: drop-shadow(0px 3px 3px black);
     border-radius: 2px;
     aspect-ratio: 4 / 3;
+    
 }
 
 .item{
     padding: .5rem;
     max-width: 12%;
     transition: all .2s ease-in-out;
-   
+    
     
 
 }
@@ -150,7 +214,7 @@ img{
   transform: translateY(-60px);
   scale: 1.2;
   cursor: pointer;
-  z-index: 500;
+  
 }
 
 .category-container{
@@ -316,6 +380,36 @@ button:hover{
 .right-arrow{ 
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    
+}
+/* Index counter */
+.index{
+    position: relative;
+    top:0%;
+    width: 30px;
+    height: 5px;
+    background-color: grey;
+    z-index: 2;
+    margin: 5px;
+    cursor: pointer;
+}
+.current-index{
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 35px;
+    height: 8px;
+    background-color: white;
+    z-index: 2;
+    margin: 3px;
+
+}
+.index-container{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: -2%;
+    left: 85vw;
     
 }
 </style>
