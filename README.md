@@ -1,6 +1,6 @@
 # Netflix-Clone
 ## Objective
-> A web app for my capstone project, replicating Netflix with my childhood VHS tapes using mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level, using all my own assets. With little to no previous knowledge, I'm testing how well I'm able to adapt and learn new web and software techniques in under a 4 month timeframe.
+> A web app for my capstone project, replicating Netflix with my childhood VHS tapes using mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level, using all my own assets
 
 ## Content
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
@@ -32,10 +32,8 @@
 ## Tools
 ### Client
 * **Vue Router**    - allow multi-page navigation, redirection 
-* **Vuex**          - persistedstate, stores states (token, loading, user id, etc.)
+* **Vuex**          - persistedstate, stores states (token, loading, user id)
 * **Axios**         - API to make HTTP requests to my server
-* **Vuetify?** - TBD component based styling library
-* **Scss?** - TBD make styling easier
 * **Google Icons** - SVG icons
 * **VueUse** - Vue library providing additional hooks, event listeners (onClickOutside, Screen Observer)
 ### Server
@@ -43,13 +41,10 @@
 * **Postman**     - server endpoint functional, integration, and regression testing
 * **DB Browser for SQLite** - help visualize and build tables in the database
 * **Nodemon**       - restarts server when a change is detected (QoL)
-* **Eslint**        - help debug and find issues
-* **Bcrypt**        - password hashing
-* **Bluebird**      - allows promisifying node modules (async)
-* **Morgan**        - logs requests, helps visualize server interactions 
-* **Joi**           - used to enfore email and password schema
+* **Eslint**        - debugger
+* **Bcrypt**        - password hashing 
+* **Joi**           - enfore email and password schema
 * **JWT**           - "JSON Web Token" generates user token for logged in users
-* **Cors**          - fetching resources 
 ### Misc
 * **Whisper**     - API to generate captions
 * **Whimsical**   - Visualizing and planning project
@@ -58,23 +53,25 @@
 ## Features
 * Account system with personal favorites and watch history (resuming where left off)
 * Top 5 rating system based on favorites from all accounts
-* Modal showing related videos (based on shared categories)
+* Modal showing related videos (shared categories)
 * Authentication with appropriate redirection, token storage, policies, and hashing
 * Custom video player with keybinds and a variety of features, including ai generated captions
-* Dynamic gallery page with different featured videos and changing arrangements of categories/videos
+* Dynamic gallery page, with multiple categories
 * Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
 * Dynamic searching and filtering (combinations work), query urls/links
 * Seamless UI/UX interaction with responsive and dynamic buttons, transitions and animations, lazy/skeleton loading
+* Custom Carousel with index tabs and dynamic scrolling
 
 
 ## Screenshots
 Coming Soon
 
 ## TODO
+
+* Vitest for testing components
+* Multiple profile system for each account to have many users
 * Calculated "Match" system, based on favorited videos shared categories (weighted higher on appearing more)
-* Vitest for testing
-* Profile system for each account
-* Cast section
+* More videa api data, cast section, rating
 * Increase search/filtering capabilities
 * Passport for better authenticaiton
 * Deploy to host
@@ -85,8 +82,8 @@ Coming Soon
 * Typescript - came accross ambiguous typing issues, leading to some DB problems 
 * Scss - better organized, easier to read, and use for CSS 
 * Vue 3 - more up-to-date, more features, easier configuration with imported tools
-* Methodology - follow an agile system while developing a more consistent, effient, and fine-tuned product
-* Better Practices - small code organization and optimization techniques that I've picked up on
+* Rich Server - too much functionality on the client-side, distribution of data for performance
+* Refractor - organize code better, specifically html tags, component usage, easier to read  
 
 
 
