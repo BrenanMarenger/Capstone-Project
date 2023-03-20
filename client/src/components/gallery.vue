@@ -88,8 +88,11 @@
       </div>
       <!--FAVORITES-->
       <Favorite v-show="hideItems" 
-        @recieveToggleFavorites="toggleFavorites($event)" 
-        :favoriteList="favoriteList" />
+        @recieveToggleFavorites="toggleFavorites($event)"
+        @recieveToggleModal="toggleModal($event)" 
+        :favoriteList="favoriteList"
+        :favoritesId="favoritesId" 
+        />
 
       <!--ALL-->
       <h1> All {{search}} Videos </h1>
