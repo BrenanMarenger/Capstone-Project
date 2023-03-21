@@ -95,30 +95,52 @@
         />
 
       <!--ALL-->
-      <h1> All {{search}} Videos </h1>
+      
       <div class="all-videos-container">
+        <h1> All {{search}} Videos </h1>
+        <br>
         <div class="" v-for="video in videos" :key="video.id">
+          <!-- Search -->
           <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" >
+            <!-- Filter -->
             <div v-show="(filteredYears.indexOf(video.Year) != -1) || filteredYears.length == 0"> 
-              <img class="all-videos-video" :src="video.Thumbnail" />
-              <router-link :to="{name: 'display', params: {videoId: video.id}}" tag="button">
-                <svg viewBox="0 0 24 24" >
-                  <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
-                </svg>
-              </router-link>
-              <button @click="toggleModal(video)">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-              </button>
-              <button @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              </button>
-              <button @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
-              </button>
+              <div class="all-videos-item">
+
+                <img :src="video.Thumbnail" @click="toggleModal(video)"/>
+
+                <div class="all-videos-item-controls">
+                  <div class="all-videos-title">
+                    {{ video.Title }}
+                  </div>
+                  <router-link class="play" :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                    <svg viewBox="0 0 24 24" >
+                      <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                    </svg>
+                  </router-link>
+
+                  <button class="more-info" @click="toggleModal(video)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  </button>
+
+                  <button class="fav" @click="removeFavorite(video.id)" v-if="favoritesId.includes(video.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  </button>
+                  <button class="fav" @click="setFavorite(video.id)" v-if="!(favoritesId.includes(video.id))">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
+                  </button>
+                  <div class="all-videos-categories">
+                    {{ video.Categories }}
+                  </div>
+                </div>
+                
+                
+              </div>
+              
             </div>
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -349,6 +371,7 @@ export default {
 
     filteredYears(){
       this.$router.replace({query: {filter: this.filteredYears}})
+      
     },
 
     modalActive(){
@@ -376,19 +399,6 @@ export default {
   }, 
 }
 
-//Shows what part of the screen is being viewed
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        } else {
-            entry.target.classList.remove('show');
-        }
-    })
-})
-const hiddenVideos = document.querySelectorAll('.hidden')
-hiddenVideos.forEach((el) => observer.observe(el))
-
 </script>
 
 <style scoped>
@@ -415,7 +425,26 @@ h1{
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
-  width: 70%;
+  width: 100vw;
+  justify-content: center;
+  padding-top: 20px;
+  border: 2px solid blue;
+  height: auto;
+  
+  
+}
+
+.all-videos-container h1{
+  position: relative;
+  flex-basis: 100%;
+  color: white;
+  font-size: 25px;
+  margin-left: 20px;
+  font-family: 'Rubbik', Arial;
+  font-weight: 700;
+  filter: drop-shadow(2px 2px 4px black);
+  
+  border: 2px solid green;
 }
 
 video{
@@ -424,23 +453,88 @@ video{
 
 }
 
-.all-videos-video{
+.all-videos-item img{
   width:250px;
+  padding: .7rem;
+  transition: all .2s ease-in-out;
+  filter: drop-shadow(0px 3px 3px black);
+  border-radius: 2px;
+  aspect-ratio: 4 / 3;
 }
-.all-videos-video:hover{
+
+.all-videos-item:hover{
+  transition: all .5s ease-in-out;
+  transform: translateY(-60px);
+  scale: 1.2;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.all-videos-item{
+  transition: all .2s ease-in-out;
+}
+
+.all-videos-item-controls{
+  position:relative;
+    display: none;
+    background: rgb(61, 61, 61);
+    width: 250px;
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    padding-bottom: 60px;
+    height: 50px;
+    top: -15px;
+    left: 11px;
+    font-family: 'Rubbik', Arial;
+}
+
+.all-videos-item:hover .all-videos-item-controls{
+  transition: all .5s ease-in-out;
+  display: block;
   
 }
-.hidden {
-    opacity: 0;
-    filter: blur(5px);
-    transition: all 1s;
+
+.all-videos-categories{
+  position: absolute;
+  bottom: 9%;
+  left: 7%;
+  color: gray;
+  font-size: 12px;
+
+}
+.all-videos-title{
+  color: white;
+  font-weight: 700;
+  font-size: 20;
+  padding: 9px;
+  margin: 1px;
+
 }
 
-.show {
+.fav{
+  position: absolute;
+  right: 20%;
+  top: 30%;
+}
+.more-info{
+  position: absolute;
+  right: 2%;
+  top: 30%;
+
+}
+
+.play{
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+
+.all-videos-item-controls button:hover{
     opacity: 1;
-    filter: blur(0);
+    scale: 1.05;
+    transition: all .2s ease-in-out;
 }
-
 
 /* Top 5 */
 .top5-container{
