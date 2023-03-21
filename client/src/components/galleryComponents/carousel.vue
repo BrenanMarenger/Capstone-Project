@@ -35,7 +35,7 @@
                         {{ video.Title }}
                     </div>
                     <!-- Play btn -->
-                    <router-link class="play" :to="{name: 'display', params: {videoId: video.id}}" tag="button">
+                    <router-link class="play" :to="{name: 'display',  params: {videoId: video.id}, query: { time: video.Spot }}" tag="button">
                         <svg viewBox="0 0 24 24" >
                             <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
                         </svg>
