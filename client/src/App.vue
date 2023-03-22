@@ -22,7 +22,6 @@ export default {
   },
   computed: {
     isLoading() {
-      //console.log("loading!", this.$store.state.loading)
       return this.$store.state.loading
     }
   }
