@@ -11,7 +11,7 @@
       />
 
       <!-- TOP 5 -->
-    <div v-show="hideItems" class="top5">
+    <div v-show="hideItems" class="top5" v-scrollanimation>
       <h1>Top 5 Films</h1>
       <div class="top5-container">
         <div class="top5-item" v-for="(video, index) in topRated" :key="video.title">
@@ -69,7 +69,7 @@
   <div class="below-container">
       
       <!--CATEGORIES-->
-      <div v-for="category in categories" :key="category" > 
+      <div v-for="category in categories" :key="category" v-scrollanimation> 
         <Category v-show="hideItems" 
           :videos="videos" 
           :favoritesId="favoritesId" 
@@ -84,22 +84,25 @@
           :videos="videos" 
           :favoritesId="favoritesId" 
           @recieveToggleModal="toggleModal($event)" 
-          @recieveToggleFavorites="toggleFavorites($event)"/>
+          @recieveToggleFavorites="toggleFavorites($event)"
+          v-scrollanimation
+          />
       </div>
       <!--FAVORITES-->
       <Favorite v-show="hideItems" 
         @recieveToggleFavorites="toggleFavorites($event)"
         @recieveToggleModal="toggleModal($event)" 
         :favoriteList="favoriteList"
-        :favoritesId="favoritesId" 
+        :favoritesId="favoritesId"
+        v-scrollanimation
         />
 
       <!--ALL-->
       
-      <div class="all-videos-container">
+      <div class="all-videos-container" id="allVideosContainer">
         <h1> All {{search}} Videos </h1>
         <br>
-        <div class="" v-for="video in videos" :key="video.id">
+        <div class="" v-for="video in videos" :key="video.id" v-scrollanimation>
           <!-- Search -->
           <div v-show="video.Title.toLowerCase().includes(search.toLowerCase())" >
             <!-- Filter -->
@@ -157,8 +160,6 @@ import WatchAgain from "./galleryComponents/watchAgain.vue"
 import {mapState} from 'vuex'
 import store from '../store/store'
 
-import { ref } from 'vue'
-import { useIntersectionObserver } from '@vueuse/core'
 // import { vIntersectionObserver } from '@vueuse/components'
 
 export default {
@@ -187,16 +188,8 @@ export default {
       interval: null,
     }
   },
-  setup(props, context){
-    const item = ref(null)
-    const itemIsVisible = ref(false)
-    
-    const {stop} = useIntersectionObserver(item, ([{ isIntersecting }], observerElement) => {
-      itemIsVisible.value = isIntersecting
-      //emit change to fade in item, only once
-      })
-    
-      return {item, itemIsVisible}
+  setup(){
+  
   },
   components: {
     Feature,
@@ -371,8 +364,10 @@ export default {
     search(){
       if(this.search == ''){
         this.$router.replace({name: "gallery"})
+        document.getElementById('allVideosContainer').style.paddingTop = '20px'
       } else {
         this.$router.replace({query: {search: this.search}})
+        document.getElementById('allVideosContainer').style.paddingTop = '70px'
       }
     },
     // '$route.query.filter': {
@@ -384,6 +379,12 @@ export default {
 
     filteredYears(){
       this.$router.replace({query: {filter: this.filteredYears}})
+
+      if(this.filteredYears.length > 0){
+        document.getElementById('allVideosContainer').style.paddingTop = '80px'
+      } else {
+        document.getElementById('allVideosContainer').style.paddingTop = '20px'
+      }
       
     },
 
@@ -415,7 +416,17 @@ export default {
 </script>
 
 <style scoped>
-
+/* Fade in Styles */
+.before-enter{
+  opacity: 0;
+  transition: all .8s ease-out;
+  transform: translateY(50px);
+}
+.enter{
+  opacity: 1;
+  transform: translateY(0px);
+}
+/* Modal/Loading animation */
 .fade-enter-active, .fade-leave-active {
   transition: all .5s;
 }
@@ -423,7 +434,7 @@ export default {
   scale: .9;
   opacity: 0;
 }
-
+/* General */
 .gallery{
   background: rgb(35, 35, 35);
 }
@@ -436,13 +447,15 @@ h1{
 .all-videos-container{
   display: flex;
   flex-direction: row;
+  
   gap: 10px;
   flex-wrap: wrap;
   width: 100vw;
   justify-content: center;
+  
   padding-top: 20px;
-  border: 2px solid blue;
-  height: auto;
+
+  
   
   
 }
@@ -457,7 +470,7 @@ h1{
   font-weight: 700;
   filter: drop-shadow(2px 2px 4px black);
   
-  border: 2px solid green;
+
 }
 
 video{
@@ -480,11 +493,13 @@ video{
   transform: translateY(-60px);
   scale: 1.2;
   cursor: pointer;
-  z-index: 6;
+ 
+  
 }
 
 .all-videos-item{
   transition: all .2s ease-in-out;
+  height: 260px;
 }
 
 .all-videos-item-controls{
@@ -496,8 +511,8 @@ video{
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     padding-bottom: 60px;
-    height: 50px;
-    top: -15px;
+    
+    top: -16px;
     left: 11px;
     font-family: 'Rubbik', Arial;
 }
@@ -505,6 +520,8 @@ video{
 .all-videos-item:hover .all-videos-item-controls{
   transition: all .5s ease-in-out;
   display: block;
+ 
+  
   
 }
 
