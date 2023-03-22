@@ -157,6 +157,10 @@ import WatchAgain from "./galleryComponents/watchAgain.vue"
 import {mapState} from 'vuex'
 import store from '../store/store'
 
+import { ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
+// import { vIntersectionObserver } from '@vueuse/components'
+
 export default {
   name: 'gallery',
   data () {
@@ -183,6 +187,17 @@ export default {
       interval: null,
     }
   },
+  setup(props, context){
+    const item = ref(null)
+    const itemIsVisible = ref(false)
+    
+    const {stop} = useIntersectionObserver(item, ([{ isIntersecting }], observerElement) => {
+      itemIsVisible.value = isIntersecting
+      //emit change to fade in item, only once
+      })
+    
+      return {item, itemIsVisible}
+  },
   components: {
     Feature,
     Category,
@@ -206,9 +221,7 @@ export default {
     }, 100); 
   },
   async created() {
-    store.commit('setLoading', true);
-    //class gallery, disable scrolling while loads
-    //window.body.style.overflowY = "hidden";    
+    store.commit('setLoading', true);   
     this.videos = (await videoService.getAllVideos()).data  
     await this.parseRating();
     this.getYears();
