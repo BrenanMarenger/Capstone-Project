@@ -125,7 +125,7 @@ export default{
                 screenWidth = e.target.innerWidth
             } else{
                 screenWidth = window.screen.width
-                console.log("setting them up")
+                
             }
         
             if(screenWidth > 1900){ //7 on screen
@@ -137,7 +137,7 @@ export default{
             } else if(screenWidth < 1300){ //4 or less
                 this.numIndexes = Math.ceil( this.carouselVideos.length / 4 )
             }
-            console.log(this.numIndexes)
+            
         },
         changeIndex(index){//for clicking the tabs 
             let scroll = document.getElementById(this.sectionTitle)  
@@ -189,6 +189,7 @@ img{
 .carousel-container{
     display: flex;
     justify-content: center;
+    padding-bottom: 35px;
 }
 
 .slider{
@@ -196,7 +197,7 @@ img{
     --slider-index: 0;
     display: flex;
     position: relative;
-    left: -60px;
+    left: -20px;
     top: -6px;
     width: calc(100% - 10rem);
     height: 200px;
@@ -209,7 +210,7 @@ img{
 .item:hover .carousel-controls{
     transition: all .5s ease-in-out;
     display: inline-block;
-    filter: drop-shadow(2px 2px 4px black);
+    
 }
 .carousel-controls{
     position:relative;
@@ -361,6 +362,7 @@ button:hover{
     z-index: 2;
     margin: 5px;
     cursor: pointer;
+    border-radius: 3px;
 }
 .current-index{
     position: absolute;
@@ -369,17 +371,18 @@ button:hover{
     width: 35px;
     height: 8px;
     background-color: white;
-    z-index: 2;
+    
     margin: 3px;
+    border-radius: 3px;
 
 }
 .index-container{
     display: flex;
     flex-direction: row;
     position: relative;
-    top: -2%;
-    left: 85vw;
     
+    left: 85vw;
+    z-index: 0;
 }
 /* History Bar */
 .history-bar{

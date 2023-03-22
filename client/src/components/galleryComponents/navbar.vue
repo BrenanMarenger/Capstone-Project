@@ -23,7 +23,7 @@
             </div>
             
             <!--Searching-->
-            <div ref="search" class="search-container"> 
+            <div class="search-container"> 
                 <svg 
                 id="searchIcon"
                 :class="{searchIconToggle: isSearching}" 
@@ -59,18 +59,10 @@
 </template>
 
 <script>
-import {ref} from 'vue'
-import {onClickOutside} from '@vueuse/core'
+
 export default {
     name: 'Navbar',
     props: ['categoryList', 'yearList', 'filteredYears', 'search'],
-    setup(){
-        const search = ref(null)
-        const isSearching = ref(false)
-
-        onClickOutside(search, (event) => console.log("clicked outside"))
-        return { search }
-    },
     data() {
         return {
             navSearch: '',
