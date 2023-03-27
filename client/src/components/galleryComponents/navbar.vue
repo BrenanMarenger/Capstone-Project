@@ -219,9 +219,7 @@ svg{
     height: 50px;
     transition: all .3s ease-in-out;
 }
-svg:hover{
-    
-}
+
 /* SEARCH */
 .search-container{
     display: inline-block;
@@ -335,8 +333,6 @@ input[type="checkbox"]::before {
 }
 input[type="checkbox"]:checked::before {
   transform: scale(1.09);
-}
-label{
 }
 
 
