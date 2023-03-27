@@ -62,11 +62,11 @@
 > Filtering
 ![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/NavBar.PNG)
 
-> Searching
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Searching.PNG)
-
 > Loading State
 ![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Loading.gif)
+
+> Searching
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Searching.PNG)
 
 > Dynamic Carousel
 ![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Carousel.gif)
