@@ -172,7 +172,7 @@ export default {
     height: 80px;
     width: 100%;
     z-index: 5;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(35,35,35,1));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(46, 46, 46));
 }
 
 .fade-enter-active, .fade-leave-active {
