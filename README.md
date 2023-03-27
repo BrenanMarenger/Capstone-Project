@@ -7,9 +7,9 @@
 
 [Project Map](https://github.com/BrenanMarenger/Capstone-Project#project-map)
 
-[Tools](https://github.com/BrenanMarenger/Capstone-Project#tools)
-
 [Features](https://github.com/BrenanMarenger/Capstone-Project#features)
+
+[Tools](https://github.com/BrenanMarenger/Capstone-Project#tools)
 
 [Screenshots](https://github.com/BrenanMarenger/Capstone-Project#screenshots)
 
@@ -28,6 +28,51 @@
 <p align="center">
   <img src="https://github.com/BrenanMarenger/Capstone-Project/blob/main/Map%401.25x.png" width="950" />
 </p>
+
+## Features
+* Account system with personal favorites and a resuming watch history
+* Top 5 rating system based on favorites from all accounts
+* Modal showing related videos (shared categories)
+* Authentication with appropriate redirection, token storage, policies, and hashing
+* Custom video player with keybinds and a variety of features, including ai generated captions
+* Dynamic gallery page, with multiple changing categories
+* Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
+* Dynamic searching and filtering (combinations work), query urls/links
+* Seamless UI/UX interaction with responsive and dynamic buttons, scaling to all screens, transitions and animations, lazy/skeleton loading
+* Custom Carousel with index tabs and dynamic scrolling based on screen size and number of videos
+
+
+## Screenshots
+
+> History 
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/History.PNG)
+
+> Modal
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Modal2.gif)
+
+> Featured Video
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Feature.gif)
+
+> Display
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Display.PNG)
+
+> Top 5 Rating 
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Top5.PNG)
+
+> Filtering
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/NavBar.PNG)
+
+> Searching
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Searching.PNG)
+
+> Loading State
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Loading.gif)
+
+> Dynamic Carousel
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Carousel.gif)
+
+> Register / Log in
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Register.gif)
 
 ## Tools
 ### Client
@@ -49,49 +94,6 @@
 * **Whisper**     - API to generate captions
 * **Whimsical**   - Visualizing and planning project
 * **Elgato Video Capture** - Converting VHS tapes to digital download
-
-## Features
-* Account system with personal favorites and watch history (resuming where left off)
-* Top 5 rating system based on favorites from all accounts
-* Modal showing related videos (shared categories)
-* Authentication with appropriate redirection, token storage, policies, and hashing
-* Custom video player with keybinds and a variety of features, including ai generated captions
-* Dynamic gallery page, with multiple categories
-* Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
-* Dynamic searching and filtering (combinations work), query urls/links
-* Seamless UI/UX interaction with responsive and dynamic buttons, transitions and animations, lazy/skeleton loading
-* Custom Carousel with index tabs and dynamic scrolling
-
-
-## Screenshots
-
-History 
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/History.PNG)
-
-Modal
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Modal2.gif)
-
-Featured Video
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Feature.gif)
-
-Display
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Display.PNG)
-
-Top 5 Rating 
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Top5.PNG)
-
-Navigation Bar
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/NavBar.PNG)
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Searching.PNG)
-
-Loading State
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Loading.gif)
-
-Dynamic Carousel
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Carousel.gif)
-
-Register / Log in
-![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Register.gif)
 
 ## TODO
 
