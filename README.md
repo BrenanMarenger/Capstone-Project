@@ -64,7 +64,34 @@
 
 
 ## Screenshots
-Coming Soon
+
+History 
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/History.PNG)
+
+Modal
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Modal2.gif)
+
+Featured Video
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Feature.gif)
+
+Display
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Display.PNG)
+
+Top 5 Rating 
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Top5.PNG)
+
+Navigation Bar
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/NavBar.PNG)
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Searching.PNG)
+
+Loading State
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Loading.gif)
+
+Dynamic Carousel
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Carousel.gif)
+
+Register / Log in
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Register.gif)
 
 ## TODO
 
