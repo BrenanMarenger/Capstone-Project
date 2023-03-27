@@ -30,16 +30,16 @@
 </p>
 
 ## Features
-* Account system with personal favorites and a resuming watch history
-* Top 5 rating system based on favorites from all accounts
-* Modal showing related videos (shared categories)
-* Authentication with appropriate redirection, token storage, policies, and hashing
-* Custom video player with keybinds and a variety of features, including ai generated captions
-* Dynamic gallery page, with multiple changing categories
-* Scalable project, adapting to new videos, users, and data. Automatically adding new categories and filters
-* Dynamic searching and filtering (combinations work), query urls/links
-* Seamless UI/UX interaction with responsive and dynamic buttons, scaling to all screens, transitions and animations, lazy/skeleton loading
-* Custom Carousel with index tabs and dynamic scrolling based on screen size and number of videos
+* Account system that stores personal favorites and a resumable watch history
+* Top 5 rating system based on users' favorite videos from all accounts for accurate ranking.
+* Modal displaying additional information and related videos based on shared categories
+* Secure authentication with appropriate redirection, token storage, policies, and hashing to ensure the safety of user data.
+* Custom video player with keybinds and a variety of features, including AI-generated captions
+* Dynamic gallery page with multiple changing categories
+* Scalable project, able to adapt to new videos, users, and data, automatically adding new categories and filters 
+* Dynamic searching and filtering, with the ability to combine filters and searches, proply changing the query URLs.
+* Seamless UI/UX interaction with responsive and dynamic buttons that scale to all screens, transitions and animations, and lazy/skeleton loading
+* Custom carousel with index tabs and dynamic scrolling based on screen size and number of videos
 
 
 ## Screenshots
