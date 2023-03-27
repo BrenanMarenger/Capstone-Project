@@ -1,6 +1,6 @@
 # Netflix-Clone
 ## Objective
-> A web app for my capstone project, replicating Netflix with my childhood VHS tapes using mordern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level, using all my own assets
+> A web app for my capstone project, replicating Netflix with my childhood VHS tapes using modern technologies. Shares complex functions, layouts, and interactions of popular streaming sites. My goal of this project is to prepare myself and learn the industry standard of web development on a full-stack level, using all my own assets
 
 ## Content
 [Tech Stack](https://github.com/BrenanMarenger/Capstone-Project#tech-stack)
@@ -15,7 +15,7 @@
 
 [TODO](https://github.com/BrenanMarenger/Capstone-Project#todo)
 
-[Recreation](https://github.com/BrenanMarenger/Capstone-Project#recreation)
+[Retrospect](https://github.com/BrenanMarenger/Capstone-Project#retrospect)
 
 ## Tech Stack
 * Vue
@@ -43,7 +43,7 @@
 * **Nodemon**       - restarts server when a change is detected (QoL)
 * **Eslint**        - debugger
 * **Bcrypt**        - password hashing 
-* **Joi**           - enfore email and password schema
+* **Joi**           - enforce email and password schema
 * **JWT**           - "JSON Web Token" generates user token for logged in users
 ### Misc
 * **Whisper**     - API to generate captions
@@ -71,15 +71,15 @@ Coming Soon
 * Vitest for testing components
 * Multiple profile system for each account to have many users
 * Calculated "Match" system, based on favorited videos shared categories (weighted higher on appearing more)
-* More videa api data, cast section, rating
+* More video api data, cast section, rating
 * Increase search/filtering capabilities
-* Passport for better authenticaiton
+* Passport for better authentication
 * Deploy to host
 
-## Recreation
+## Retrospect
 > If I had to remake this project, using what I learned now, I would have taken a different route and used different technologies
 * Firebase - simplify the server-side/backend, allowing for more features and dynamic DB setup
-* Typescript - came accross ambiguous typing issues, leading to some DB problems 
+* Typescript - came across ambiguous typing issues, leading to some DB problems 
 * Scss - better organized, easier to read, and use for CSS 
 * Vue 3 - more up-to-date, more features, easier configuration with imported tools
 * Rich Server - too much functionality on the client-side, distribution of data for performance
