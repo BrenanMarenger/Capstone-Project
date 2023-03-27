@@ -74,6 +74,9 @@
 > Register / Log in
 ![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/Register.gif)
 
+> Gallery / Scrolling Animation
+![](https://github.com/BrenanMarenger/Capstone-Project/blob/main/Img/ScrollAnimation.gif)
+
 ## Tools
 ### Client
 * **Vue Router**    - allow multi-page navigation, redirection 
