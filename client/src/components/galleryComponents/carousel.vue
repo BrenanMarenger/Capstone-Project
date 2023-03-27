@@ -22,7 +22,7 @@
 
         <div class="slider" :id="sectionTitle">
             <div v-for="video in carouselVideos" class="item">
-                <img :src="video.Thumbnail" />
+                <img :src="video.Thumbnail" @click="sendToggleModal(video)"/>
                 <!-- History bar -->
                 <div class="history-bar" v-if="sectionTitle == 'watchagain'">
                     <div class="watched-bar" :style="{'width': video.Spot}"></div>
