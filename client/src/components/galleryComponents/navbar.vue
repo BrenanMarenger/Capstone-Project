@@ -88,20 +88,15 @@ export default {
 
             this.scollPosition = window.pageYOffset
 
-            // if(window.pageYOffset == 0){
-            //     navbar.style.background = "rgba(0,0,0,0)"
-            // } else {
-            //     navbar.style.background = "black"
-            // }
-
         },
         openSearch(){
             const narbar = document.getElementById("narbar")
 
            this.isSearching = !this.isSearching;
-        //    if(this.isSearching){
-        //     narbar.style.background = "black"
-        //    }
+           setTimeout(()=>{
+            document.getElementById("searchBox").focus();
+           }, 500)
+        
         },
         sendSearch() {
             this.$emit('recieveSearch', this.navSearch)
