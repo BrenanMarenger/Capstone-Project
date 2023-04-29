@@ -24,11 +24,11 @@ module.exports = {
 
                 default:
                     res.status(400).send({
-                        error: 'Invalid registration  information'
+                        error: 'Invalid registration information'
                     })
             }
         } else {
-            next() //move to thee next end point
+            next() //move to the next end point
         }
 
     }

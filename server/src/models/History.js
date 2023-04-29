@@ -5,9 +5,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             field: 'spot'
         },
-        // UserId: DataTypes.INTEGER,
-        // VideoId: DataTypes.INTEGER,
-
     })
 
     History.associate = function (models) {

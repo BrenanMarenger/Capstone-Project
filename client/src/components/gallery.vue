@@ -160,8 +160,6 @@ import WatchAgain from "./galleryComponents/watchAgain.vue"
 import {mapState} from 'vuex'
 import store from '../store/store'
 
-// import { vIntersectionObserver } from '@vueuse/components'
-
 export default {
   name: 'gallery',
   data () {
@@ -200,10 +198,12 @@ export default {
     WatchAgain
   },
   async mounted(){
+    //query url
     if(this.$route.query.search){
       this.search = this.$route.query.search
     }
 
+    //interval for checking scroll position
     this.interval = setInterval(() =>{
       if(this.isFeaturePlaying == true){
         store.commit('setLoading', false)
@@ -214,6 +214,7 @@ export default {
     }, 100); 
   },
   async created() {
+    //request assests 
     store.commit('setLoading', true);   
     this.videos = (await videoService.getAllVideos()).data  
     await this.parseRating();
@@ -360,7 +361,6 @@ export default {
   },
   watch: {
     //Query urls
-    
     search(){
       if(this.search == ''){
         this.$router.replace({name: "gallery"})
@@ -376,7 +376,6 @@ export default {
     //     this.filteredYears = value //might have to add to the array
     //   }
     // },
-
     filteredYears(){
       this.$router.replace({query: {filter: this.filteredYears}})
 
@@ -387,7 +386,6 @@ export default {
       }
       
     },
-
     modalActive(){
       if(this.modalActive){
         this.$router.replace({query: {video: this.modal.Title.toLowerCase()}})
@@ -402,7 +400,7 @@ export default {
   computed: {
     searchVideos(){
       return this.videos.filter(video =>
-                video.Title.toLowerCase().includes(this.search.toLowerCase()))
+        video.Title.toLowerCase().includes(this.search.toLowerCase()))
     },
     hideItems(){
       return (!this.search && this.filteredYears.length ==0)

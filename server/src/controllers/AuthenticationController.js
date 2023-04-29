@@ -16,7 +16,7 @@ module.exports = {
             const userJson = user.toJSON();
             res.send({
                 user: userJson,
-                token: jwtSignUser(userJson)
+                token: jwtSignUser(userJson) //send token in the response
             })
 
         } catch (err) {
@@ -38,7 +38,7 @@ module.exports = {
 
             if (!user) {
                 return res.status(403).send({
-                    error: 'Email information incorrect'
+                    error: 'Information incorrect'
                 })
             }
 
@@ -46,7 +46,7 @@ module.exports = {
 
             if (!checkPassword) {
                 return res.status(403).send({
-                    error: 'Password information incorrect'
+                    error: 'Information incorrect'
                 })
             }
 
