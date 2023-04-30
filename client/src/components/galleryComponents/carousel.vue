@@ -3,8 +3,8 @@
 <div class="carousel-body">
     <!-- Index Counter -->
     <div class="index-container" v-if="numIndexes > 1">
-            <div v-for="index in (numIndexes + 1)" class="index" @click="changeIndex(index)">
-                <div v-show="((sliderIndex + 1) == index) " class="current-index">
+            <div v-for="index in (numIndexes)" class="index" @click="changeIndex(index)" :key="index">
+                <div v-show="((sliderIndex+1) == index) " class="current-index">
                 
                 </div>
             </div>
@@ -22,7 +22,7 @@
         
         <div class="slider" :id="sectionTitle">
             
-                <div v-for="(video, index) in carouselVideos" class="item">
+                <div v-for="(video, index) in carouselVideos" class="item" :key="index">
                     <img :src="video.Thumbnail" @click="sendToggleModal(video)"/>
                     
                     <!-- History bar -->
@@ -102,7 +102,7 @@ export default{
             this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
             if(this.sliderIndex == 0){
         
-                scroll.style.setProperty("--slider-index", this.sliderIndex + this.numIndexes)
+                scroll.style.setProperty("--slider-index", this.numIndexes - 1)
 
             } else {
                 scroll.style.setProperty("--slider-index", this.sliderIndex - 1)
@@ -111,10 +111,11 @@ export default{
             this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
         },
         scrollRight(e){
+            console.log(this.carouselVideos.length)
             let scroll = document.getElementById(this.sectionTitle)
             this.sliderIndex = parseInt(getComputedStyle(scroll).getPropertyValue("--slider-index"))
-            if(this.sliderIndex >= this.numIndexes){
-                scroll.style.setProperty("--slider-index", this.sliderIndex - this.numIndexes)
+            if(this.sliderIndex >= this.numIndexes - 1){
+                scroll.style.setProperty("--slider-index", 0)
             } else {
                 scroll.style.setProperty("--slider-index", this.sliderIndex + 1)
             }
@@ -136,6 +137,9 @@ export default{
                 this.numIndexes = Math.ceil( this.carouselVideos.length / 6 )
             } else if(screenWidth > 1500){ //5 on screen
                 this.numIndexes = Math.ceil( this.carouselVideos.length / 5 )
+                if(this.carouselVideos.length >= 9){
+                    this.numIndexes++
+                }
             } else if(screenWidth < 1300){ //4 or less
                 this.numIndexes = Math.ceil( this.carouselVideos.length / 4 )
             }
