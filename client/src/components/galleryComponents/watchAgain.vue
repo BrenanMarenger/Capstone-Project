@@ -39,6 +39,7 @@ export default {
                 this.watchAgainVideos.push((await videoService.show(key)).data);
                 this.watchAgainVideos[index].Spot = value;
             }
+            this.watchAgainVideos.reverse()
         }, 1000);
     },
     methods: {
