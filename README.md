@@ -17,6 +17,8 @@
 
 [Retrospect](https://github.com/BrenanMarenger/Capstone-Project#retrospect)
 
+[Project Essay](https://github.com/BrenanMarenger/Capstone-Project/blob/main/RetroFlix%20-%20Final%20Paper.pdf)
+
 ## Tech Stack
 * Vue
 * Express
